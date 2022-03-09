@@ -35,7 +35,7 @@ const Cart = () => {
           </Button>
         </Text>
       </VStack>
-      <HStack spacing={6}>
+      <HStack spacing={6} alignItems="center" w="full">
         <AspectRatio ratio={1} w={24}>
           <Image
             src="https://academy-public.coinmarketcap.com/optimized-uploads/8506726a7a1046b196fe230fad8a8a2a.png"
