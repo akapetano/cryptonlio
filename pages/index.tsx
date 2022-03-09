@@ -1,7 +1,9 @@
-import { Container, Flex, VStack } from '@chakra-ui/react';
+import { Container, Flex } from '@chakra-ui/react';
+import Head from 'next/head';
+
+import { MainNav } from '../src/sections/MainNav';
 import Cart from '../src/sections/cart';
 import Details from '../src/sections/details';
-import Head from 'next/head';
 
 const IndexPage = () => {
   return (
@@ -13,6 +15,7 @@ const IndexPage = () => {
       </Head>
 
       <main>
+        <MainNav />
         <Container maxW="container.xl" p={0}>
           <Flex
             h={{ base: 'auto', md: '100vh' }}
