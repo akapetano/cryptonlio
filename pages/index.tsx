@@ -4,8 +4,9 @@ import Head from 'next/head';
 import { MainNav } from '../src/components/MainNav';
 import Cart from '../src/components/cart';
 import Details from '../src/components/details';
+import { CryptoTable } from '../src/components/crypto/CryptoTable';
 
-const IndexPage = () => {
+const HomePage = () => {
   return (
     <div>
       <Head>
@@ -17,6 +18,7 @@ const IndexPage = () => {
       <main>
         <MainNav />
         <Container maxW="container.xl" p={0}>
+          <CryptoTable />
           <Flex
             h={{ base: 'auto', md: '100vh' }}
             py={[0, 10, 20]}
@@ -31,4 +33,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default HomePage;

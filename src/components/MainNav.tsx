@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
-const Links = ['Home', 'Cryotocurrencies', 'Projects'];
+const Links = ['Home', 'Cryotocurrencies', 'Create a Portfolio'];
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -45,9 +45,12 @@ function MainNav() {
   return (
     <>
       <Box
-        bg={useColorModeValue('white', 'gray.900')}
+        bg={useColorModeValue('white', 'gray.800')}
         px={4}
-        boxShadow="0 1px 6px -1px rgba(0, 0, 0, .2)"
+        boxShadow={useColorModeValue(
+          '0 1px 6px -1px rgba(0, 0, 0, .2)',
+          '0 1px 6px 1px rgba(0, 0, 0, .3)'
+        )}
       >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <Box>CRYPTON LOGO</Box>
@@ -96,7 +99,7 @@ function MainNav() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem>Your Servers</MenuItem>
+                  <MenuItem>Your Portfolio</MenuItem>
                   <MenuItem>Account Settings</MenuItem>
                   <MenuItem>Logout</MenuItem>
                 </MenuList>
