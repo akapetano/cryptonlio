@@ -1,10 +1,10 @@
-import cryptonLogo from '../../images/logo/crypton_logo-310x310.png';
 import { ReactNode } from 'react';
 import {
   Box,
   Flex,
   Avatar,
   Link,
+  HStack,
   Button,
   Menu,
   MenuButton,
@@ -16,9 +16,11 @@ import {
   Stack,
   useColorMode,
   Center,
-  Image,
+  IconButton,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+
+const Links = ['Home', 'Cryotocurrencies', 'Projects'];
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -27,8 +29,10 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     rounded={'md'}
     _hover={{
       textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
+      color: 'white',
+      bg: useColorModeValue('brand.600', 'brand.300'),
     }}
+    _active={{ bg: useColorModeValue('brand.700', 'brand.400') }}
     href={'#'}
   >
     {children}
@@ -40,22 +44,30 @@ function MainNav() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+      <Box
+        bg={useColorModeValue('white', 'gray.900')}
+        px={4}
+        boxShadow="0 1px 6px -1px rgba(0, 0, 0, .2)"
+      >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <Box>
-            <Image
-              boxSize="310px"
-              objectFit="cover"
-              src={cryptonLogo}
-              alt="Crypton - logo"
-            />
-          </Box>
+          <Box>CRYPTON LOGO</Box>
 
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
-              <Button onClick={toggleColorMode}>
-                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-              </Button>
+              <HStack
+                as={'nav'}
+                spacing={4}
+                display={{ base: 'none', md: 'flex' }}
+              >
+                {Links.map((link) => (
+                  <NavLink key={link}>{link}</NavLink>
+                ))}
+              </HStack>
+              <IconButton
+                aria-label="Toggle light dark mode"
+                onClick={toggleColorMode}
+                icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              />
 
               <Menu>
                 <MenuButton

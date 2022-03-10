@@ -1,9 +1,9 @@
 import { Container, Flex } from '@chakra-ui/react';
 import Head from 'next/head';
 
-import { MainNav } from '../src/sections/MainNav';
-import Cart from '../src/sections/cart';
-import Details from '../src/sections/details';
+import { MainNav } from '../src/components/MainNav';
+import Cart from '../src/components/cart';
+import Details from '../src/components/details';
 
 const IndexPage = () => {
   return (
