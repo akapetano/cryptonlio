@@ -1,9 +1,12 @@
-import { Container, Flex, VStack } from '@chakra-ui/react';
-import Cart from '../src/sections/cart';
-import Details from '../src/sections/details';
+import { Container, Flex } from '@chakra-ui/react';
 import Head from 'next/head';
 
-const IndexPage = () => {
+import { MainNav } from '../src/components/MainNav';
+import Cart from '../src/components/cart';
+import Details from '../src/components/details';
+import { CryptoTable } from '../src/components/crypto/CryptoTable';
+
+const HomePage = () => {
   return (
     <div>
       <Head>
@@ -13,7 +16,9 @@ const IndexPage = () => {
       </Head>
 
       <main>
+        <MainNav />
         <Container maxW="container.xl" p={0}>
+          <CryptoTable />
           <Flex
             h={{ base: 'auto', md: '100vh' }}
             py={[0, 10, 20]}
@@ -28,4 +33,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default HomePage;
