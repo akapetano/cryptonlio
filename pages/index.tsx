@@ -3,8 +3,8 @@ import Head from 'next/head';
 import { Column } from 'react-table';
 
 import { MainNav } from '../src/components/MainNav';
-import Cart from '../src/components/cart';
-import Details from '../src/components/details';
+// import Cart from '../src/components/cart';
+// import Details from '../src/components/details';
 import { CryptoTable } from '../src/components/CryptoTable/CryptoTable';
 
 type CryptoData = {
@@ -111,7 +111,7 @@ const HomePage = () => {
 
       <main>
         <MainNav />
-        <Container maxW="container.xl" p={10}>
+        <Container maxW="container.xl" p={5}>
           <CryptoTable columns={columns} data={data} />
           <Flex
             h={{ base: 'auto', md: '100vh' }}

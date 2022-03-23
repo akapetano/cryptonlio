@@ -19,6 +19,7 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { Logo } from './Logo/Logo';
 
 const Links = ['Home', 'Cryotocurrencies', 'Create a Portfolio'];
 
@@ -53,7 +54,9 @@ function MainNav() {
         )}
       >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <Box>CRYPTON LOGO</Box>
+          <Box>
+            <Logo />
+          </Box>
 
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
