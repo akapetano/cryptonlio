@@ -28,9 +28,10 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     px={2}
     py={1}
     rounded={'md'}
+    transition={'all .3s ease-in-out'}
     _hover={{
       textDecoration: 'none',
-      color: 'white',
+      color: '#fff',
       bg: useColorModeValue('brand.600', 'brand.300'),
     }}
     _active={{ bg: useColorModeValue('brand.700', 'brand.400') }}
@@ -53,7 +54,7 @@ function MainNav() {
           '0 1px 6px 1px rgba(0, 0, 0, .3)'
         )}
       >
-        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+        <Flex h={28} alignItems={'center'} justifyContent={'space-between'}>
           <Box>
             <Logo />
           </Box>
@@ -62,7 +63,7 @@ function MainNav() {
             <Stack direction={'row'} spacing={7}>
               <HStack
                 as={'nav'}
-                spacing={4}
+                spacing={6}
                 display={{ base: 'none', md: 'flex' }}
               >
                 {Links.map((link) => (

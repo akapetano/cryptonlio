@@ -5,8 +5,8 @@ export const Logo = () => {
     <Image
       src="/crypton_logo-310x310.png"
       alt="crypton-logo"
-      width="64"
-      height="64"
+      width="100"
+      height="100"
     />
   );
 };

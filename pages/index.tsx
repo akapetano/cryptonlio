@@ -7,14 +7,14 @@ import { MainNav } from '../src/components/MainNav';
 // import Details from '../src/components/details';
 import { CryptoTable } from '../src/components/CryptoTable/CryptoTable';
 
-type CryptoData = {
+export type CryptoData = {
   cryptoId: string;
   cryptoName: string;
   priceInUSD: number;
   marketCap: number;
 };
 
-const data: CryptoData[] = [
+const cryptocurrencies: CryptoData[] = [
   {
     cryptoId: 'BTC',
     cryptoName: 'Bitcoin',
@@ -112,7 +112,7 @@ const HomePage = () => {
       <main>
         <MainNav />
         <Container maxW="container.xl" p={5}>
-          <CryptoTable columns={columns} data={data} />
+          <CryptoTable columns={columns} data={cryptocurrencies} />
           <Flex
             h={{ base: 'auto', md: '100vh' }}
             py={[0, 10, 20]}
