@@ -1,5 +1,4 @@
 import {
-  Box,
   Flex,
   HStack,
   useDisclosure,
@@ -36,7 +35,7 @@ function MainNav() {
 
       <Flex>
         <Stack direction={'row'} spacing={7}>
-          <HStack as={'nav'} spacing={6} display={{ base: 'none', md: 'flex' }}>
+          <HStack as={'nav'} spacing={8} display={{ base: 'none', md: 'flex' }}>
             {Links.map((link) => (
               <NavLink key={link}>{link}</NavLink>
             ))}
@@ -45,6 +44,7 @@ function MainNav() {
             aria-label="Toggle light dark mode"
             onClick={toggleColorMode}
             icon={<SwitchIcon />}
+            _hover={{ color: useColorModeValue('brand.600', 'brand.50') }}
             rounded="full"
             size="md"
           />
