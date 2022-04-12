@@ -6,6 +6,14 @@ import {
 } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 
+const breakpoints = {
+  sm: '30em',
+  md: '48em',
+  lg: '62em',
+  xl: '80em',
+  '2xl': '96em',
+};
+
 const inputSelectStyles = {
   variants: {
     filled: {
@@ -84,6 +92,7 @@ const theme = extendTheme(
         },
       },
     },
+    breakpoints,
   },
   withDefaultColorScheme({
     colorScheme: 'brand',
