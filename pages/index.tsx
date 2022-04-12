@@ -2,7 +2,7 @@ import { Container, Flex } from '@chakra-ui/react';
 import Head from 'next/head';
 import { Column } from 'react-table';
 
-import { MainNav } from '../src/components/MainNav';
+import { MainNav } from '../src/components/core/MainNav/MainNav';
 // import Cart from '../src/components/cart';
 // import Details from '../src/components/details';
 import { CryptoTable } from '../src/components/CryptoTable/CryptoTable';
