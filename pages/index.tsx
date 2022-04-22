@@ -1,18 +1,8 @@
 import { Container, Flex } from '@chakra-ui/react';
 import Head from 'next/head';
-import { Column } from 'react-table';
-
 import { MainNav } from '../src/components/core/MainNav/MainNav';
-// import Cart from '../src/components/cart';
-// import Details from '../src/components/details';
-import { CryptoTable } from '../src/components/CryptoTable/CryptoTable';
-
-export type CryptoData = {
-  cryptoId: string;
-  cryptoName: string;
-  priceInUSD: number;
-  marketCap: number;
-};
+import { CryptoTable } from '../src/components/features/home/CryptoTable/CryptoTable';
+import { CryptoData } from '../types/crypto';
 
 const cryptocurrencies: CryptoData[] = [
   {
@@ -77,29 +67,6 @@ const cryptocurrencies: CryptoData[] = [
   },
 ];
 
-const columns: Column[] = [
-  {
-    Header: 'ID',
-    accessor: 'cryptocurrencyId',
-    isNumeric: false,
-  },
-  {
-    Header: 'COIN',
-    accessor: 'cryptocurrencyName',
-    isNumeric: false,
-  },
-  {
-    Header: 'PRICE',
-    accessor: 'cryptocurrencyPrice',
-    isNumeric: true,
-  },
-  {
-    Header: 'MARKET CAP',
-    accessor: 'cryptocurrencyMarketCap',
-    isNumeric: true,
-  },
-];
-
 const HomePage = () => {
   return (
     <div>
@@ -112,7 +79,7 @@ const HomePage = () => {
       <main>
         <MainNav />
         <Container maxW="container.xl" p={5}>
-          <CryptoTable columns={columns} data={cryptocurrencies} />
+          <CryptoTable data={cryptocurrencies} />
           <Flex
             h={{ base: 'auto', md: '100vh' }}
             py={[0, 10, 20]}

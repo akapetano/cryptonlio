@@ -64,7 +64,7 @@ const theme = extendTheme(
       Button: {
         variants: {
           primary: (props: any) => ({
-            rounded: 'none',
+            rounded: 'md',
             ...brandRing,
             color: mode('white', 'gray.800')(props),
             backgroundColor: mode('brand.500', 'brand.200')(props),
@@ -75,6 +75,20 @@ const theme = extendTheme(
 
             _active: {
               backgroundColor: mode('brand.700', 'brand.400'),
+            },
+          }),
+          secondary: (props: any) => ({
+            rounded: 'md',
+            ...brandRing,
+            color: mode('gray.800', 'gray.300')(props),
+            backgroundColor: 'transparent',
+
+            _hover: {
+              color: mode('brand.500', 'brand.200'),
+            },
+
+            _active: {
+              color: mode('brand.600', 'brand.300'),
             },
           }),
         },

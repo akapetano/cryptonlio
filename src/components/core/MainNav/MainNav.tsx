@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Flex,
   HStack,
@@ -6,18 +7,20 @@ import {
   Stack,
   useColorMode,
   IconButton,
+  Button,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { Logo } from '../../Logo/Logo';
+import { Logo } from '../Logo/Logo';
 import { NavLink } from '../NavLink/NavLink';
 import { UserMenu } from '../UserMenu/UserMenu';
 
-const Links = ['Home', 'Cryotocurrencies', 'Create a Portfolio'];
+const Links = ['Home', 'Dashboard', 'Cryotocurrencies', 'Create a Portfolio'];
 
 function MainNav() {
   const { toggleColorMode } = useColorMode();
   const SwitchIcon = useColorModeValue(SunIcon, MoonIcon);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <Flex
       h={28}
@@ -33,24 +36,28 @@ function MainNav() {
     >
       <Logo />
 
-      <Flex>
-        <Stack direction={'row'} spacing={7}>
-          <HStack as={'nav'} spacing={8} display={{ base: 'none', md: 'flex' }}>
-            {Links.map((link) => (
-              <NavLink key={link}>{link}</NavLink>
-            ))}
-          </HStack>
-          <IconButton
-            aria-label="Toggle light dark mode"
-            onClick={toggleColorMode}
-            icon={<SwitchIcon />}
-            _hover={{ color: useColorModeValue('brand.600', 'brand.50') }}
-            rounded="full"
-            size="md"
-          />
+      <HStack as={'nav'} spacing={8} display={{ base: 'none', md: 'flex' }}>
+        {Links.map((link) => (
+          <NavLink key={link}>{link}</NavLink>
+        ))}
+      </HStack>
+
+      <HStack spacing={2}>
+        <IconButton
+          aria-label="Toggle light dark mode"
+          onClick={toggleColorMode}
+          icon={<SwitchIcon />}
+          _hover={{ color: useColorModeValue('brand.600', 'brand.50') }}
+          rounded="full"
+          size="md"
+        />
+        {!isLoggedIn ? <Button variant="secondary">Sign in</Button> : null}
+        {isLoggedIn ? (
           <UserMenu />
-        </Stack>
-      </Flex>
+        ) : (
+          <Button variant="primary">Get started</Button>
+        )}
+      </HStack>
     </Flex>
   );
 }
