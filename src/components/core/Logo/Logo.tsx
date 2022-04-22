@@ -8,7 +8,7 @@ export const Logo = () => {
       <NextLink href="/" passHref>
         <Link>
           <Image
-            src="/crypton_logo-310x310.png"
+            src="/images/crypton_logo-310x310.png"
             alt="crypton-logo"
             width="75"
             height="75
