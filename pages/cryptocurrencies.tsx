@@ -7,7 +7,7 @@ import { AllCryptoTable } from '../src/components/features/cryptocurrencies/AllC
 const Cryptocurrencies = () => {
   return (
     <Box>
-      <NextHead title="Crypton - Top 100 Cryptocurrencies By Market Cap " />
+      <NextHead title="Crypton - Top 100 cryptocurrencies" />
       <main>
         <Navigation />
         <CryptoTableContainer>

@@ -7,60 +7,56 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 
 interface INavLinkProps extends LinkProps {
-  children: string;
   to: string;
+  linkName: string;
 }
 
-export const NavLink = ({ to, children, ...restProps }: INavLinkProps) => {
+export const NavLink = ({ to, linkName, ...restProps }: INavLinkProps) => {
   const router = useRouter();
   const isActive = router.pathname === to;
   console.log(isActive);
-  const chakraLinkBg = useColorModeValue('brand.600', 'brand.200');
-  const chakraLinkActiveBg = useColorModeValue('brand.700', 'brand.300');
-  const chakraLinkColor = useColorModeValue('white', 'gray.800');
+  const chakraLinkBg = useColorModeValue('brand.300', 'brand.200');
+  const chakraLinkActiveBg = useColorModeValue('brand.400', 'brand.200');
+  const chakraLinkColor = useColorModeValue('brand.200', 'brand.100');
+  const chakraActiveLinkColor = useColorModeValue('white', 'gray.800');
+  const chakraLinkColorHover = useColorModeValue('white', 'gray.800');
 
-  if (isActive) {
-    return (
-      <NextLink href={to} passHref>
-        <ChakraLink
-          color={chakraLinkColor}
-          h="2rem"
-          opacity="1"
-          rounded="md"
-          fontWeight="600"
-          bg={chakraLinkBg}
-          fontSize="sm"
-          textTransform="uppercase"
-          p="0.7rem"
-          _hover={{ bg: chakraLinkActiveBg }}
-          _active={{ bg: chakraLinkActiveBg }}
-          {...restProps}
-        >
-          {children}
-        </ChakraLink>
-      </NextLink>
-    );
-  }
-
-  return (
+  return isActive ? (
+    <NextLink href={to} passHref>
+      <ChakraLink
+        color={chakraActiveLinkColor}
+        rounded="md"
+        fontWeight="600"
+        bg={chakraLinkBg}
+        fontSize="sm"
+        textTransform="uppercase"
+        p="0.7rem"
+        _hover={{ bg: chakraLinkActiveBg }}
+        _active={{ bg: chakraLinkActiveBg }}
+        {...restProps}
+      >
+        {linkName}
+      </ChakraLink>
+    </NextLink>
+  ) : (
     <NextLink href={to} passHref>
       <ChakraLink
         color={chakraLinkColor}
         rounded={'md'}
         fontWeight="600"
-        transition="text-decoration .3s ease, color .3s ease"
+        transition="color .3s ease-in, background-color .3s ease-in"
         fontSize="sm"
         textTransform="uppercase"
         p="0.7rem"
         _hover={{
-          color: 'white',
+          color: chakraLinkColorHover,
           bg: chakraLinkBg,
-          transition: 'text-decoration .3s ease-out, color .3s ease-out',
+          transition: 'color .3s ease-out, background-color .3s ease-out',
         }}
         _active={{ bg: chakraLinkActiveBg }}
         {...restProps}
       >
-        {children}
+        {linkName}
       </ChakraLink>
     </NextLink>
   );

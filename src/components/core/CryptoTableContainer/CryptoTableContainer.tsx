@@ -5,7 +5,7 @@ export const CryptoTableContainer = ({ ...restProps }: ContainerProps) => {
 
   return (
     <Container
-      mt="1.5rem"
+      m="3rem auto 3rem auto"
       display="flex"
       justifyContent="center"
       alignItems="center"
