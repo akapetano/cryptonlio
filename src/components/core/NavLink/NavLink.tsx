@@ -14,7 +14,6 @@ interface INavLinkProps extends LinkProps {
 export const NavLink = ({ to, linkName, ...restProps }: INavLinkProps) => {
   const router = useRouter();
   const isActive = router.pathname === to;
-  console.log(isActive);
   const chakraLinkBg = useColorModeValue('brand.300', 'brand.200');
   const chakraLinkActiveBg = useColorModeValue('brand.400', 'brand.200');
   const chakraLinkColor = useColorModeValue('brand.200', 'brand.100');
