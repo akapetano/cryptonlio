@@ -1,20 +1,17 @@
 import { Box } from '@chakra-ui/react';
-import { MainNav } from '../src/components/core/MainNav/MainNav';
-import { CryptoTable } from '../src/components/features/home/CryptoTable/CryptoTable';
-import { CryptoTableContainer } from '../src/components/features/home/CryptoTableContainer/CryptoTableContainer';
+import { Navigation } from '../src/components/core/Navigation/Navigation';
+import { TopTenCryptoTable } from '../src/components/features/home/TopTenCryptoTable/TopTenCryptoTable';
+import { CryptoTableContainer } from '../src/components/core/CryptoTableContainer/CryptoTableContainer';
 import { NextHead } from '../src/components/shared/NextHead/NextHead';
 
 const HomePage = () => {
   return (
     <Box>
-      <NextHead
-        title="Crypton - Explore the World of Cryptocurrencies"
-        metaDescription="Crypton is a cryptocurrency website"
-      />
+      <NextHead title="Crypton - Explore the World of Cryptocurrencies" />
       <main>
-        <MainNav />
+        <Navigation />
         <CryptoTableContainer>
-          <CryptoTable />
+          <TopTenCryptoTable />
         </CryptoTableContainer>
         {/* <Flex
             h={{ base: 'auto', md: '100vh' }}

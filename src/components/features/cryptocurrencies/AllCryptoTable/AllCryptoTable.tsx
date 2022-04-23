@@ -3,13 +3,14 @@ import { useCrypto } from '../../../../../hooks/useCrypto';
 import Image from 'next/image';
 import { Coin } from '../../../../../types/crypto';
 
-export const CryptoTable = () => {
+export const AllCryptoTable = () => {
   const { data: cryptocurrencies, error } = useCrypto();
 
   return (
     <Table>
       <Thead>
         <Tr>
+          <Th>#</Th>
           <Th>Logo</Th>
           <Th>Name</Th>
           <Th>Symbol</Th>
@@ -20,10 +21,10 @@ export const CryptoTable = () => {
         </Tr>
       </Thead>
       <Tbody>
-        {cryptocurrencies?.map((coin: Coin) => {
-          console.log(coin);
+        {cryptocurrencies?.map((coin: Coin, index: string) => {
           return (
             <Tr key={coin.id}>
+              <Td>{index + 1}</Td>
               <Td>
                 <Image
                   loader={() => coin.image}
@@ -31,12 +32,30 @@ export const CryptoTable = () => {
                   alt={coin.name}
                   height="30px"
                   width="30px"
+                  unoptimized
                 />
               </Td>
               <Td>{coin.name}</Td>
-              <Td>{coin.symbol}</Td>
-              <Td>${coin.current_price.toFixed(2)}</Td>
-              <Td>{coin.price_change_percentage_24h.toFixed(2)}%</Td>
+              <Td>{coin.symbol.toUpperCase()}</Td>
+              <Td>
+                $
+                {coin.current_price > 1
+                  ? coin.current_price.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })
+                  : coin.current_price.toLocaleString(undefined, {
+                      minimumFractionDigits: 6,
+                      maximumFractionDigits: 6,
+                    })}
+              </Td>
+              <Td
+                color={
+                  coin.price_change_percentage_24h > 0 ? '#60AD65' : '#E53E3E'
+                }
+              >
+                {coin.price_change_percentage_24h.toFixed(2)}%
+              </Td>
               <Td>${coin.total_volume.toLocaleString()}</Td>
               <Td>${coin.market_cap.toLocaleString()}</Td>
             </Tr>
