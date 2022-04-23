@@ -13,6 +13,10 @@ export const CryptoTableContainer = ({ ...restProps }: ContainerProps) => {
       p={5}
       border={`1px solid ${containerBorderColor}`}
       rounded="md"
+      boxShadow={useColorModeValue(
+        '0 1px 16px -1px rgba(0, 0, 0, .2)',
+        '0 1px 16px 1px rgba(255, 255, 255, .05)'
+      )}
       {...restProps}
     />
   );

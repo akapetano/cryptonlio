@@ -10,7 +10,7 @@ export const NavigationWrapper = ({ ...restProps }: FlexProps) => {
       height="6rem"
       boxShadow={useColorModeValue(
         '0 1px 6px -1px rgba(0, 0, 0, .2)',
-        '0 1px 6px 1px rgba(0, 0, 0, .3)'
+        '0 1px 6px 1px rgba(255, 255, 255, .05)'
       )}
       width="100%"
       {...restProps}

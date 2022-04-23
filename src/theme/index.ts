@@ -44,31 +44,20 @@ const theme = extendTheme(
   {
     styles: {
       global: (props: any) => ({
-        a: {
-          color: mode('brand.600', 'brand.300')(props),
-          position: 'relative',
-          textDecoration: 'none',
-          _link: {
-            color: mode('brand.600', 'brand.300')(props),
-            textDecoration: 'none',
-          },
-          _visited: {
-            color: mode('brand.600', 'brand.300')(props),
-            textDecoration: 'none',
-          },
-          _hover: {
-            color: mode('brand.700', 'brand.200')(props),
-            textDecoration: 'none',
-            _before: {
-              backgroundColor: mode('brand.700', 'brand.200')(props),
-              transformOrigin: 'left',
-              transform: 'scaleX(1)',
-            },
-          },
-          _active: {
-            color: mode('brand.600', 'brand.200')(props),
-            textDecoration: 'none',
-          },
+        'body::-webkit-scrollbar': {
+          width: '1em',
+        },
+        'body::-webkit-scrollbar-track': {
+          boxShadow: mode(
+            'inset 0 0 6px rgba(0, 0, 0, 0.3)',
+            'inset 0 0 6px rgba(255, 255, 255, 0.3)'
+          )(props),
+        },
+
+        'body::-webkit-scrollbar-thumb': {
+          borderRadius: '10px',
+          backgroundColor: mode('brand.200', 'brand.100')(props),
+          outline: '1px solid green',
         },
       }),
     },
