@@ -57,6 +57,10 @@ const theme = extendTheme(
         'body::-webkit-scrollbar-thumb': {
           borderRadius: '10px',
           backgroundColor: mode('brand.200', 'brand.100')(props),
+          boxShadow: mode(
+            'inset 0 0 12px rgba(21, 49, 23, 0.6)',
+            'inset 0 0 12px rgba(21, 49, 23, 1)'
+          )(props),
           outline: '1px solid green',
         },
       }),
