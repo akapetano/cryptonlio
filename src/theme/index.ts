@@ -19,7 +19,7 @@ const inputSelectStyles = {
     filled: {
       field: {
         _focus: {
-          borderColor: 'brand.500',
+          borderColor: 'brand.800',
         },
       },
     },
@@ -36,12 +36,35 @@ const inputSelectStyles = {
 const brandRing = {
   _focus: {
     ring: 2,
-    ringColor: 'brand.500',
+    ringColor: 'brand.200',
   },
 };
 
 const theme = extendTheme(
   {
+    styles: {
+      global: (props: any) => ({
+        'body::-webkit-scrollbar': {
+          width: '1em',
+        },
+        'body::-webkit-scrollbar-track': {
+          boxShadow: mode(
+            'inset 0 0 6px rgba(0, 0, 0, 0.3)',
+            'inset 0 0 6px rgba(255, 255, 255, 0.3)'
+          )(props),
+        },
+
+        'body::-webkit-scrollbar-thumb': {
+          borderRadius: '10px',
+          backgroundColor: mode('brand.200', 'brand.100')(props),
+          boxShadow: mode(
+            'inset 0 0 12px rgba(21, 49, 23, 0.6)',
+            'inset 0 0 12px rgba(21, 49, 23, 1)'
+          )(props),
+          outline: '1px solid green',
+        },
+      }),
+    },
     colors: {
       brand: {
         50: '#60AD65',
@@ -61,20 +84,33 @@ const theme = extendTheme(
       body: `Inter, ${base.fonts?.body}`,
     },
     components: {
+      IconButton: {
+        variants: {
+          primary: (props: any) => ({
+            backgroundColor: mode('brand.200', 'brand.100')(props),
+            color: mode('white', 'gray.800')(props),
+            ...brandRing,
+            transition: 'background-color .3s ease',
+            _hover: {
+              backgroundColor: mode('brand.300', 'brand.50')(props),
+            },
+          }),
+        },
+      },
       Button: {
         variants: {
           primary: (props: any) => ({
             rounded: 'md',
             ...brandRing,
             color: mode('white', 'gray.800')(props),
-            backgroundColor: mode('brand.500', 'brand.200')(props),
+            backgroundColor: mode('brand.200', 'brand.100')(props),
 
             _hover: {
-              backgroundColor: mode('brand.600', 'brand.300'),
+              backgroundColor: mode('brand.300', 'brand.50')(props),
             },
 
             _active: {
-              backgroundColor: mode('brand.700', 'brand.400'),
+              backgroundColor: mode('brand.300', 'brand.50')(props),
             },
           }),
           secondary: (props: any) => ({
@@ -84,11 +120,11 @@ const theme = extendTheme(
             backgroundColor: 'transparent',
 
             _hover: {
-              color: mode('brand.500', 'brand.200'),
+              color: mode('brand.300', 'brand.50')(props),
             },
 
             _active: {
-              color: mode('brand.600', 'brand.300'),
+              color: mode('brand.300', 'brand.50')(props),
             },
           }),
         },

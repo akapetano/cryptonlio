@@ -2,6 +2,7 @@ import {
   Menu,
   MenuList,
   MenuItem,
+  Text,
   Button,
   MenuButton,
   Avatar,
@@ -34,7 +35,7 @@ export const UserMenu = () => {
         </Center>
         <br />
         <Center>
-          <p>Username</p>
+          <Text>Username</Text>
         </Center>
         <br />
         <MenuDivider />
