@@ -1,15 +1,24 @@
-import { Container, ContainerProps, useColorModeValue } from '@chakra-ui/react';
+import {
+  Container,
+  TableContainerProps,
+  useColorModeValue,
+} from '@chakra-ui/react';
 
-export const CryptoTableContainer = ({ ...restProps }: ContainerProps) => {
+export const CryptoTableContainer = ({ ...restProps }: TableContainerProps) => {
   const containerBorderColor = useColorModeValue('#E2E8F0', '#2D3748');
 
   return (
     <Container
-      m="3rem auto 3rem auto"
       display="flex"
       justifyContent="center"
       alignItems="center"
-      maxW="container.xl"
+      maxW={[
+        '25rem',
+        'container.sm',
+        'container.md',
+        'container.lg',
+        'container.xl',
+      ]}
       p={5}
       border={`1px solid ${containerBorderColor}`}
       rounded="md"

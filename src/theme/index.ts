@@ -44,17 +44,17 @@ const theme = extendTheme(
   {
     styles: {
       global: (props: any) => ({
-        'body::-webkit-scrollbar': {
+        '::-webkit-scrollbar': {
           width: '1em',
         },
-        'body::-webkit-scrollbar-track': {
+        '::-webkit-scrollbar-track': {
           boxShadow: mode(
             'inset 0 0 6px rgba(0, 0, 0, 0.3)',
             'inset 0 0 6px rgba(255, 255, 255, 0.3)'
           )(props),
         },
 
-        'body::-webkit-scrollbar-thumb': {
+        '::-webkit-scrollbar-thumb': {
           borderRadius: '10px',
           backgroundColor: mode('brand.200', 'brand.100')(props),
           boxShadow: mode(
@@ -80,8 +80,8 @@ const theme = extendTheme(
       },
     },
     fonts: {
-      heading: `Montserrat, ${base.fonts?.heading}`,
-      body: `Inter, ${base.fonts?.body}`,
+      heading: `Rubik, ${base.fonts?.heading}`,
+      body: `Noto Sans, ${base.fonts?.body}`,
     },
     components: {
       IconButton: {
