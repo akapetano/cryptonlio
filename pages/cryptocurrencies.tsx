@@ -10,9 +10,7 @@ const Cryptocurrencies = () => {
       <NextHead title="Crypton - Top 100 cryptocurrencies" />
       <main>
         <Navigation />
-        <CryptoTableContainer>
-          <AllCryptoTable />
-        </CryptoTableContainer>
+        <AllCryptoTable />
       </main>
     </Box>
   );
