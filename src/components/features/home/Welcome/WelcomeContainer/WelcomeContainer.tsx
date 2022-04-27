@@ -5,9 +5,10 @@ export const WelcomeContainer = ({ ...restProps }) => {
     <Container
       m="3rem auto 3rem auto"
       display="flex"
-      justifyContent="center"
+      flexDir={{ base: 'column', md: 'row' }}
+      justifyContent="space-between"
       alignItems="center"
-      maxW="container.xl"
+      maxW={{ base: 'container.lg', md: 'container.xl' }}
       p={5}
       rounded="md"
       {...restProps}

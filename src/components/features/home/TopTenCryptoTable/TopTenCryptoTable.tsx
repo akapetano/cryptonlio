@@ -9,7 +9,14 @@ export const TopTenCryptoTable = () => {
 
   return (
     <CryptoTableContainer>
-      <Table>
+      <Table
+        display={['block', 'block', 'block', 'table', 'table']}
+        maxWidth={{ base: 'max-content', md: 'container.xl' }}
+        margin="0 auto"
+        overflowX="auto"
+        whiteSpace="nowrap"
+        fontSize={{ base: 'sm', md: 'md' }}
+      >
         <Thead>
           <Tr>
             <Th>#</Th>
