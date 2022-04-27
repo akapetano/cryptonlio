@@ -3,6 +3,7 @@ import { Navigation } from '../src/components/core/Navigation/Navigation';
 import { TopTenCryptoTable } from '../src/components/features/home/TopTenCryptoTable/TopTenCryptoTable';
 import { CryptoTableContainer } from '../src/components/core/CryptoTableContainer/CryptoTableContainer';
 import { NextHead } from '../src/components/shared/NextHead/NextHead';
+import { Welcome } from '../src/components/features/home/Welcome/Welcome';
 
 const HomePage = () => {
   return (
@@ -10,9 +11,8 @@ const HomePage = () => {
       <NextHead title="Crypton - Explore the World of Cryptocurrencies" />
       <main>
         <Navigation />
-        <CryptoTableContainer>
-          <TopTenCryptoTable />
-        </CryptoTableContainer>
+        <Welcome />
+        <TopTenCryptoTable />
         {/* <Flex
             h={{ base: 'auto', md: '100vh' }}
             py={[0, 10, 20]}
