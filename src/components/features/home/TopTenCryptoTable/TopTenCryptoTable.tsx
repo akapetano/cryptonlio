@@ -3,6 +3,7 @@ import { CryptoTableContainer } from '../../../core/CryptoTableContainer/CryptoT
 import { useCrypto } from '../../../../../hooks/useCrypto';
 import Image from 'next/image';
 import { Coin } from '../../../../../types/crypto';
+import NextLink from 'next/link';
 
 export const TopTenCryptoTable = () => {
   const { data: cryptocurrencies, error } = useCrypto();
@@ -44,7 +45,12 @@ export const TopTenCryptoTable = () => {
                     unoptimized
                   />
                 </Td>
-                <Td>{coin.name}</Td>
+                <NextLink
+                  href={`/cryptocurrencies/${coin.name.toLowerCase()}`}
+                  passHref
+                >
+                  <Td _hover={{ cursor: 'pointer' }}>{coin.name}</Td>
+                </NextLink>
                 <Td>{coin.symbol.toUpperCase()}</Td>
                 <Td>
                   $

@@ -3,6 +3,7 @@ import { useCrypto } from '../../../../../hooks/useCrypto';
 import Image from 'next/image';
 import { Coin } from '../../../../../types/crypto';
 import { CryptoTableContainer } from '../../../core/CryptoTableContainer/CryptoTableContainer';
+import NextLink from 'next/link';
 import { BsStarFill, BsStar } from 'react-icons/bs';
 
 export const AllCryptoTable = () => {
@@ -45,7 +46,12 @@ export const AllCryptoTable = () => {
                     unoptimized
                   />
                 </Td>
-                <Td>{coin.name}</Td>
+                <NextLink
+                  href={`/cryptocurrencies/${coin.name.toLowerCase()}`}
+                  passHref
+                >
+                  <Td _hover={{ cursor: 'pointer' }}>{coin.name}</Td>
+                </NextLink>
                 <Td>{coin.symbol.toUpperCase()}</Td>
                 <Td fontStyle="bold">
                   $
