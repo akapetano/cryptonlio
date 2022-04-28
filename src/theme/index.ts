@@ -109,6 +109,16 @@ const theme = extendTheme(
           },
         }),
       },
+      Badge: {
+        variants: {
+          primary: (props: any) => ({
+            backgroundColor: mode('gray.600', 'gray.400')(props),
+            color: mode('gray.100', 'gray.800')(props),
+            borderRadius: '10px',
+            padding: '0.3rem 0.5rem',
+          }),
+        },
+      },
       Button: {
         variants: {
           primary: (props: any) => ({

@@ -12,7 +12,7 @@ export const AllCryptoTable = () => {
   return (
     <CryptoTableContainer m="3rem auto 3rem auto">
       <Table
-        display={['block', 'block', 'block', 'table', 'table']}
+        display={['block', 'block', 'block', 'block', 'table']}
         maxWidth={{ base: 'max-content', md: 'container.xl' }}
         margin="0 auto"
         overflowX="auto"
