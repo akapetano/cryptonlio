@@ -45,10 +45,7 @@ export const TopTenCryptoTable = () => {
                     unoptimized
                   />
                 </Td>
-                <NextLink
-                  href={`/cryptocurrencies/${coin.name.toLowerCase()}`}
-                  passHref
-                >
+                <NextLink href={`/cryptocurrencies/${coin.id}`} passHref>
                   <Td _hover={{ cursor: 'pointer' }}>{coin.name}</Td>
                 </NextLink>
                 <Td>{coin.symbol.toUpperCase()}</Td>

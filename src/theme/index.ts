@@ -63,6 +63,9 @@ const theme = extendTheme(
           )(props),
           outline: '1px solid green',
         },
+        a: {
+          color: props.colorMode === 'dark' ? 'teal.300' : 'teal.500',
+        },
       }),
     },
     colors: {
@@ -96,6 +99,15 @@ const theme = extendTheme(
             },
           }),
         },
+      },
+      Link: {
+        baseStyle: (props: any) => ({
+          color: mode('brand.200', 'brand.50')(props),
+          _hover: {
+            color: mode('brand.300', 'brand.100')(props),
+            ...brandRing,
+          },
+        }),
       },
       Button: {
         variants: {
