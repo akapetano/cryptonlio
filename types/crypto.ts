@@ -51,7 +51,10 @@ export type CoinById = {
   last_updated: string;
   links: {
     homepage: string[];
+    repos_url: { github: string[] };
+    subreddit_url: string;
   };
+
   liquidity_score: number;
   market_cap_rank: number;
   market_data: {
@@ -123,4 +126,10 @@ export type CoinById = {
   status_updates: [];
   symbol: string;
   tickers: Array<Object>;
+};
+
+export type CoinMarketHistory = {
+  market_caps: Array<Array<number>>;
+  prices: Array<Array<number>>;
+  total_volumes: Array<Array<number>>;
 };

@@ -1,12 +1,7 @@
 import { HStack, Box } from '@chakra-ui/react';
 import { NavLink } from '../NavLink/NavLink';
 
-const NAV_ITEMS = [
-  'Home',
-  'Dashboard',
-  'Cryptocurrencies',
-  'Create a Portfolio',
-];
+const NAV_ITEMS = ['Home', 'Cryptocurrencies', 'Create a Portfolio'];
 
 export const NavLinks = () => {
   return (

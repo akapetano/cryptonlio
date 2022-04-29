@@ -19,7 +19,7 @@ export const CryptoTableContainer = ({ ...restProps }: TableContainerProps) => {
         'container.lg',
         'container.xl',
       ]}
-      p={5}
+      p={'1rem 0'}
       border={`1px solid ${containerBorderColor}`}
       rounded="md"
       boxShadow={useColorModeValue(

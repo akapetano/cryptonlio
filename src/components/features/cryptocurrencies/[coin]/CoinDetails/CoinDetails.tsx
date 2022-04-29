@@ -8,6 +8,7 @@ import {
   Link,
   Button,
   Badge,
+  Icon,
 } from '@chakra-ui/react';
 import parse, {
   attributesToProps,
@@ -17,6 +18,14 @@ import parse, {
 import Image from 'next/image';
 import { useState } from 'react';
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
+import { BsGlobe2, BsGithub, BsReddit } from 'react-icons/bs';
+import { FaCoins } from 'react-icons/fa';
+import {
+  AiOutlineRise,
+  AiOutlineFall,
+  AiOutlineDollar,
+  AiFillPieChart,
+} from 'react-icons/ai';
 import { LineChart } from '../charts/LineChart/LineChart';
 import { CoinById } from '../../../../../../types/crypto';
 
@@ -74,40 +83,74 @@ export const CoinDetails = ({ coin }: ICoinDetails) => {
         </HStack>
       </VStack>
       <Box>
-        <LineChart coin={coin} />
+        <LineChart coinId={coin.id} />
       </Box>
       <Flex flexDir="column" maxWidth="45rem" mb="2rem">
         <Heading as="h3" fontSize="2xl" mb="1rem">
           Market data
         </Heading>
         <Box mb="2rem">
-          <Text fontSize="large">
-            All-Time High: $
-            {coin.market_data.ath.usd > 1
-              ? coin.market_data.ath.usd.toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })
-              : coin.market_data.ath.usd.toLocaleString(undefined, {
-                  minimumFractionDigits: 6,
-                  maximumFractionDigits: 6,
-                })}
-          </Text>
-          <Text fontSize="large">
-            Current Price: $
-            {coin.market_data.current_price.usd > 1
-              ? coin.market_data.current_price.usd.toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })
-              : coin.market_data.current_price.usd.toLocaleString(undefined, {
-                  minimumFractionDigits: 6,
-                  maximumFractionDigits: 6,
-                })}
-          </Text>
-          <Text fontSize="large">
-            Market Cap: ${coin.market_data.market_cap.usd.toLocaleString()}
-          </Text>
+          <HStack spacing="1rem" mb="1rem">
+            <Icon as={AiOutlineDollar} w={6} h={6} />
+            <Text fontSize="large">
+              Current Price: $
+              {coin.market_data.current_price.usd > 1
+                ? coin.market_data.current_price.usd.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })
+                : coin.market_data.current_price.usd.toLocaleString(undefined, {
+                    minimumFractionDigits: 6,
+                    maximumFractionDigits: 6,
+                  })}
+            </Text>
+          </HStack>
+
+          <HStack spacing="1rem" mb="1rem">
+            <Icon as={AiFillPieChart} w={6} h={6} />
+            <Text fontSize="large">
+              Market Cap: ${coin.market_data.market_cap.usd.toLocaleString()}
+            </Text>
+          </HStack>
+
+          <HStack spacing="1rem" mb="1rem">
+            <Icon as={FaCoins} w={6} h={6} />
+            <Text fontSize="large">
+              Total Supply: {coin.market_data.total_supply.toLocaleString()}
+            </Text>
+          </HStack>
+
+          <HStack spacing="1rem" mb="1rem">
+            <Icon as={AiOutlineRise} w={6} h={6} />
+            <Text fontSize="large">
+              All-Time High: $
+              {coin.market_data.ath.usd > 1
+                ? coin.market_data.ath.usd.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })
+                : coin.market_data.ath.usd.toLocaleString(undefined, {
+                    minimumFractionDigits: 6,
+                    maximumFractionDigits: 6,
+                  })}
+            </Text>
+          </HStack>
+
+          <HStack spacing="1rem" mb="1rem">
+            <Icon as={AiOutlineFall} w={6} h={6} />
+            <Text fontSize="large">
+              All-Time Low: $
+              {coin.market_data.atl.usd > 1
+                ? coin.market_data.atl.usd.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })
+                : coin.market_data.atl.usd.toLocaleString(undefined, {
+                    minimumFractionDigits: 6,
+                    maximumFractionDigits: 6,
+                  })}
+            </Text>
+          </HStack>
         </Box>
         <Flex flexDir="column" maxWidth="45rem" mb="2rem">
           <Heading as="h3" fontSize="2xl" mb="1rem">
@@ -132,11 +175,32 @@ export const CoinDetails = ({ coin }: ICoinDetails) => {
         </Flex>
         <Flex flexDir="column" maxWidth="45rem" mb="2rem">
           <Heading as="h3" fontSize="2xl" mb="1rem">
-            Website
+            Resources
           </Heading>
-          <Link mb="0.5rem" href={coin.links.homepage[0]} target="_blank">
-            {coin.links.homepage[0]}
-          </Link>
+          <HStack spacing="1rem" mb="1rem">
+            <Icon as={BsGlobe2} w={6} h={6} />
+            <Link mb="0.5rem" href={coin.links.homepage[0]} target="_blank">
+              Official website
+            </Link>
+          </HStack>
+          <HStack spacing="1rem" mb="1rem">
+            <Icon as={BsGithub} w={6} h={6} />
+            <Link
+              mb="0.5rem"
+              href={coin.links.repos_url.github[0]}
+              target="_blank"
+            >
+              GitHub
+            </Link>
+          </HStack>
+          {coin.links.subreddit_url ? (
+            <HStack spacing="1rem" mb="1rem">
+              <Icon as={BsReddit} w={6} h={6} />
+              <Link mb="0.5rem" href={coin.links.subreddit_url} target="_blank">
+                Reddit
+              </Link>
+            </HStack>
+          ) : null}
         </Flex>
       </Flex>
     </Box>
