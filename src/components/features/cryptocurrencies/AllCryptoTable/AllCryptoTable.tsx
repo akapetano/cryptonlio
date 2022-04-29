@@ -1,4 +1,12 @@
-import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { useCrypto } from '../../../../../hooks/useCrypto';
 import Image from 'next/image';
 import { Coin } from '../../../../../types/crypto';
@@ -8,6 +16,7 @@ import { BsStarFill, BsStar } from 'react-icons/bs';
 
 export const AllCryptoTable = () => {
   const { data: cryptocurrencies, error } = useCrypto();
+  const tableRowHoverBgColor = useColorModeValue('gray.100', 'gray.700');
 
   return (
     <CryptoTableContainer m="3rem auto 3rem auto">
@@ -34,44 +43,55 @@ export const AllCryptoTable = () => {
         <Tbody>
           {cryptocurrencies?.map((coin: Coin, index: string) => {
             return (
-              <Tr key={coin.id}>
-                <Td>{index + 1}</Td>
-                <Td>
-                  <Image
-                    loader={() => coin.image}
-                    src={coin.image}
-                    alt={coin.name}
-                    height="30px"
-                    width="30px"
-                    unoptimized
-                  />
-                </Td>
-                <NextLink href={`/cryptocurrencies/${coin.id}`} passHref>
-                  <Td _hover={{ cursor: 'pointer' }}>{coin.name}</Td>
-                </NextLink>
-                <Td>{coin.symbol.toUpperCase()}</Td>
-                <Td fontStyle="bold">
-                  $
-                  {coin.current_price > 1
-                    ? coin.current_price.toLocaleString(undefined, {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })
-                    : coin.current_price.toLocaleString(undefined, {
-                        minimumFractionDigits: 6,
-                        maximumFractionDigits: 6,
-                      })}
-                </Td>
-                <Td
-                  color={
-                    coin.price_change_percentage_24h > 0 ? '#60AD65' : '#E53E3E'
-                  }
+              <NextLink
+                key={coin.id}
+                href={`/cryptocurrencies/${coin.id}`}
+                passHref
+              >
+                <Tr
+                  key={coin.id}
+                  _hover={{ bg: tableRowHoverBgColor, cursor: 'pointer' }}
                 >
-                  {coin.price_change_percentage_24h.toFixed(2)}%
-                </Td>
-                <Td>${coin.total_volume.toLocaleString()}</Td>
-                <Td>${coin.market_cap.toLocaleString()}</Td>
-              </Tr>
+                  <Td>{index + 1}</Td>
+                  <Td>
+                    <Image
+                      loader={() => coin.image}
+                      src={coin.image}
+                      alt={coin.name}
+                      height="30px"
+                      width="30px"
+                      unoptimized
+                    />
+                  </Td>
+
+                  <Td>{coin.name}</Td>
+
+                  <Td>{coin.symbol.toUpperCase()}</Td>
+                  <Td fontStyle="bold">
+                    $
+                    {coin.current_price > 1
+                      ? coin.current_price.toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })
+                      : coin.current_price.toLocaleString(undefined, {
+                          minimumFractionDigits: 6,
+                          maximumFractionDigits: 6,
+                        })}
+                  </Td>
+                  <Td
+                    color={
+                      coin.price_change_percentage_24h > 0
+                        ? '#60AD65'
+                        : '#E53E3E'
+                    }
+                  >
+                    {coin.price_change_percentage_24h.toFixed(2)}%
+                  </Td>
+                  <Td>${coin.total_volume.toLocaleString()}</Td>
+                  <Td>${coin.market_cap.toLocaleString()}</Td>
+                </Tr>
+              </NextLink>
             );
           })}
         </Tbody>

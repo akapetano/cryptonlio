@@ -74,7 +74,7 @@ export const CoinDetails = ({ coin }: ICoinDetails) => {
         </HStack>
       </VStack>
       <Box>
-        <LineChart coinId={coin.id} />
+        <LineChart coin={coin} />
       </Box>
       <Flex flexDir="column" maxWidth="45rem" mb="2rem">
         <Heading as="h3" fontSize="2xl" mb="1rem">
