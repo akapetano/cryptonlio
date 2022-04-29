@@ -1,6 +1,4 @@
 import { CoinMarketHistory } from '../../../../../../../types/crypto';
-import { Chart as ChartJS, registerables } from 'chart.js';
-ChartJS.register(...registerables);
 
 export const chartConfig = {
   plugins: {
@@ -32,7 +30,7 @@ export const formatChartData = (data: CoinMarketHistory['prices']) => {
   return data?.map((el) => {
     return {
       x: new Date(el[0]).toLocaleDateString('en-GB'),
-      y: typeof el[1] === 'number' ? el[1].toFixed(2) : null,
+      y: el[1],
     };
   });
 };

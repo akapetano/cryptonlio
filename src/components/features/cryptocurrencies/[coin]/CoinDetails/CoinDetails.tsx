@@ -34,7 +34,6 @@ interface ICoinDetails {
 }
 
 export const CoinDetails = ({ coin }: ICoinDetails) => {
-  console.log(coin);
   const [readMore, setReadMore] = useState(false);
 
   const coinDescription = parse(
@@ -116,7 +115,10 @@ export const CoinDetails = ({ coin }: ICoinDetails) => {
           <HStack spacing="1rem" mb="1rem">
             <Icon as={FaCoins} w={6} h={6} />
             <Text fontSize="large">
-              Total Supply: {coin.market_data.total_supply.toLocaleString()}
+              Total Supply:{' '}
+              {coin.market_data.total_supply === null
+                ? '?'
+                : coin.market_data.total_supply.toLocaleString()}
             </Text>
           </HStack>
 
@@ -140,14 +142,14 @@ export const CoinDetails = ({ coin }: ICoinDetails) => {
             <Icon as={AiOutlineFall} w={6} h={6} />
             <Text fontSize="large">
               All-Time Low: $
-              {coin.market_data.atl.usd > 1
+              {coin.market_data.atl.usd > 0.01
                 ? coin.market_data.atl.usd.toLocaleString(undefined, {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })
                 : coin.market_data.atl.usd.toLocaleString(undefined, {
-                    minimumFractionDigits: 6,
-                    maximumFractionDigits: 6,
+                    minimumFractionDigits: 10,
+                    maximumFractionDigits: 10,
                   })}
             </Text>
           </HStack>
@@ -180,7 +182,7 @@ export const CoinDetails = ({ coin }: ICoinDetails) => {
           <HStack spacing="1rem" mb="1rem">
             <Icon as={BsGlobe2} w={6} h={6} />
             <Link mb="0.5rem" href={coin.links.homepage[0]} target="_blank">
-              Official website
+              Official Website
             </Link>
           </HStack>
           <HStack spacing="1rem" mb="1rem">

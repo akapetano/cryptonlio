@@ -1,15 +1,32 @@
-import { Container } from '@chakra-ui/react';
+import { Container, useColorModeValue } from '@chakra-ui/react';
 import {} from './LineChart.utils';
 import { useCoinMarketChartHistory } from '../../../../../../../hooks/useCoinMarketChartHistory';
-import { CoinMarketHistory } from '../../../../../../../types/crypto';
-import { Chart } from 'chart.js/auto';
-import { chartConfig, formatChartData } from './LineChart.utils';
-
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { chartConfig, formatChartData } from './LineChart.utils';
 
 interface ILineChartProps {
   coinId: string;
 }
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export const LineChart = ({ coinId }: ILineChartProps) => {
   const {
@@ -17,31 +34,33 @@ export const LineChart = ({ coinId }: ILineChartProps) => {
     isLoading,
     isError,
   } = useCoinMarketChartHistory(coinId);
-
-  console.log(coinMarketHistory);
+  const bgColor = useColorModeValue('brand.400', 'brand.100');
+  const borderColor = useColorModeValue('#153117', 'brand.100');
 
   const data = {
+    labels: [],
     datasets: [
       {
-        label: 'Coin Price Chart',
-        fill: true,
+        label: '90-day Coin Price Chart',
+        fill: false,
+        lineTension: 0.1,
         data: coinMarketHistory
           ? formatChartData(coinMarketHistory.prices)
           : null,
-        borderColor: 'rgb(255,99,132)',
-        borderWidth: 3,
-        pointRadius: pointRadius,
-        pointHoverRadius: 5,
-        borderCapStyle: 'butt',
-        pointHoverBackgroundColor: 'rgba(59, 130, 246, 1)',
-        pointHoverBorderColor: 'rgba(59, 130, 246, 1)',
+        borderColor: 'rgba(21, 49, 23, 0.3)',
+        backgroundColor: '#2ecc71',
+        borderWidth: 1,
+        pointRadius: 3,
+        pointHoverRadius: 7,
+        pointHoverBackgroundColor: '#27ae60',
+        pointHoverBorderColor: '#d35400',
         pointHoverBorderWidth: 2,
       },
     ],
   };
 
   return (
-    <Container height={'100%'} width={'100%'} p={2} maxWidth="container.xl">
+    <Container p={2} height="25rem" maxWidth="container.xl" mb="2rem">
       <Line data={data} options={chartConfig} />
     </Container>
   );
