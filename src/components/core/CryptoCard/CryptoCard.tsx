@@ -4,8 +4,8 @@ import { SiEthereum } from 'react-icons/si';
 
 export const CryptoCard = () => {
   const cryptoCardBoxShadow = useColorModeValue(
-    '0 2px 32px 0 rgba(96, 173, 101, .7)',
-    '0 2px 32px 0 rgba(46, 204, 113, .4)'
+    '0 -4px 64px 32px rgba(96, 173, 101, .9)',
+    '0 -4px 64px 32px rgba(46, 204, 113, .5)'
   );
 
   return (

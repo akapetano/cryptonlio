@@ -65,15 +65,7 @@ export const CoinLineChart = ({ coinId, days, interval }: ILineChartProps) => {
   };
 
   return (
-    <Container
-      p={5}
-      height="25rem"
-      maxWidth="container.xl"
-      mb="1rem"
-      rounded="xl"
-      border="1px solid"
-      borderColor={containerBorderColor}
-    >
+    <Container p={5} height="25rem" maxWidth="container.xl">
       <Line data={data} options={chartConfig} />
     </Container>
   );
