@@ -26,8 +26,8 @@ import {
   AiOutlineDollar,
   AiFillPieChart,
 } from 'react-icons/ai';
-import { LineChart } from '../charts/LineChart/LineChart';
 import { CoinById } from '../../../../../../types/crypto';
+import { ChartSelector } from '../charts/ChartSelector/ChartSelector';
 
 interface ICoinDetails {
   coin: CoinById;
@@ -81,9 +81,14 @@ export const CoinDetails = ({ coin }: ICoinDetails) => {
           </Box>
         </HStack>
       </VStack>
-      <Box>
-        <LineChart coinId={coin.id} />
-      </Box>
+      <Flex
+        flexDir="column"
+        mb="2rem"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <ChartSelector coinId={coin.id} />
+      </Flex>
       <Flex flexDir="column" maxWidth="45rem" mb="2rem">
         <Heading as="h3" fontSize="2xl" mb="1rem">
           Market data

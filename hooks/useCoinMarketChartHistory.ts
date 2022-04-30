@@ -5,9 +5,13 @@ import {
 } from '../src/fetchers/marketChartHistoryFetcher';
 import { CoinMarketHistory } from '../types/crypto';
 
-export const useCoinMarketChartHistory = (id: string) => {
+export const useCoinMarketChartHistory = (
+  id: string,
+  days: string,
+  interval: string
+) => {
   const { data, error } = useSWR<CoinMarketHistory>(
-    getMarketChartKey(id),
+    getMarketChartKey(id, days, interval),
     marketChartFetcher
   );
 
