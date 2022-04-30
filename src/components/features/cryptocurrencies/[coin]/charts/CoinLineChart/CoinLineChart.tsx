@@ -48,10 +48,11 @@ export const CoinLineChart = ({ coinId, days, interval }: ILineChartProps) => {
             ? `24-hour Coin Price Chart (${getDate(coinMarketHistory?.prices)})`
             : `${days}-day Coin Price Chart`,
         fill: false,
-        lineTension: 0.1,
+
         data: coinMarketHistory
           ? formatChartData(coinMarketHistory.prices, interval)
           : null,
+        fontColor: 'white',
         borderColor: '#2ecc71',
         backgroundColor: '#c0f0d4',
         borderWidth: 1,

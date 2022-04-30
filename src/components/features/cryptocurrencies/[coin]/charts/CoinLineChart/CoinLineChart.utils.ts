@@ -4,25 +4,59 @@ export const chartConfig = {
   plugins: {
     // show legends for our graph
     legend: {
-      display: true,
+      display: false,
     },
-  },
-  lineHeightAnnotation: {
-    always: true,
-    lineWeight: 1.5,
-  },
+    datalabels: {
+      display: true,
+      color: '#6a0dad',
+      align: 'top',
+      labels: {
+        title: {
+          font: {
+            weight: 'bold',
+            size: 13,
+          },
+          padding: 10,
+        },
+      },
+    },
+    lineHeightAnnotation: {
+      always: true,
+      lineWeight: 1.5,
+    },
 
-  //   animate in
-  animation: {
-    duration: 1,
-  },
-  maintainAspectRatio: false,
-  responsive: true,
+    //   animate in
+    animation: {
+      duration: 1,
+    },
+    maintainAspectRatio: false,
+    responsive: true,
 
-  //   show the x and y scales
-  scales: {
-    x: { display: true },
-    y: { display: true },
+    //   show the x and y scales
+    scales: {
+      x: {
+        display: true,
+        ticks: {
+          color: '#6a0dad',
+          maxRotation: 45,
+          minRotation: 45,
+        },
+        grid: {
+          color: '#6a0dad',
+        },
+      },
+      y: {
+        ticks: {
+          color: '#6a0dad',
+          padding: 10,
+        },
+        display: true,
+        borderDash: [5, 5],
+        grid: {
+          color: '#6a0dad',
+        },
+      },
+    },
   },
 };
 
