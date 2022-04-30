@@ -14,15 +14,27 @@ const breakpoints = {
   '2xl': '96em',
 };
 
+const brandRing = {
+  _focus: {
+    ring: 2,
+    ringColor: 'brand.200',
+  },
+};
+
 const inputSelectStyles = {
   variants: {
-    filled: {
+    filled: (props: any) => ({
       field: {
+        rounded: 'xl',
+        // backgroundColor: mode('brand.50', 'brand.700')(props),
         _focus: {
-          borderColor: 'brand.800',
+          borderColor: mode('brand.600', 'brand.200')(props),
+        },
+        _active: {
+          borderColor: 'none',
         },
       },
-    },
+    }),
   },
   sizes: {
     md: {
@@ -30,13 +42,6 @@ const inputSelectStyles = {
         borderRadius: 'none',
       },
     },
-  },
-};
-
-const brandRing = {
-  _focus: {
-    ring: 2,
-    ringColor: 'brand.200',
   },
 };
 
@@ -62,6 +67,9 @@ const theme = extendTheme(
             'inset 0 0 12px rgba(21, 49, 23, 1)'
           )(props),
           outline: '1px solid green',
+        },
+        a: {
+          color: props.colorMode === 'dark' ? 'teal.300' : 'teal.500',
         },
       }),
     },
@@ -94,6 +102,25 @@ const theme = extendTheme(
             _hover: {
               backgroundColor: mode('brand.300', 'brand.50')(props),
             },
+          }),
+        },
+      },
+      Link: {
+        baseStyle: (props: any) => ({
+          color: mode('brand.200', 'brand.50')(props),
+          _hover: {
+            color: mode('brand.300', 'brand.100')(props),
+          },
+          ...brandRing,
+        }),
+      },
+      Badge: {
+        variants: {
+          primary: (props: any) => ({
+            backgroundColor: mode('gray.600', 'gray.400')(props),
+            color: mode('gray.100', 'gray.800')(props),
+            borderRadius: '10px',
+            padding: '0.3rem 0.5rem',
           }),
         },
       },
@@ -130,7 +157,7 @@ const theme = extendTheme(
         },
       },
       Input: { ...inputSelectStyles },
-      Select: { ...inputSelectStyles },
+      Select: { ...inputSelectStyles, ...brandRing },
       Checkbox: {
         baseStyle: {
           control: {
@@ -138,6 +165,14 @@ const theme = extendTheme(
               borderRadius: 'none',
               ...brandRing,
             },
+          },
+        },
+      },
+      Radio: {
+        variants: {
+          primary: {
+            colorScheme: 'brand',
+            ...brandRing,
           },
         },
       },
