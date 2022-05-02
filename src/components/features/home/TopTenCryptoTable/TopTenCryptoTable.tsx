@@ -18,7 +18,7 @@ export const TopTenCryptoTable = () => {
   const tableRowHoverBgColor = useColorModeValue('gray.100', 'gray.700');
 
   return (
-    <CryptoTableContainer>
+    <CryptoTableContainer mt="10rem">
       <Table
         id="top-10-coins"
         display={['block', 'block', 'block', 'table', 'table']}

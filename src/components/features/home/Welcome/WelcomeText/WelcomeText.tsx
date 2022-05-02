@@ -1,5 +1,5 @@
-import { VStack, Heading, Button, HStack } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { VStack, Heading } from '@chakra-ui/react';
+import { TopTenCoinsLink } from '../../TopTenCoinsLink/TopTenCoinsLink';
 
 export const WelcomeText = () => {
   return (
@@ -20,12 +20,6 @@ export const WelcomeText = () => {
       >
         Create Your Portfolio <br /> With Ease.
       </Heading>
-      <HStack>
-        <Button variant="primary">Get started</Button>
-        <NextLink href={'#top-10-coins'} passHref>
-          <Button variant="secondary">Top 10 Coins</Button>
-        </NextLink>
-      </HStack>
     </VStack>
   );
 };
