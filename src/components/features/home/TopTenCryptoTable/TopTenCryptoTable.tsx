@@ -14,12 +14,13 @@ import { Coin } from '../../../../../types/crypto';
 import NextLink from 'next/link';
 
 export const TopTenCryptoTable = () => {
-  const { data: cryptocurrencies, error } = useCrypto();
+  const { data: cryptocurrencies, isLoading, isError } = useCrypto();
   const tableRowHoverBgColor = useColorModeValue('gray.100', 'gray.700');
 
   return (
     <CryptoTableContainer>
       <Table
+        id="top-10-coins"
         display={['block', 'block', 'block', 'table', 'table']}
         maxWidth={{ base: 'max-content', md: 'container.xl' }}
         margin="0 auto"
