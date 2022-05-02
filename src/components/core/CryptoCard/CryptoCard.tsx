@@ -4,8 +4,8 @@ import { SiEthereum } from 'react-icons/si';
 
 export const CryptoCard = () => {
   const cryptoCardBoxShadow = useColorModeValue(
-    '0 -4px 64px 32px rgba(96, 173, 101, .9)',
-    '0 -4px 64px 32px rgba(46, 204, 113, .5)'
+    '0 8px 32px 8px rgba(96, 173, 101, .9)',
+    '0 8px 32px 8px rgba(46, 204, 113, .5)'
   );
 
   return (
@@ -52,7 +52,7 @@ export const CryptoCard = () => {
             Address
           </Text>
           <Text color="white" fontWeight="semi-bold" fontSize="xl" mt={1}>
-            Blockchain
+            Crypton
           </Text>
         </Box>
       </Flex>

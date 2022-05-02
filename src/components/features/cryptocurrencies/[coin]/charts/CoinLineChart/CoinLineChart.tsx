@@ -31,13 +31,15 @@ ChartJS.register(
 );
 
 export const CoinLineChart = ({ coinId, days, interval }: ILineChartProps) => {
+  const pointBgColor = useColorModeValue('#a55eea', '#e056fd');
+  const pointHoverBgColor = useColorModeValue('#8854d0', '#be2edd');
+  const pointBorderColor = useColorModeValue('#44bd32', '#badc58');
+  const pointHoverBorderColor = useColorModeValue('#20bf6b', '#4cd137');
   const {
     data: coinMarketHistory,
     isLoading,
     isError,
   } = useCoinMarketChartHistory(coinId, days, interval);
-  const bgColor = useColorModeValue('brand.400', 'brand.100');
-  const containerBorderColor = useColorModeValue('gray.200', 'gray.700');
 
   const data = {
     labels: [],
@@ -48,25 +50,30 @@ export const CoinLineChart = ({ coinId, days, interval }: ILineChartProps) => {
             ? `24-hour Coin Price Chart (${getDate(coinMarketHistory?.prices)})`
             : `${days}-day Coin Price Chart`,
         fill: false,
-
         data: coinMarketHistory
           ? formatChartData(coinMarketHistory.prices, interval)
           : null,
-        fontColor: 'white',
-        borderColor: '#2ecc71',
-        backgroundColor: '#c0f0d4',
+        color: 'black',
+        backroundColor: pointBgColor,
+        borderColor: pointBorderColor,
+        pointBackgroundColor: pointBgColor,
+        pointBorderColor: pointBorderColor,
         borderWidth: 1,
-        pointRadius: 3,
-        pointHoverRadius: 7,
-        pointHoverBackgroundColor: '#27ae60',
-        pointHoverBorderColor: '#27ae60',
+        pointRadius: days === '365' ? 1 : 3,
+        pointHoverRadius: days === '365' ? 5 : 7,
+        pointHoverBackgroundColor: pointHoverBgColor,
+        pointHoverBorderColor: pointHoverBorderColor,
         pointHoverBorderWidth: 2,
       },
     ],
   };
 
   return (
-    <Container p={5} height="25rem" maxWidth="container.xl">
+    <Container
+      p={5}
+      height="25rem"
+      maxWidth={{ base: 'container.sm', md: 'container.xl' }}
+    >
       <Line data={data} options={chartConfig} />
     </Container>
   );

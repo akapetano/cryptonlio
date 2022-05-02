@@ -5,7 +5,7 @@ export const NavigationWrapper = ({ ...restProps }: FlexProps) => {
     <Flex
       h={28}
       alignItems={'center'}
-      justifyContent={'space-around'}
+      justifyContent={{ base: 'space-between', md: 'space-around' }}
       bg={useColorModeValue('white', 'gray.800')}
       height="6rem"
       boxShadow={useColorModeValue(

@@ -1,14 +1,15 @@
-import { HStack, Box } from '@chakra-ui/react';
+import { Stack, StackProps } from '@chakra-ui/react';
 import { NavLink } from '../NavLink/NavLink';
 
 const NAV_ITEMS = ['Home', 'Cryptocurrencies', 'Create a Portfolio'];
 
-export const NavLinks = () => {
+export const NavLinks = ({ ...restProps }: StackProps) => {
   return (
-    <HStack as={'nav'} spacing={8} display={{ base: 'none', md: 'flex' }}>
+    <Stack as={'nav'} spacing={8} {...restProps}>
       {NAV_ITEMS.map((navItem, index) => {
         return (
           <NavLink
+            width={{ base: '135%', md: 'auto' }}
             key={navItem + index}
             to={
               navItem === 'Home'
@@ -19,6 +20,6 @@ export const NavLinks = () => {
           />
         );
       })}
-    </HStack>
+    </Stack>
   );
 };

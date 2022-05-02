@@ -9,6 +9,7 @@ export const ContentCard = ({ ...restProps }: BoxProps) => {
       borderColor={contentCardBorderColor}
       rounded="xl"
       mb="2rem"
+      maxWidth={{ base: 'container.xs', md: 'container.xl' }}
       {...restProps}
     />
   );
