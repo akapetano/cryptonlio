@@ -1,20 +1,9 @@
-import { Container, ContainerProps } from '@chakra-ui/react';
+import { Box, BoxProps } from '@chakra-ui/react';
 
-export const LayoutMain = ({ ...restProps }: ContainerProps) => {
+export const LayoutMain = ({ children, ...restProps }: BoxProps) => {
   return (
-    <Container
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      maxW={[
-        '25rem',
-        'container.sm',
-        'container.md',
-        'container.lg',
-        'container.xl',
-      ]}
-      p={5}
-      {...restProps}
-    />
+    <Box {...restProps}>
+      <main>{children}</main>
+    </Box>
   );
 };

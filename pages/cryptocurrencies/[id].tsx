@@ -1,9 +1,9 @@
-import { Box } from '@chakra-ui/react';
 import { NextHead } from '../../src/components/shared/NextHead/NextHead';
+import { Layout } from '../../src/components/shared/Layout/Layout';
+import { LayoutMain } from '../../src/components/shared/LayoutMain/LayoutMain';
 import { Navigation } from '../../src/components/core/Navigation/Navigation';
 import { CoinDetails } from '../../src/components/features/cryptocurrencies/[coin]/CoinDetails/CoinDetails';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { LayoutMain } from '../../src/components/shared/LayoutMain/LayoutMain';
 import { COINS_COINGECKO_API_URL } from '../../src/fetchers/cryptoFetcher';
 import { Coin, CoinById } from '../../types/crypto';
 
@@ -40,15 +40,18 @@ interface ICoinProps {
 
 const Coin = ({ coin }: ICoinProps) => {
   return (
-    <Box>
+    <Layout>
       <NextHead title="Crypton - Top 100 cryptocurrencies" />
-      <main>
-        <Navigation />
-        <LayoutMain mt="2rem">
-          <CoinDetails coin={coin} />
-        </LayoutMain>
-      </main>
-    </Box>
+      <Navigation />
+      <LayoutMain
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        mt="2rem"
+      >
+        <CoinDetails coin={coin} />
+      </LayoutMain>
+    </Layout>
   );
 };
 
