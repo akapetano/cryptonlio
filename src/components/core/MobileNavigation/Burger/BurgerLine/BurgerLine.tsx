@@ -5,7 +5,7 @@ interface IBurgerLine {
 }
 
 export const BurgerLine = ({ isOpen }: IBurgerLine) => {
-  const lineColor = useColorModeValue('brand.200', 'brand.100');
+  const lineColor = useColorModeValue('#204A23', '#419547');
 
   return (
     <Box

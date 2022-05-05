@@ -12,7 +12,7 @@ export const Navigation = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <NavigationWrapper>
-      <Logo />
+      <Logo width="75" height="75" />
       <NavLinks
         display={{ base: 'none', md: 'flex' }}
         direction={{ base: 'column', md: 'row' }}

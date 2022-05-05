@@ -7,7 +7,7 @@ import { TopTenCoinsLink } from '../TopTenCoinsLink/TopTenCoinsLink';
 
 export const Welcome = () => {
   return (
-    <WelcomeContainer mt="-10rem">
+    <WelcomeContainer mt={{ base: '-5rem', md: '-10rem' }}>
       <VStack spacing="4rem">
         <VStack>
           <TopTenCoinsLink />

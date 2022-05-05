@@ -22,7 +22,12 @@ export const TopTenCoinsTable = () => {
 
   return (
     <TopTenCoinsSection>
-      <Heading as="h2" textAlign="center" mb="2rem">
+      <Heading
+        as="h2"
+        textAlign="center"
+        mb="2rem"
+        fontSize={{ base: '3xl', md: '4xl' }}
+      >
         Top 10 Coins by <br /> Market Cap
       </Heading>
       <CoinsTableContainer>

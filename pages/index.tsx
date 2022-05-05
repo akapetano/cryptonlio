@@ -4,6 +4,7 @@ import { TopTenCoinsTable } from '../src/components/features/home/TopTenCoinsTab
 import { NextHead } from '../src/components/shared/NextHead/NextHead';
 import { Welcome } from '../src/components/features/home/Welcome/Welcome';
 import { SignUpForm } from '../src/components/core/SignUpForm/SignUpForm';
+import { Footer } from '../src/components/core/Footer/Footer';
 
 const HomePage = () => {
   return (
@@ -16,6 +17,7 @@ const HomePage = () => {
 
         {/* <SignUpForm /> */}
       </main>
+      <Footer />
     </Box>
   );
 };
