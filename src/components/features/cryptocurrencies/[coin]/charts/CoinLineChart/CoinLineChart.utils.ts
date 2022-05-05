@@ -8,7 +8,7 @@ export const chartConfig = {
     },
     datalabels: {
       display: true,
-      color: '#6a0dad',
+      color: 'blue',
       align: 'top',
       labels: {
         title: {
@@ -34,26 +34,30 @@ export const chartConfig = {
 
     //   show the x and y scales
     scales: {
-      x: {
-        display: true,
+      xAxes: {
+        // display: true,
         ticks: {
-          color: '#6a0dad',
+          color: 'blue',
+          fontSize: 12,
           maxRotation: 45,
           minRotation: 45,
         },
         grid: {
-          color: '#6a0dad',
+          drawBorder: true,
+          color: 'blue',
         },
       },
-      y: {
+      yAxes: {
         ticks: {
-          color: '#6a0dad',
+          color: 'blue',
+          fontSize: 12,
           padding: 10,
         },
-        display: true,
+        // display: true,
         borderDash: [5, 5],
         grid: {
-          color: '#6a0dad',
+          drawBorder: true,
+          color: 'blue',
         },
       },
     },
