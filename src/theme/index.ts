@@ -50,7 +50,7 @@ const theme = extendTheme(
     styles: {
       global: (props: any) => ({
         '::-webkit-scrollbar': {
-          width: '1em',
+          width: '0.8em',
         },
         '::-webkit-scrollbar-track': {
           boxShadow: mode(
@@ -67,9 +67,6 @@ const theme = extendTheme(
             'inset 0 0 12px rgba(21, 49, 23, 1)'
           )(props),
           outline: '1px solid green',
-        },
-        a: {
-          color: props.colorMode === 'dark' ? 'teal.300' : 'teal.500',
         },
       }),
     },

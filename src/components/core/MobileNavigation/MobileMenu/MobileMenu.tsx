@@ -19,7 +19,7 @@ export const MobileMenu = ({ isOpen, isLoggedIn }: IMobileMenuProps) => {
     'rgba(255,255,255,0.55)',
     'rgba(0,0,0,0.55)'
   );
-  console.log(isOpen);
+
   return (
     <Flex
       as="nav"

@@ -7,7 +7,7 @@ export const CryptoCard = () => {
     '0 8px 32px 8px rgba(70, 190, 74, .75)',
     '0 8px 32px 8px rgba(46, 204, 113, .75)'
   );
-  const cryptoCardTextColor = useColorModeValue('gray.700', 'gray.800');
+  const cryptoCardTextColor = useColorModeValue('gray.900', 'gray.800');
   const cryptoCardBgColor = useColorModeValue('#46be4a', '#99f3ff');
   const cryptoCardBgImage = useColorModeValue(
     'radial-gradient(at 32% 9%, hsla(27,61%,71%,1) 0px, transparent 50%), radial-gradient(at 84% 96%, hsla(172,72%,67%,1) 0px, transparent 50%), radial-gradient(at 15% 76%, hsla(153,97%,78%,1) 0px, transparent 50%), radial-gradient(at 41% 79%, hsla(89,92%,67%,1) 0px, transparent 50%), radial-gradient(at 62% 45%, hsla(98,81%,79%,1) 0px, transparent 50%), radial-gradient(at 46% 30%, hsla(118,85%,65%,1) 0px, transparent 50%), radial-gradient(at 92% 71%, hsla(104,83%,65%,1) 0px, transparent 50%), radial-gradient(at 70% 55%, hsla(138,83%,65%,1) 0px, transparent 50%), radial-gradient(at 84% 79%, hsla(128,83%,65%,1) 0px, transparent 50%)',
