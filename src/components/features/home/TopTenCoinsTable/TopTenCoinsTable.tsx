@@ -9,7 +9,7 @@ import {
   Skeleton,
   Heading,
 } from '@chakra-ui/react';
-import { CoinsTableContainer } from '../../../core/CoinsTableContainer/CoinsTableContainer';
+import { Card } from '../../../core/Card/Card';
 import { useCrypto } from '../../../../../hooks/useCrypto';
 import Image from 'next/image';
 import { Coin } from '../../../../../types/crypto';
@@ -22,15 +22,10 @@ export const TopTenCoinsTable = () => {
 
   return (
     <TopTenCoinsSection>
-      <Heading
-        as="h2"
-        textAlign="center"
-        mb="2rem"
-        fontSize={{ base: '3xl', md: '4xl' }}
-      >
+      <Heading as="h2" textAlign="center" fontSize={{ base: '3xl', md: '4xl' }}>
         Top 10 Coins by <br /> Market Cap
       </Heading>
-      <CoinsTableContainer>
+      <Card>
         <Table
           id="top-10-coins"
           display={['block', 'block', 'block', 'table', 'table']}
@@ -113,7 +108,7 @@ export const TopTenCoinsTable = () => {
             )}
           </Tbody>
         </Table>
-      </CoinsTableContainer>
+      </Card>
     </TopTenCoinsSection>
   );
 };

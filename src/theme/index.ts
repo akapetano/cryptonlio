@@ -25,7 +25,7 @@ const inputSelectStyles = {
   variants: {
     filled: (props: any) => ({
       field: {
-        rounded: 'xl',
+        rounded: 'lg',
         _placeholder: { color: mode('gray.400', 'gray.500')(props) },
         _focus: {
           borderColor: mode('brand.600', 'brand.200')(props),

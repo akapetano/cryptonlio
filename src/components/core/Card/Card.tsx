@@ -4,7 +4,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-export const CoinsTableContainer = ({ ...restProps }: TableContainerProps) => {
+export const Card = ({ ...restProps }: TableContainerProps) => {
   const containerBorderColor = useColorModeValue('#E2E8F0', '#2D3748');
   const containerBoxShadow = useColorModeValue(
     '0 1px 16px -1px rgba(0, 0, 0, .2)',
@@ -27,6 +27,7 @@ export const CoinsTableContainer = ({ ...restProps }: TableContainerProps) => {
       border={`1px solid ${containerBorderColor}`}
       rounded="md"
       boxShadow={containerBoxShadow}
+      m="3rem auto 3rem auto"
       {...restProps}
     />
   );

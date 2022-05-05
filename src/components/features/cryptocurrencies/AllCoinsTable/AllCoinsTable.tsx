@@ -11,7 +11,7 @@ import {
 import { useCrypto } from '../../../../../hooks/useCrypto';
 import Image from 'next/image';
 import { Coin } from '../../../../../types/crypto';
-import { CoinsTableContainer } from '../../../core/CoinsTableContainer/CoinsTableContainer';
+import { Card } from '../../../core/Card/Card';
 import NextLink from 'next/link';
 import { BsStarFill, BsStar } from 'react-icons/bs';
 
@@ -20,7 +20,7 @@ export const AllCoinsTable = () => {
   const tableRowHoverBgColor = useColorModeValue('gray.100', 'gray.700');
 
   return (
-    <CoinsTableContainer m="3rem auto 3rem auto">
+    <Card>
       <Table
         display={['block', 'block', 'block', 'block', 'table']}
         maxWidth={{ base: 'max-content', md: 'container.xl' }}
@@ -101,6 +101,6 @@ export const AllCoinsTable = () => {
           )}
         </Tbody>
       </Table>
-    </CoinsTableContainer>
+    </Card>
   );
 };
