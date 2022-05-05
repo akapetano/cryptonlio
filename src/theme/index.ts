@@ -26,7 +26,7 @@ const inputSelectStyles = {
     filled: (props: any) => ({
       field: {
         rounded: 'xl',
-        // backgroundColor: mode('brand.50', 'brand.700')(props),
+        _placeholder: { color: mode('gray.400', 'gray.500')(props) },
         _focus: {
           borderColor: mode('brand.600', 'brand.200')(props),
         },
@@ -50,7 +50,7 @@ const theme = extendTheme(
     styles: {
       global: (props: any) => ({
         '::-webkit-scrollbar': {
-          width: '1em',
+          width: '0.8em',
         },
         '::-webkit-scrollbar-track': {
           boxShadow: mode(
@@ -67,9 +67,6 @@ const theme = extendTheme(
             'inset 0 0 12px rgba(21, 49, 23, 1)'
           )(props),
           outline: '1px solid green',
-        },
-        a: {
-          color: props.colorMode === 'dark' ? 'teal.300' : 'teal.500',
         },
       }),
     },
@@ -143,11 +140,14 @@ const theme = extendTheme(
           secondary: (props: any) => ({
             rounded: 'md',
             ...brandRing,
-            color: mode('gray.800', 'gray.300')(props),
+            color: mode('brand.200', 'brand.100')(props),
             backgroundColor: 'transparent',
+            border: '2px solid',
 
             _hover: {
-              color: mode('brand.300', 'brand.50')(props),
+              color: mode('white', 'gray.800')(props),
+              backgroundColor: mode('brand.200', 'brand.100')(props),
+              borderColor: mode('brand.200', 'brand.100')(props),
             },
 
             _active: {

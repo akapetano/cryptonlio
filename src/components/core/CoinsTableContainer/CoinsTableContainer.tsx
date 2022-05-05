@@ -4,15 +4,19 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-export const CryptoTableContainer = ({ ...restProps }: TableContainerProps) => {
+export const CoinsTableContainer = ({ ...restProps }: TableContainerProps) => {
   const containerBorderColor = useColorModeValue('#E2E8F0', '#2D3748');
+  const containerBoxShadow = useColorModeValue(
+    '0 1px 16px -1px rgba(0, 0, 0, .2)',
+    '0 1px 16px 1px rgba(255, 255, 255, .05)'
+  );
 
   return (
     <Container
       display="flex"
       justifyContent="center"
       alignItems="center"
-      maxW={[
+      maxWidth={[
         '25rem',
         'container.sm',
         'container.md',
@@ -22,10 +26,7 @@ export const CryptoTableContainer = ({ ...restProps }: TableContainerProps) => {
       p={'1rem 0'}
       border={`1px solid ${containerBorderColor}`}
       rounded="md"
-      boxShadow={useColorModeValue(
-        '0 1px 16px -1px rgba(0, 0, 0, .2)',
-        '0 1px 16px 1px rgba(255, 255, 255, .05)'
-      )}
+      boxShadow={containerBoxShadow}
       {...restProps}
     />
   );

@@ -12,7 +12,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-const Cart = () => {
+export const SignUpForm = () => {
   const { toggleColorMode } = useColorMode();
   const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
   const secondaryTextColor = useColorModeValue('gray.600', 'gray.400');
@@ -80,5 +80,3 @@ const Cart = () => {
     </VStack>
   );
 };
-
-export default Cart;

@@ -1,9 +1,10 @@
 import { Box } from '@chakra-ui/react';
 import { Navigation } from '../src/components/core/Navigation/Navigation';
-import { TopTenCryptoTable } from '../src/components/features/home/TopTenCryptoTable/TopTenCryptoTable';
-import { CryptoTableContainer } from '../src/components/core/CryptoTableContainer/CryptoTableContainer';
+import { TopTenCoinsTable } from '../src/components/features/home/TopTenCoinsTable/TopTenCoinsTable';
 import { NextHead } from '../src/components/shared/NextHead/NextHead';
 import { Welcome } from '../src/components/features/home/Welcome/Welcome';
+import { SignUpForm } from '../src/components/core/SignUpForm/SignUpForm';
+import { Footer } from '../src/components/core/Footer/Footer';
 
 const HomePage = () => {
   return (
@@ -12,16 +13,11 @@ const HomePage = () => {
       <main>
         <Navigation />
         <Welcome />
-        <TopTenCryptoTable />
-        {/* <Flex
-            h={{ base: 'auto', md: '100vh' }}
-            py={[0, 10, 20]}
-            direction={{ base: 'column-reverse', md: 'row' }}
-          >
-            <Details />
-            <Cart />
-          </Flex> */}
+        <TopTenCoinsTable />
+
+        {/* <SignUpForm /> */}
       </main>
+      <Footer />
     </Box>
   );
 };
