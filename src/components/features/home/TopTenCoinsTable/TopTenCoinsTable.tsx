@@ -57,54 +57,48 @@ export const TopTenCoinsTable = () => {
             ) : (
               cryptocurrencies?.slice(0, 10).map((coin: Coin) => {
                 return (
-                  <NextLink
-                    key={coin.id}
-                    href={`/cryptocurrencies/${coin.id}`}
-                    passHref
-                  >
-                    <Tr
-                      _hover={{ bg: tableRowHoverBgColor, cursor: 'pointer' }}
+                  <Tr key={coin.id} _hover={{ bg: tableRowHoverBgColor }}>
+                    <Td>{coin.market_cap_rank}</Td>
+                    <Td>
+                      <Image
+                        loader={() => coin.image}
+                        src={coin.image}
+                        alt={coin.name}
+                        height="30px"
+                        width="30px"
+                        unoptimized
+                      />
+                    </Td>
+
+                    <NextLink href={`/cryptocurrencies/${coin.id}`} passHref>
+                      <Td _hover={{ cursor: 'pointer' }}>{coin.name}</Td>
+                    </NextLink>
+
+                    <Td>{coin.symbol.toUpperCase()}</Td>
+                    <Td>
+                      $
+                      {coin.current_price > 1
+                        ? coin.current_price.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })
+                        : coin.current_price.toLocaleString(undefined, {
+                            minimumFractionDigits: 6,
+                            maximumFractionDigits: 6,
+                          })}
+                    </Td>
+                    <Td
+                      color={
+                        coin.price_change_percentage_24h > 0
+                          ? '#60AD65'
+                          : '#E53E3E'
+                      }
                     >
-                      <Td>{coin.market_cap_rank}</Td>
-                      <Td>
-                        <Image
-                          loader={() => coin.image}
-                          src={coin.image}
-                          alt={coin.name}
-                          height="30px"
-                          width="30px"
-                          unoptimized
-                        />
-                      </Td>
-
-                      <Td>{coin.name}</Td>
-
-                      <Td>{coin.symbol.toUpperCase()}</Td>
-                      <Td>
-                        $
-                        {coin.current_price > 1
-                          ? coin.current_price.toLocaleString(undefined, {
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2,
-                            })
-                          : coin.current_price.toLocaleString(undefined, {
-                              minimumFractionDigits: 6,
-                              maximumFractionDigits: 6,
-                            })}
-                      </Td>
-                      <Td
-                        color={
-                          coin.price_change_percentage_24h > 0
-                            ? '#60AD65'
-                            : '#E53E3E'
-                        }
-                      >
-                        {coin.price_change_percentage_24h.toFixed(2)}%
-                      </Td>
-                      <Td>${coin.total_volume.toLocaleString()}</Td>
-                      <Td>${coin.market_cap.toLocaleString()}</Td>
-                    </Tr>
-                  </NextLink>
+                      {coin.price_change_percentage_24h.toFixed(2)}%
+                    </Td>
+                    <Td>${coin.total_volume.toLocaleString()}</Td>
+                    <Td>${coin.market_cap.toLocaleString()}</Td>
+                  </Tr>
                 );
               })
             )}
