@@ -48,7 +48,11 @@ export const TablePaginationActions = ({
 
   return (
     <HStack spacing="3rem">
-      <Text fontSize="lg" color={paginationColor} p="0.4rem 0.8rem">
+      <Text
+        fontSize={{ base: 'md', md: 'lg' }}
+        color={paginationColor}
+        p="0.4rem 0.8rem"
+      >
         {page === 0 ? rowsPerPage - 4 : rowsPerPage * page + 1}-
         {page === 0 ? rowsPerPage : rowsPerPage * (page + 1)} / {count}
       </Text>
@@ -61,7 +65,7 @@ export const TablePaginationActions = ({
           variant="secondary"
           disabled={page === 0}
           aria-label="first page"
-          fontSize="32px"
+          fontSize={{ base: '16px', md: '24px' }}
           cursor="pointer"
           onClick={onFirstPageClick}
         />
@@ -73,7 +77,7 @@ export const TablePaginationActions = ({
           variant="secondary"
           disabled={page === 0}
           aria-label="previous page"
-          fontSize="32px"
+          fontSize={{ base: '16px', md: '24px' }}
           cursor="pointer"
           onClick={onBackButtonPageClick}
         />
@@ -85,7 +89,7 @@ export const TablePaginationActions = ({
           variant="secondary"
           disabled={page >= Math.ceil(count / rowsPerPage) - 1}
           aria-label="next page"
-          fontSize="32px"
+          fontSize={{ base: '16px', md: '24px' }}
           cursor="pointer"
           onClick={onNextButtonPageClick}
         />
@@ -97,7 +101,7 @@ export const TablePaginationActions = ({
           variant="secondary"
           disabled={page >= Math.ceil(count / rowsPerPage) - 1}
           aria-label="last page"
-          fontSize="32px"
+          fontSize={{ base: '16px', md: '24px' }}
           cursor="pointer"
           onClick={onLastButtonPageClick}
         />

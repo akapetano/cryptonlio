@@ -55,7 +55,7 @@ export const AllCoinsTable = () => {
       <Search onChange={onChange} />
       <Card flexDir="column">
         <Table
-          display={['block', 'block', 'block', 'block', 'table']}
+          display={['block', 'block', 'block', 'table', 'table']}
           maxWidth={{ base: 'max-content', md: 'container.xl' }}
           margin="0 auto 1rem auto"
           overflowX="auto"
