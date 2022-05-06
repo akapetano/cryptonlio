@@ -1,6 +1,13 @@
-import { Flex, Heading, useColorModeValue } from '@chakra-ui/react';
+import {
+  Flex,
+  Heading,
+  HStack,
+  Icon,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { Copyright } from '../Copyright/Copyright';
 import { Logo } from '../Logo/Logo';
+import { IoIosRocket } from 'react-icons/io';
 
 export const Footer = () => {
   const accentBgColor = useColorModeValue('#204A23', '#419547');
@@ -16,21 +23,19 @@ export const Footer = () => {
       flexDirection="column"
       mt="2rem"
     >
-      <Flex
-        w="full"
+      <HStack
         h="5rem"
         alignItems="center"
         justifyContent="center"
         textAlign="center"
+        color={bgAndTextColor}
+        spacing="1rem"
       >
-        <Heading
-          as="h3"
-          fontSize={{ base: 'xl', md: '2xl' }}
-          color={bgAndTextColor}
-        >
+        <Icon as={IoIosRocket} w={8} h={8} />
+        <Heading as="h3" fontSize={{ base: 'xl', md: '2xl' }}>
           Boost your crypto experience with
         </Heading>
-      </Flex>
+      </HStack>
       <Flex
         bg={bgAndTextColor}
         w="full"
