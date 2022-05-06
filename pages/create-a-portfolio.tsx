@@ -10,7 +10,7 @@ const CreateAPortfolio = () => {
   const constructionColor = useColorModeValue('brand.400', 'brand.300');
   return (
     <Layout>
-      <NextHead title="Crypton - Explore the World of Cryptocurrencies" />
+      <NextHead title="Crypton - Create Your Portfolio Now" />
       <Navigation />
       <LayoutMain>
         <Flex
