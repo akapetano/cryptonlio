@@ -2,8 +2,8 @@ import { HStack, IconButton, Text, useColorModeValue } from '@chakra-ui/react';
 import {
   BiFirstPage,
   BiLastPage,
-  BiLeftArrow,
-  BiRightArrow,
+  BiChevronLeft,
+  BiChevronRight,
 } from 'react-icons/bi';
 
 interface ITablePaginationActionsProps {
@@ -65,31 +65,31 @@ export const TablePaginationActions = ({
           variant="secondary"
           disabled={page === 0}
           aria-label="first page"
-          fontSize={{ base: '16px', md: '24px' }}
+          fontSize="24px"
           cursor="pointer"
           onClick={onFirstPageClick}
         />
         <IconButton
-          icon={<BiLeftArrow />}
+          icon={<BiChevronLeft />}
           width={10}
           height={10}
           border="none"
           variant="secondary"
           disabled={page === 0}
           aria-label="previous page"
-          fontSize={{ base: '16px', md: '24px' }}
+          fontSize="24px"
           cursor="pointer"
           onClick={onBackButtonPageClick}
         />
         <IconButton
-          icon={<BiRightArrow />}
+          icon={<BiChevronRight />}
           width={10}
           height={10}
           border="none"
           variant="secondary"
           disabled={page >= Math.ceil(count / rowsPerPage) - 1}
           aria-label="next page"
-          fontSize={{ base: '16px', md: '24px' }}
+          fontSize="24px"
           cursor="pointer"
           onClick={onNextButtonPageClick}
         />
@@ -101,7 +101,7 @@ export const TablePaginationActions = ({
           variant="secondary"
           disabled={page >= Math.ceil(count / rowsPerPage) - 1}
           aria-label="last page"
-          fontSize={{ base: '16px', md: '24px' }}
+          fontSize="24px"
           cursor="pointer"
           onClick={onLastButtonPageClick}
         />

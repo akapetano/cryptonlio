@@ -22,12 +22,16 @@ export const TopTenCoinsTable = () => {
 
   return (
     <TopTenCoinsSection>
-      <Heading as="h2" textAlign="center" fontSize={{ base: '3xl', md: '4xl' }}>
+      <Heading
+        id="top-10-coins"
+        as="h2"
+        textAlign="center"
+        fontSize={{ base: '3xl', md: '4xl' }}
+      >
         Top 10 Coins by <br /> Market Cap
       </Heading>
       <Card>
         <Table
-          id="top-10-coins"
           display={['block', 'block', 'block', 'table', 'table']}
           maxWidth={{ base: 'max-content', md: 'container.xl' }}
           margin="0 auto"
