@@ -5,7 +5,6 @@ import { AllCoinsTable } from '../../src/components/features/cryptocurrencies/Al
 import { Layout } from '../../src/components/shared/Layout/Layout';
 import { LayoutMain } from '../../src/components/shared/LayoutMain/LayoutMain';
 import { Footer } from '../../src/components/core/Footer/Footer';
-import { Search } from '../../src/components/features/cryptocurrencies/Search/Search';
 
 const Cryptocurrencies = () => {
   return (
@@ -13,7 +12,6 @@ const Cryptocurrencies = () => {
       <NextHead title="Crypton - Top 100 cryptocurrencies" />
       <LayoutMain>
         <Navigation />
-        <Search />
         <AllCoinsTable />
       </LayoutMain>
       <Footer />

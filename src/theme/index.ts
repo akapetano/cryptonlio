@@ -100,6 +100,18 @@ const theme = extendTheme(
               backgroundColor: mode('brand.300', 'brand.50')(props),
             },
           }),
+          secondary: (props: any) => ({
+            backgroundColor: 'black',
+            color: mode('white', 'gray.800')(props),
+            transition: 'background-color .3s ease',
+            _hover: {
+              _disabled: {
+                backgroundColor: 'transparent',
+                color: 'brand.300',
+              },
+              backgroundColor: mode('brand.300', 'brand.50')(props),
+            },
+          }),
         },
       },
       Link: {

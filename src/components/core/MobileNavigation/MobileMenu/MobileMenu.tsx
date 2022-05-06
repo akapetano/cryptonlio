@@ -47,14 +47,14 @@ export const MobileMenu = ({ isOpen, isLoggedIn }: IMobileMenuProps) => {
         />
 
         {!isLoggedIn ? (
-          <Button variant="secondary" width="35%">
+          <Button variant="secondary" width="14rem">
             Sign in
           </Button>
         ) : null}
         {isLoggedIn ? (
           <UserMenu />
         ) : (
-          <Button variant="primary" width="35%">
+          <Button variant="primary" width="14rem">
             Get started
           </Button>
         )}

@@ -9,15 +9,15 @@ import {
 } from '@chakra-ui/react';
 import { BiSearch } from 'react-icons/bi';
 
-export const Search = () => {
+interface ISearchProps {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const Search = ({ onChange }: ISearchProps) => {
   const iconColor = useColorModeValue('gray.300', 'gray.500');
 
   return (
-    <Card
-      justifyContent={{ base: 'center', md: 'start' }}
-      alignItems="center"
-      p="1rem"
-    >
+    <Card justifyContent="start" alignItems="center" p="1rem">
       <Flex maxWidth={{ base: 'container.xs', md: 'container.xl' }}>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
@@ -27,7 +27,7 @@ export const Search = () => {
             width="full"
             placeholder="Search a cryptocurrency"
             variant="filled"
-            // onChange={handleChange}
+            onChange={onChange}
           />
         </InputGroup>
       </Flex>
