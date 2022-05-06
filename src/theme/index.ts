@@ -25,7 +25,7 @@ const inputSelectStyles = {
   variants: {
     filled: (props: any) => ({
       field: {
-        rounded: 'xl',
+        rounded: 'lg',
         _placeholder: { color: mode('gray.400', 'gray.500')(props) },
         _focus: {
           borderColor: mode('brand.600', 'brand.200')(props),
@@ -97,6 +97,18 @@ const theme = extendTheme(
             ...brandRing,
             transition: 'background-color .3s ease',
             _hover: {
+              backgroundColor: mode('brand.300', 'brand.50')(props),
+            },
+          }),
+          secondary: (props: any) => ({
+            backgroundColor: 'black',
+            color: mode('white', 'gray.800')(props),
+            transition: 'background-color .3s ease',
+            _hover: {
+              _disabled: {
+                backgroundColor: 'transparent',
+                color: 'brand.300',
+              },
               backgroundColor: mode('brand.300', 'brand.50')(props),
             },
           }),

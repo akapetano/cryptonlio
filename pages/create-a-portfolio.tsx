@@ -14,14 +14,14 @@ const CreateAPortfolio = () => {
       <Navigation />
       <LayoutMain>
         <Flex
-          height="60vh"
+          height="100vh"
           alignItems="center"
           justifyContent="center"
           flexDir="column"
           color={constructionColor}
         >
           <Icon as={MdConstruction} w={150} h={150} />
-          <Heading>Work In Progress...</Heading>
+          <Heading>Under Construction...</Heading>
         </Flex>
       </LayoutMain>
       <Footer />
