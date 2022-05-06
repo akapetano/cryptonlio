@@ -7,6 +7,7 @@ import {
   Td,
   useColorModeValue,
   Skeleton,
+  Text,
 } from '@chakra-ui/react';
 import { useCrypto } from '../../../../../hooks/useCrypto';
 import Image from 'next/image';
