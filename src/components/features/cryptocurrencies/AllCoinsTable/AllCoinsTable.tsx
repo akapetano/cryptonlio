@@ -1,5 +1,4 @@
 import {
-  Box,
   Table,
   Thead,
   Tbody,
@@ -24,7 +23,7 @@ export const AllCoinsTable = () => {
   const { data: cryptocurrencies, isLoading, isError } = useCrypto();
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const tableRowHoverBgColor = useColorModeValue('gray.100', 'gray.700');
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +75,11 @@ export const AllCoinsTable = () => {
           </Thead>
           <Tbody>
             {isLoading ? (
-              <Skeleton noOfLines={5} />
+              <Tr>
+                <Td>
+                  <Skeleton noOfLines={10} />
+                </Td>
+              </Tr>
             ) : (
               filteredAndPaginatedCoins?.map((coin: Coin) => {
                 return (

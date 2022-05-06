@@ -6,6 +6,7 @@ import { CoinDetails } from '../../src/components/features/cryptocurrencies/[coi
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { COINS_COINGECKO_API_URL } from '../../src/fetchers/cryptoFetcher';
 import { Coin, CoinById } from '../../types/crypto';
+import { Footer } from '../../src/components/core/Footer/Footer';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response = await fetch(COINS_COINGECKO_API_URL);
@@ -51,6 +52,7 @@ const Coin = ({ coin }: ICoinProps) => {
       >
         <CoinDetails coin={coin} />
       </LayoutMain>
+      <Footer />
     </Layout>
   );
 };

@@ -53,7 +53,7 @@ export const TablePaginationActions = ({
         color={paginationColor}
         p="0.4rem 0.8rem"
       >
-        {page === 0 ? rowsPerPage - 4 : rowsPerPage * page + 1}-
+        {page === 0 ? rowsPerPage - (rowsPerPage - 1) : rowsPerPage * page + 1}-
         {page === 0 ? rowsPerPage : rowsPerPage * (page + 1)} / {count}
       </Text>
       <HStack spacing="1rem">
