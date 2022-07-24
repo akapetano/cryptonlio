@@ -11,22 +11,23 @@ import {
   Button,
   useBreakpointValue,
   useColorModeValue,
-} from '@chakra-ui/react';
-import { SignUpFormContainer } from './SignUpFormContainer/SignUpFormContainer';
+} from "@chakra-ui/react";
+import NextLink from "next/link";
+import { SignUpFormContainer } from "./SignUpFormContainer/SignUpFormContainer";
 
 export const SignUpForm = () => {
   const colSpan = useBreakpointValue({ base: 2, md: 1 });
-  const formBgColor = useColorModeValue('white', 'gray.800');
+  const formBgColor = useColorModeValue("white", "gray.800");
   const formBoxShadow = useColorModeValue(
-    '0 1px 16px -1px rgba(0, 0, 0, .2)',
-    '0 1px 16px 1px rgba(255, 255, 255, .05)'
+    "0 1px 16px -1px rgba(0, 0, 0, .2)",
+    "0 1px 16px 1px rgba(255, 255, 255, .05)"
   );
 
   return (
     <SignUpFormContainer>
       <VStack
         w="30rem"
-        h="full"
+        h="fit-content"
         p={10}
         spacing={10}
         alignItems="flex-start"
@@ -38,7 +39,10 @@ export const SignUpForm = () => {
       >
         <VStack spacing={3} alignItems="flex-start">
           <Heading size="2xl">Sign Up</Heading>
-          <Text>If you already have an account, click here to login.</Text>
+          <Text>
+            If you already have an account, click{" "}
+            <NextLink href="/sign-in">here to login.</NextLink>
+          </Text>
         </VStack>
         <SimpleGrid columns={2} columnGap={3} rowGap={6} w="full">
           <GridItem colSpan={colSpan}>

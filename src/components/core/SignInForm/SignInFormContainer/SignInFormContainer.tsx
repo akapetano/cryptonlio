@@ -1,6 +1,6 @@
 import { Flex, FlexProps, useColorModeValue } from "@chakra-ui/react";
 
-export const SignUpFormContainer = ({ ...restProps }: FlexProps) => {
+export const SignInFormContainer = ({ ...restProps }: FlexProps) => {
   return (
     <Flex
       h={{ base: "auto", md: "100vh" }}
