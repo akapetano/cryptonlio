@@ -28,7 +28,7 @@ export const Navigation = () => {
         {isLoggedIn ? (
           <UserMenu />
         ) : (
-          <NextLink href="/sign-in" passHref>
+          <NextLink href="/sign-up" passHref>
             <Button variant="primary">Get started</Button>
           </NextLink>
         )}

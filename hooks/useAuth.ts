@@ -5,6 +5,7 @@ import { supabase } from "../utils/supabaseClient";
 export const useAuth = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = async (email: string) => {
     try {
