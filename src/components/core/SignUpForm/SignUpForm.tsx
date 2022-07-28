@@ -10,10 +10,12 @@ import {
   Checkbox,
   Button,
   useBreakpointValue,
+  Link as ChakraLink,
   useColorModeValue,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { SignUpFormContainer } from "./SignUpFormContainer/SignUpFormContainer";
+import { Logo } from "../Logo/Logo";
 
 export const SignUpForm = () => {
   const colSpan = useBreakpointValue({ base: 2, md: 1 });
@@ -29,7 +31,7 @@ export const SignUpForm = () => {
         w="30rem"
         h="fit-content"
         p={10}
-        spacing={10}
+        spacing={4}
         alignItems="flex-start"
         border="1px solid"
         borderColor={formBgColor}
@@ -37,11 +39,14 @@ export const SignUpForm = () => {
         bg={formBgColor}
         boxShadow={formBoxShadow}
       >
+        <Logo width="100" height="100" />
         <VStack spacing={3} alignItems="flex-start">
           <Heading size="2xl">Sign Up</Heading>
           <Text>
             If you already have an account, click{" "}
-            <NextLink href="/sign-in">here to login.</NextLink>
+            <NextLink href="/sign-in" passHref>
+              <ChakraLink>here to login.</ChakraLink>
+            </NextLink>
           </Text>
         </VStack>
         <SimpleGrid columns={2} columnGap={3} rowGap={6} w="full">
