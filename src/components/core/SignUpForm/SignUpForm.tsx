@@ -45,7 +45,11 @@ export const SignUpForm = () => {
           <Text>
             If you already have an account, click{" "}
             <NextLink href="/sign-in" passHref>
-              <ChakraLink>here to login.</ChakraLink>
+              <ChakraLink
+                _hover={{ color: "brand.500", textDecoration: "underline" }}
+              >
+                here to login.
+              </ChakraLink>
             </NextLink>
           </Text>
         </VStack>

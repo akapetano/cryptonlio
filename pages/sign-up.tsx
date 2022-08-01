@@ -12,7 +12,6 @@ const SignUp = () => {
       <LayoutMain>
         <SignUpForm />
       </LayoutMain>
-      <Footer />
     </Layout>
   );
 };

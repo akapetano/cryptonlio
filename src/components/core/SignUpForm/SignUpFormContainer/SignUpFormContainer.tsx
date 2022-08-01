@@ -4,6 +4,7 @@ export const SignUpFormContainer = ({ ...restProps }: FlexProps) => {
   return (
     <Flex
       h={{ base: "auto", md: "100vh" }}
+      my={100}
       justifyContent="center"
       alignItems="center"
       py={[0, 10, 20]}
