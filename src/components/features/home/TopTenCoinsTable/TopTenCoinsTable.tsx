@@ -53,7 +53,7 @@ export const TopTenCoinsTable = () => {
           </Thead>
           <Tbody>
             {isLoading ? (
-              <Skeleton noOfLines={10} />
+              <Skeleton noOfLines={10} as="tr" />
             ) : (
               topTenCoins.map((coin: Coin) => {
                 return (
