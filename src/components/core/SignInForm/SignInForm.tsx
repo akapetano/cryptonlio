@@ -8,22 +8,37 @@ import {
   SimpleGrid,
   GridItem,
   Button,
-  useBreakpointValue,
+  Spinner,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
-import { SignInFormContainer } from "./SignInFormContainer/SignInFormContainer";
+import { SignInFormContainer } from "./SignInFormContainer";
 import { Logo } from "../Logo/Logo";
 import { useAuth } from "../../../../hooks/useAuth";
-import { FormEvent } from "react";
+import { FormEvent, MouseEventHandler } from "react";
 
 export const SignInForm = () => {
-  const colSpan = useBreakpointValue({ base: 2, md: 1 });
   const formBgColor = useColorModeValue("white", "gray.800");
+  const spinnerColor = useColorModeValue("brand.400", "brand.800");
   const formBoxShadow = useColorModeValue(
     "0 1px 16px -1px rgba(0, 0, 0, .2)",
     "0 1px 16px 1px rgba(255, 255, 255, .05)"
   );
+  const toast = useToast();
   const { email, setEmail, loading, setLoading, handleLogin } = useAuth();
+  const onSignIn: MouseEventHandler = async (e) => {
+    e.preventDefault();
+    const response = await handleLogin(email);
+    console.log(response);
+    toast({
+      position: "top",
+      title: "Magic link set.",
+      description: "Check your email for the login link!",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
 
   return (
     <SignInFormContainer>
@@ -71,12 +86,9 @@ export const SignInForm = () => {
               w="full"
               h="4rem"
               disabled={!email || loading}
-              onClick={(e) => {
-                e.preventDefault();
-                handleLogin(email);
-              }}
+              onClick={(e) => onSignIn(e)}
             >
-              Sign In
+              {loading ? <Spinner color={spinnerColor} /> : "Sign In"}
             </Button>
           </GridItem>
         </SimpleGrid>

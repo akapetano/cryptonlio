@@ -5,14 +5,13 @@ import { supabase } from "../utils/supabaseClient";
 export const useAuth = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLogin = async (email: string) => {
     try {
       setLoading(true);
-      const { error } = await supabase.auth.signIn({ email });
+      const { error } = await supabase?.auth?.signIn({ email });
       if (error) throw error;
-      alert("Check your email for the login link!");
     } catch (error) {
       if (error) alert(error);
     } finally {
