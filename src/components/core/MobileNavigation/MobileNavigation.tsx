@@ -2,13 +2,14 @@ import { Burger } from "./Burger/Burger";
 import { MobileMenu } from "./MobileMenu/MobileMenu";
 import { Flex, FlexProps } from "@chakra-ui/react";
 import { useState } from "react";
+import { Session } from "@supabase/supabase-js";
 
 interface IMobileNavigation extends FlexProps {
-  isLoggedIn: boolean;
+  session: Session | null;
 }
 
 export const MobileNavigation = ({
-  isLoggedIn,
+  session,
   ...restProps
 }: IMobileNavigation) => {
   const [isopen, setIsopen] = useState(false);
@@ -16,7 +17,7 @@ export const MobileNavigation = ({
   return (
     <Flex {...restProps}>
       <Burger isopen={isopen ? isopen : undefined} setIsopen={setIsopen} />
-      <MobileMenu isLoggedIn={isLoggedIn} isOpen={isopen} />
+      <MobileMenu session={session} isOpen={isopen} />
     </Flex>
   );
 };

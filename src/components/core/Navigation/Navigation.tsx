@@ -7,8 +7,13 @@ import { NavLinks } from "../NavLinks/NavLinks";
 import { NavigationWrapper } from "../NavigationWrapper/NavigationWrapper";
 import { ColorModeButton } from "../ColorModeButton/ColorModeButton";
 import { MobileNavigation } from "../MobileNavigation/MobileNavigation";
+import { Session } from "@supabase/supabase-js";
 
-export const Navigation = () => {
+interface INavigationProps {
+  session: Session | null;
+}
+
+export const Navigation = ({ session }: INavigationProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
@@ -34,7 +39,7 @@ export const Navigation = () => {
         )}
       </HStack>
       <MobileNavigation
-        isLoggedIn={isLoggedIn}
+        session={session}
         display={{ base: "flex", md: "none" }}
       />
     </NavigationWrapper>

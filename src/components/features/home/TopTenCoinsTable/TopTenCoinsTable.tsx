@@ -15,8 +15,13 @@ import Image from "next/image";
 import { Coin } from "../../../../../types/crypto";
 import NextLink from "next/link";
 import { TopTenCoinsSection } from "../TopTenCoinsSection/TopTenCoinsSection";
+import { Session } from "@supabase/supabase-js";
 
-export const TopTenCoinsTable = () => {
+interface ITopTenCoinsTableProps {
+  session: Session | null;
+}
+
+export const TopTenCoinsTable = ({ session }: ITopTenCoinsTableProps) => {
   const { topTenCoins, isLoading, isError } = useCrypto();
   const tableRowHoverBgColor = useColorModeValue("gray.100", "gray.700");
 

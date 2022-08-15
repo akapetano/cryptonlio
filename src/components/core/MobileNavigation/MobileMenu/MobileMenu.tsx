@@ -4,20 +4,21 @@ import {
   FlexProps,
   useColorModeValue,
   VStack,
-} from '@chakra-ui/react';
-import { ColorModeButton } from '../../ColorModeButton/ColorModeButton';
-import { NavLinks } from '../../NavLinks/NavLinks';
-import { UserMenu } from '../../UserMenu/UserMenu';
+} from "@chakra-ui/react";
+import { Session } from "@supabase/supabase-js";
+import { ColorModeButton } from "../../ColorModeButton/ColorModeButton";
+import { NavLinks } from "../../NavLinks/NavLinks";
+import { UserMenu } from "../../UserMenu/UserMenu";
 
 interface IMobileMenuProps extends FlexProps {
   isOpen: boolean;
-  isLoggedIn: boolean;
+  session: Session | null;
 }
 
-export const MobileMenu = ({ isOpen, isLoggedIn }: IMobileMenuProps) => {
+export const MobileMenu = ({ isOpen, session }: IMobileMenuProps) => {
   const overlayBgColor = useColorModeValue(
-    'rgba(255,255,255,0.55)',
-    'rgba(0,0,0,0.55)'
+    "rgba(255,255,255,0.55)",
+    "rgba(0,0,0,0.55)"
   );
 
   return (
@@ -34,24 +35,24 @@ export const MobileMenu = ({ isOpen, isLoggedIn }: IMobileMenuProps) => {
       position="fixed"
       top="0"
       right="0"
-      transform={isOpen ? 'translateX(0)' : 'translateX(100%)'}
+      transform={isOpen ? "translateX(0)" : "translateX(100%)"}
       transition="transform 0.3s ease-in-out"
       zIndex="20"
     >
       <VStack spacing={12}>
         <NavLinks
-          display={{ base: 'flex', md: 'none' }}
+          display={{ base: "flex", md: "none" }}
           direction="column"
           justifyContent="center"
           alignItems="center"
         />
 
-        {!isLoggedIn ? (
+        {!session ? (
           <Button variant="secondary" width="14rem">
             Sign in
           </Button>
         ) : null}
-        {isLoggedIn ? (
+        {session ? (
           <UserMenu />
         ) : (
           <Button variant="primary" width="14rem">
