@@ -1,4 +1,4 @@
-import { Navigation } from "../src/components/core/Navigation/Navigation";
+import { Navigation } from "../src/components/shared/Navigation/Navigation";
 import { TopTenCoinsTable } from "../src/components/features/home/TopTenCoinsTable/TopTenCoinsTable";
 import { NextHead } from "../src/components/shared/NextHead/NextHead";
 import { Welcome } from "../src/components/features/home/Welcome/Welcome";
