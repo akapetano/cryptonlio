@@ -9,13 +9,15 @@ import {
   GridItem,
   Button,
   Spinner,
+  Link as ChakraLink,
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import { SignInFormContainer } from "./SignInFormContainer";
-import { Logo } from "../Logo/Logo";
-import { useAuth } from "../../../../hooks/useAuth";
+import { Logo } from "../../../core/Logo/Logo";
+import { useAuth } from "../../../../../hooks/useAuth";
 import { FormEvent, MouseEventHandler } from "react";
+import NextLink from "next/link";
 
 export const SignInForm = () => {
   const formBgColor = useColorModeValue("white", "gray.800");
@@ -58,16 +60,41 @@ export const SignInForm = () => {
         <Logo width="100" height="100" />
         <VStack spacing={3} alignItems="flex-start" justifyContent="flex-start">
           <Heading size="2xl">Sign In</Heading>
-          <Text>Sign in via magic link with your email below</Text>
+          <Text>
+            If you do not have an account, click{" "}
+            <NextLink href="/sign-up" passHref>
+              <ChakraLink
+                _hover={{ color: "brand.500", textDecoration: "underline" }}
+              >
+                here to sign up.
+              </ChakraLink>
+            </NextLink>
+          </Text>
         </VStack>
         <SimpleGrid columns={2} columnGap={3} rowGap={6} w="full">
           <GridItem colSpan={2}>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>
                 Email
                 <Input
                   type="email"
                   placeholder="Please enter your email address"
+                  h="4rem"
+                  value={email}
+                  onChange={(e: FormEvent<HTMLInputElement>) =>
+                    setEmail(e?.currentTarget.value)
+                  }
+                />
+              </FormLabel>
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={2}>
+            <FormControl isRequired>
+              <FormLabel>
+                Password
+                <Input
+                  type="password"
+                  placeholder="Please enter your password"
                   h="4rem"
                   value={email}
                   onChange={(e: FormEvent<HTMLInputElement>) =>

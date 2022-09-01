@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { HStack, useDisclosure, Button } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { Logo } from "../Logo/Logo";
-import { UserMenu } from "../UserMenu/UserMenu";
-import { NavLinks } from "../NavLinks/NavLinks";
-import { NavigationWrapper } from "../NavigationWrapper/NavigationWrapper";
-import { ColorModeButton } from "../ColorModeButton/ColorModeButton";
-import { MobileNavigation } from "../MobileNavigation/MobileNavigation";
+import { Logo } from "../../core/Logo/Logo";
+import { UserMenu } from "../../core/UserMenu/UserMenu";
+import { NavLinks } from "../../core/NavLinks/NavLinks";
+import { NavigationWrapper } from "./NavigationWrapper/NavigationWrapper";
+import { ColorModeButton } from "../../core/ColorModeButton/ColorModeButton";
+import { MobileNavigation } from "../../core/MobileNavigation/MobileNavigation";
 import { Session } from "@supabase/supabase-js";
 
 interface INavigationProps {

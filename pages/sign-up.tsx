@@ -1,7 +1,5 @@
-import { Navigation } from "../src/components/core/Navigation/Navigation";
 import { NextHead } from "../src/components/shared/NextHead/NextHead";
-import { SignUpForm } from "../src/components/core/SignUpForm/SignUpForm";
-import { Footer } from "../src/components/core/Footer/Footer";
+import { SignUpForm } from "../src/components/features/sign-up/SignUpForm/SignUpForm";
 import { LayoutMain } from "../src/components/shared/LayoutMain/LayoutMain";
 import { Layout } from "../src/components/shared/Layout/Layout";
 

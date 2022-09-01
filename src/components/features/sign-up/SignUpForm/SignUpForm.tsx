@@ -12,10 +12,12 @@ import {
   useBreakpointValue,
   Link as ChakraLink,
   useColorModeValue,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { SignUpFormContainer } from "./SignUpFormContainer/SignUpFormContainer";
-import { Logo } from "../Logo/Logo";
+import { Logo } from "../../../core/Logo/Logo";
+import { useFormControl } from "../../../../../hooks/useFormControl";
 
 export const SignUpForm = () => {
   const colSpan = useBreakpointValue({ base: 2, md: 1 });
@@ -24,6 +26,7 @@ export const SignUpForm = () => {
     "0 1px 16px -1px rgba(0, 0, 0, .2)",
     "0 1px 16px 1px rgba(255, 255, 255, .05)"
   );
+  const { input, setInput, handleInputChange, isError } = useFormControl();
 
   return (
     <SignUpFormContainer>
@@ -55,26 +58,40 @@ export const SignUpForm = () => {
         </VStack>
         <SimpleGrid columns={2} columnGap={3} rowGap={6} w="full">
           <GridItem colSpan={colSpan}>
-            <FormControl>
-              <FormLabel>First Name*</FormLabel>
-              <Input placeholder="First name" h="4rem" />
+            <FormControl isRequired isInvalid={isError}>
+              <FormLabel>First Name</FormLabel>
+              <Input
+                placeholder="First name"
+                h="4rem"
+                value={input}
+                onChange={handleInputChange}
+              />
+              {isError ? (
+                <FormErrorMessage>First name is required.</FormErrorMessage>
+              ) : null}
             </FormControl>
           </GridItem>
           <GridItem colSpan={colSpan}>
-            <FormControl>
-              <FormLabel>Last Name*</FormLabel>
+            <FormControl isRequired>
+              <FormLabel>Last Name</FormLabel>
               <Input placeholder="Last name" h="4rem" />
             </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <FormControl>
-              <FormLabel>Email*</FormLabel>
+            <FormControl isRequired>
+              <FormLabel>Email</FormLabel>
               <Input placeholder="Email" h="4rem" />
             </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <FormControl>
-              <FormLabel>Password*</FormLabel>
+            <FormControl isRequired>
+              <FormLabel>Password</FormLabel>
+              <Input placeholder="Password" h="4rem" />
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={2}>
+            <FormControl isRequired>
+              <FormLabel>Password Confirmation</FormLabel>
               <Input placeholder="Password" h="4rem" />
             </FormControl>
           </GridItem>
@@ -86,7 +103,7 @@ export const SignUpForm = () => {
             </Checkbox>
           </GridItem>
           <GridItem colSpan={2}>
-            <Button variant="primary" size="lg" w="full" h="5rem" disabled>
+            <Button variant="primary" size="lg" w="full" h="4rem" disabled>
               Create Account
             </Button>
           </GridItem>

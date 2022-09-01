@@ -1,12 +1,13 @@
-import { NextHead } from '../../src/components/shared/NextHead/NextHead';
-import { Layout } from '../../src/components/shared/Layout/Layout';
-import { LayoutMain } from '../../src/components/shared/LayoutMain/LayoutMain';
-import { Navigation } from '../../src/components/core/Navigation/Navigation';
-import { CoinDetails } from '../../src/components/features/cryptocurrencies/[coin]/CoinDetails/CoinDetails';
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { COINS_COINGECKO_API_URL } from '../../src/fetchers/cryptoFetcher';
-import { Coin, CoinById } from '../../types/crypto';
-import { Footer } from '../../src/components/core/Footer/Footer';
+import { NextHead } from "../../src/components/shared/NextHead/NextHead";
+import { Layout } from "../../src/components/shared/Layout/Layout";
+import { LayoutMain } from "../../src/components/shared/LayoutMain/LayoutMain";
+import { Navigation } from "../../src/components/shared/Navigation/Navigation";
+import { CoinDetails } from "../../src/components/features/cryptocurrencies/[coin]/CoinDetails/CoinDetails";
+import { GetStaticProps, GetStaticPaths } from "next";
+import { COINS_COINGECKO_API_URL } from "../../src/fetchers/cryptoFetcher";
+import { Coin, CoinById } from "../../types/crypto";
+import { Footer } from "../../src/components/core/Footer/Footer";
+import { useAuth } from "../../hooks/useAuth";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response = await fetch(COINS_COINGECKO_API_URL);
@@ -40,10 +41,12 @@ interface ICoinProps {
 }
 
 const Coin = ({ coin }: ICoinProps) => {
+  const { session } = useAuth();
+
   return (
     <Layout>
       <NextHead title="Crypton - Top 100 cryptocurrencies" />
-      <Navigation />
+      <Navigation session={session} />
       <LayoutMain
         display="flex"
         alignItems="center"

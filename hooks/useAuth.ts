@@ -1,4 +1,4 @@
-import { Session } from "@supabase/supabase-js";
+import { Session, User } from "@supabase/supabase-js";
 import Error from "next/error";
 import { useState } from "react";
 import { supabase } from "../utils/supabaseClient";
@@ -8,11 +8,15 @@ export const useAuth = () => {
   const [email, setEmail] = useState("");
   const [session, setSession] = useState<Session | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
   const handleLogin = async (email: string) => {
     try {
       setLoading(true);
-      const { error } = await supabase?.auth?.signIn({ email });
+      const { user: supabaseUser, error } = await supabase?.auth?.signIn({
+        email,
+      });
+      setUser(supabaseUser);
       if (error) throw error;
     } catch (error) {
       if (error) alert(error);
@@ -22,6 +26,7 @@ export const useAuth = () => {
   };
 
   return {
+    user,
     loading,
     setLoading,
     email,
