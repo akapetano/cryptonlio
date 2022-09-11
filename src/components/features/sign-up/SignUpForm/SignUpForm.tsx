@@ -1,6 +1,7 @@
 import {
   FormControl,
   FormLabel,
+  FormErrorMessage,
   Input,
   VStack,
   Heading,
@@ -12,12 +13,11 @@ import {
   useBreakpointValue,
   Link as ChakraLink,
   useColorModeValue,
-  FormErrorMessage,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { SignUpFormContainer } from "./SignUpFormContainer/SignUpFormContainer";
 import { Logo } from "../../../core/Logo/Logo";
-import { Formik, Field, FieldProps, Form } from "formik";
+import { Formik, FormikProps, Form } from "formik";
 
 interface ISignUpFormValues {
   firstName: string;
@@ -25,6 +25,7 @@ interface ISignUpFormValues {
   email: string;
   password: string;
   passwordConfirmation: string;
+  ageConfirmation: boolean;
 }
 
 export const SignUpForm = () => {
@@ -41,6 +42,7 @@ export const SignUpForm = () => {
     email: "",
     password: "",
     passwordConfirmation: "",
+    ageConfirmation: false,
   };
 
   return (
@@ -81,74 +83,112 @@ export const SignUpForm = () => {
             }, 1000);
           }}
         >
-          {(props) => (
-            <Form>
-              <Field>
-                <SimpleGrid columns={2} columnGap={3} rowGap={6} w="full">
-                  <GridItem colSpan={colSpan}>
-                    <Field name="firstName">
-                      {({ field, form }: FieldProps) => (
-                        <FormControl isRequired>
-                          <FormLabel>First Name</FormLabel>
-                          <Input
-                            name={field.name}
-                            value={field.value}
-                            onChange={field.onChange}
-                            onBlur={field.onBlur}
-                          />
-                          {form.errors.firstName && form.touched.firstName ? (
-                            <FormErrorMessage>
-                              First name is required.
-                            </FormErrorMessage>
-                          ) : null}
-                        </FormControl>
-                      )}
-                    </Field>
-                  </GridItem>
-                  <GridItem colSpan={colSpan}>
-                    <FormControl isRequired>
-                      <FormLabel>Last Name</FormLabel>
-                      <Input placeholder="Last name" h="4rem" />
-                    </FormControl>
-                  </GridItem>
-                  <GridItem colSpan={2}>
-                    <FormControl isRequired>
-                      <FormLabel>Email</FormLabel>
-                      <Input placeholder="Email" h="4rem" />
-                    </FormControl>
-                  </GridItem>
-                  <GridItem colSpan={2}>
-                    <FormControl isRequired>
-                      <FormLabel>Password</FormLabel>
-                      <Input placeholder="Password" h="4rem" />
-                    </FormControl>
-                  </GridItem>
-                  <GridItem colSpan={2}>
-                    <FormControl isRequired>
-                      <FormLabel>Password Confirmation</FormLabel>
-                      <Input placeholder="Password" h="4rem" />
-                    </FormControl>
-                  </GridItem>
-
-                  <GridItem colSpan={2}>
-                    <Checkbox>
-                      I certify that I am 18 years of age or older, and agree to
-                      the User Agreement and Privacy Policy.
-                    </Checkbox>
-                  </GridItem>
-                  <GridItem colSpan={2}>
-                    <Button
-                      variant="primary"
-                      size="lg"
-                      w="full"
-                      h="4rem"
-                      disabled
-                    >
-                      Create Account
-                    </Button>
-                  </GridItem>
-                </SimpleGrid>
-              </Field>
+          {(props: FormikProps<ISignUpFormValues>) => (
+            <Form onSubmit={props.handleSubmit}>
+              <SimpleGrid columns={2} columnGap={3} rowGap={6} w="full">
+                <GridItem colSpan={colSpan}>
+                  <FormControl isRequired>
+                    <FormLabel>First Name</FormLabel>
+                    <Input
+                      name="firstName"
+                      value={props.values.firstName}
+                      onChange={props.handleChange}
+                      onBlur={props.handleBlur}
+                      placeholder="First Name"
+                      h="3rem"
+                    />
+                    {props.errors.firstName && props.touched.firstName ? (
+                      <FormErrorMessage>
+                        First name is required.
+                      </FormErrorMessage>
+                    ) : null}
+                  </FormControl>
+                </GridItem>
+                <GridItem colSpan={colSpan}>
+                  <FormControl isRequired>
+                    <FormLabel>Last Name</FormLabel>
+                    <Input
+                      name="lastName"
+                      value={props.values.lastName}
+                      onChange={props.handleChange}
+                      onBlur={props.handleBlur}
+                      placeholder="Last name"
+                      h="3rem"
+                    />
+                    {props.errors.lastName && props.touched.lastName ? (
+                      <FormErrorMessage>
+                        Last name is required.
+                      </FormErrorMessage>
+                    ) : null}
+                  </FormControl>
+                </GridItem>
+                <GridItem colSpan={2}>
+                  <FormControl isRequired>
+                    <FormLabel>Email</FormLabel>
+                    <Input
+                      name="email"
+                      value={props.values.email}
+                      onChange={props.handleChange}
+                      onBlur={props.handleBlur}
+                      placeholder="Email"
+                      h="3rem"
+                    />
+                    {props.errors.email && props.touched.email ? (
+                      <FormErrorMessage>Email is required.</FormErrorMessage>
+                    ) : null}
+                  </FormControl>
+                </GridItem>
+                <GridItem colSpan={2}>
+                  <FormControl isRequired>
+                    <FormLabel>Password</FormLabel>
+                    <Input
+                      name="password"
+                      value={props.values.password}
+                      onChange={props.handleChange}
+                      onBlur={props.handleBlur}
+                      placeholder="Password"
+                      h="3rem"
+                    />
+                    {props.errors.password && props.touched.password ? (
+                      <FormErrorMessage>Password is required.</FormErrorMessage>
+                    ) : null}
+                  </FormControl>
+                </GridItem>
+                <GridItem colSpan={2}>
+                  <FormControl isRequired>
+                    <FormLabel>Password Confirmation</FormLabel>
+                    <Input
+                      name="passwordConfirmation"
+                      value={props.values.passwordConfirmation}
+                      onChange={props.handleChange}
+                      onBlur={props.handleBlur}
+                      placeholder="Password"
+                      h="3rem"
+                    />
+                  </FormControl>
+                </GridItem>
+                <GridItem colSpan={2}>
+                  <Checkbox
+                    name="ageConfirmation"
+                    value={props.values.ageConfirmation}
+                    onChange={props.handleChange}
+                  >
+                    I certify that I am 18 years of age or older, and agree to
+                    the User Agreement and Privacy Policy.
+                  </Checkbox>
+                </GridItem>
+                <GridItem colSpan={2}>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    w="full"
+                    h="3rem"
+                    disabled
+                  >
+                    Create Account
+                  </Button>
+                </GridItem>
+              </SimpleGrid>
             </Form>
           )}
         </Formik>
