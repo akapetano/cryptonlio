@@ -170,7 +170,7 @@ export const SignUpForm = () => {
                 <GridItem colSpan={2}>
                   <Checkbox
                     name="ageConfirmation"
-                    value={props.values.ageConfirmation}
+                    checked={props.values.ageConfirmation}
                     onChange={props.handleChange}
                   >
                     I certify that I am 18 years of age or older, and agree to
