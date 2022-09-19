@@ -1,6 +1,7 @@
 import { Session, User } from "@supabase/supabase-js";
 import Error from "next/error";
 import { useState } from "react";
+import { ISignUpFormValues } from "../types/auth";
 import { supabase } from "../utils/supabaseClient";
 
 export const useAuth = () => {
@@ -10,12 +11,30 @@ export const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
-  const handleSignup = async (email: string) => {
+  const handleSignUp = async ({
+    firstName,
+    lastName,
+    email,
+    password,
+    passwordConfirmation,
+    ageConfirmation,
+  }: ISignUpFormValues) => {
     try {
       setLoading(true);
-      const { user: supabaseUser, error } = await supabase?.auth?.signUp({
-        email,
-      });
+      const { user: supabaseUser, error } = await supabase?.auth?.signUp(
+        {
+          email,
+          password,
+        },
+        {
+          data: {
+            firstName,
+            lastName,
+            passwordConfirmation,
+            ageConfirmation,
+          },
+        }
+      );
       setUser(supabaseUser);
       if (error) throw error;
     } catch (error) {
@@ -49,6 +68,6 @@ export const useAuth = () => {
     handleLogin,
     session,
     setSession,
-    handleSignup,
+    handleSignUp,
   };
 };

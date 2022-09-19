@@ -7,6 +7,7 @@ import {
   Heading,
   Text,
   SimpleGrid,
+  Spinner,
   GridItem,
   Checkbox,
   Button,
@@ -19,6 +20,9 @@ import { SignUpFormContainer } from "./SignUpFormContainer/SignUpFormContainer";
 import { Logo } from "../../../core/Logo/Logo";
 import { Formik, FormikProps, Form } from "formik";
 import { ISignUpFormValues } from "../../../../../types/auth";
+import { useAuth } from "../../../../../hooks/useAuth";
+import { z } from "zod";
+import { toFormikValidationSchema } from "zod-formik-adapter";
 
 export const SignUpForm = () => {
   const colSpan = useBreakpointValue({ base: 2, md: 1 });
@@ -27,6 +31,8 @@ export const SignUpForm = () => {
     "0 1px 16px -1px rgba(0, 0, 0, .2)",
     "0 1px 16px 1px rgba(255, 255, 255, .05)"
   );
+  const spinnerColor = useColorModeValue("brand.400", "brand.800");
+  const { handleSignUp } = useAuth();
 
   const initialValues: ISignUpFormValues = {
     firstName: "",
@@ -36,6 +42,20 @@ export const SignUpForm = () => {
     passwordConfirmation: "",
     ageConfirmation: false,
   };
+
+  const zodSchema = z
+    .object({
+      firstName: z.string().min(1),
+      lastName: z.string().min(1),
+      email: z.string().email(),
+      password: z.string(),
+      passwordConfirmation: z.string(),
+      ageConfirmation: z.boolean(),
+    })
+    .refine((data) => data.password === data.passwordConfirmation, {
+      message: "Passwords do not match.",
+      path: ["passwordConfirmation"],
+    });
 
   return (
     <SignUpFormContainer>
@@ -68,28 +88,35 @@ export const SignUpForm = () => {
 
         <Formik
           initialValues={initialValues}
+          validationSchema={toFormikValidationSchema(zodSchema)}
           onSubmit={(values, actions) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              actions.setSubmitting(false);
-            }, 1000);
+            const response = handleSignUp(values);
+            console.log(response);
+            actions.setSubmitting(false);
           }}
         >
-          {(props: FormikProps<ISignUpFormValues>) => (
-            <Form onSubmit={props.handleSubmit}>
+          {({
+            errors,
+            touched,
+            values,
+            handleChange,
+            handleBlur,
+            isSubmitting,
+          }: FormikProps<ISignUpFormValues>) => (
+            <Form>
               <SimpleGrid columns={2} columnGap={3} rowGap={6} w="full">
                 <GridItem colSpan={colSpan}>
                   <FormControl isRequired>
                     <FormLabel>First Name</FormLabel>
                     <Input
                       name="firstName"
-                      value={props.values.firstName}
-                      onChange={props.handleChange}
-                      onBlur={props.handleBlur}
+                      value={values.firstName}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="First Name"
                       h="3rem"
                     />
-                    {props.errors.firstName && props.touched.firstName ? (
+                    {errors.firstName && touched.firstName ? (
                       <FormErrorMessage>
                         First name is required.
                       </FormErrorMessage>
@@ -101,13 +128,13 @@ export const SignUpForm = () => {
                     <FormLabel>Last Name</FormLabel>
                     <Input
                       name="lastName"
-                      value={props.values.lastName}
-                      onChange={props.handleChange}
-                      onBlur={props.handleBlur}
+                      value={values.lastName}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="Last name"
                       h="3rem"
                     />
-                    {props.errors.lastName && props.touched.lastName ? (
+                    {errors.lastName && touched.lastName ? (
                       <FormErrorMessage>
                         Last name is required.
                       </FormErrorMessage>
@@ -119,13 +146,13 @@ export const SignUpForm = () => {
                     <FormLabel>Email</FormLabel>
                     <Input
                       name="email"
-                      value={props.values.email}
-                      onChange={props.handleChange}
-                      onBlur={props.handleBlur}
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="Email"
                       h="3rem"
                     />
-                    {props.errors.email && props.touched.email ? (
+                    {errors.email && touched.email ? (
                       <FormErrorMessage>Email is required.</FormErrorMessage>
                     ) : null}
                   </FormControl>
@@ -135,13 +162,14 @@ export const SignUpForm = () => {
                     <FormLabel>Password</FormLabel>
                     <Input
                       name="password"
-                      value={props.values.password}
-                      onChange={props.handleChange}
-                      onBlur={props.handleBlur}
+                      type="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="Password"
                       h="3rem"
                     />
-                    {props.errors.password && props.touched.password ? (
+                    {errors.password && touched.password ? (
                       <FormErrorMessage>Password is required.</FormErrorMessage>
                     ) : null}
                   </FormControl>
@@ -151,9 +179,10 @@ export const SignUpForm = () => {
                     <FormLabel>Password Confirmation</FormLabel>
                     <Input
                       name="passwordConfirmation"
-                      value={props.values.passwordConfirmation}
-                      onChange={props.handleChange}
-                      onBlur={props.handleBlur}
+                      type="password"
+                      value={values.passwordConfirmation}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="Password"
                       h="3rem"
                     />
@@ -162,8 +191,8 @@ export const SignUpForm = () => {
                 <GridItem colSpan={2}>
                   <Checkbox
                     name="ageConfirmation"
-                    checked={props.values.ageConfirmation}
-                    onChange={props.handleChange}
+                    checked={values.ageConfirmation}
+                    onChange={handleChange}
                   >
                     I certify that I am 18 years of age or older, and agree to
                     the User Agreement and Privacy Policy.
@@ -175,9 +204,13 @@ export const SignUpForm = () => {
                     size="lg"
                     w="full"
                     h="3rem"
-                    disabled
+                    disabled={!values || isSubmitting}
                   >
-                    Create Account
+                    {isSubmitting ? (
+                      <Spinner color={spinnerColor} />
+                    ) : (
+                      "Create Account"
+                    )}
                   </Button>
                 </GridItem>
               </SimpleGrid>
