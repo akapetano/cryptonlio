@@ -18,15 +18,7 @@ import NextLink from "next/link";
 import { SignUpFormContainer } from "./SignUpFormContainer/SignUpFormContainer";
 import { Logo } from "../../../core/Logo/Logo";
 import { Formik, FormikProps, Form } from "formik";
-
-interface ISignUpFormValues {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-  ageConfirmation: boolean;
-}
+import { ISignUpFormValues } from "../../../../../types/auth";
 
 export const SignUpForm = () => {
   const colSpan = useBreakpointValue({ base: 2, md: 1 });

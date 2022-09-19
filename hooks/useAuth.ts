@@ -10,6 +10,21 @@ export const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
 
+  const handleSignup = async (email: string) => {
+    try {
+      setLoading(true);
+      const { user: supabaseUser, error } = await supabase?.auth?.signUp({
+        email,
+      });
+      setUser(supabaseUser);
+      if (error) throw error;
+    } catch (error) {
+      if (error) alert(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleLogin = async (email: string) => {
     try {
       setLoading(true);
@@ -34,5 +49,6 @@ export const useAuth = () => {
     handleLogin,
     session,
     setSession,
+    handleSignup,
   };
 };
