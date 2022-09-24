@@ -1,6 +1,7 @@
 import {
   FormControl,
   FormLabel,
+  FormErrorMessage,
   Input,
   VStack,
   Heading,
@@ -43,6 +44,7 @@ export const SignInForm = () => {
       .min(6),
   });
   const {
+    register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ISignUpFormValues>({ resolver: zodResolver(zodSchema) });
@@ -85,26 +87,36 @@ export const SignInForm = () => {
           w="full"
         >
           <GridItem colSpan={2}>
-            <FormControl isRequired>
+            <FormControl isInvalid={Boolean(errors.email)} isRequired>
               <FormLabel>
                 Email
                 <Input
+                  {...register("email", { required: true })}
                   type="email"
                   placeholder="Please enter your email address"
                   h="4rem"
                 />
+                {errors?.email ? (
+                  <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
+                ) : null}
               </FormLabel>
             </FormControl>
           </GridItem>
           <GridItem colSpan={2}>
-            <FormControl isRequired>
+            <FormControl isInvalid={Boolean(errors.password)} isRequired>
               <FormLabel>
                 Password
                 <Input
+                  {...register("password", { required: true })}
                   type="password"
                   placeholder="Please enter your password"
                   h="4rem"
                 />
+                {errors?.password ? (
+                  <FormErrorMessage>
+                    {errors?.password?.message}
+                  </FormErrorMessage>
+                ) : null}
               </FormLabel>
             </FormControl>
           </GridItem>
