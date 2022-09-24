@@ -6,3 +6,8 @@ export interface ISignUpFormValues {
   passwordConfirmation: string;
   ageConfirmation: boolean;
 }
+
+export interface ILoginFormValues {
+  email: string;
+  password: string;
+}
