@@ -13,9 +13,14 @@ import { UserMenu } from "../../UserMenu/UserMenu";
 interface IMobileMenuProps extends FlexProps {
   isOpen: boolean;
   session: Session | null;
+  onSignOut: () => void;
 }
 
-export const MobileMenu = ({ isOpen, session }: IMobileMenuProps) => {
+export const MobileMenu = ({
+  isOpen,
+  session,
+  onSignOut,
+}: IMobileMenuProps) => {
   const overlayBgColor = useColorModeValue(
     "rgba(255,255,255,0.55)",
     "rgba(0,0,0,0.55)"
@@ -53,7 +58,7 @@ export const MobileMenu = ({ isOpen, session }: IMobileMenuProps) => {
           </Button>
         ) : null}
         {session ? (
-          <UserMenu />
+          <UserMenu onSignOut={onSignOut} />
         ) : (
           <Button variant="primary" width="14rem">
             Get started

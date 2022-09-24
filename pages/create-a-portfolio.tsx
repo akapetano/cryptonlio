@@ -9,11 +9,11 @@ import { useAuth } from "../hooks/useAuth";
 
 const CreateAPortfolio = () => {
   const constructionColor = useColorModeValue("brand.400", "brand.300");
-  const { session } = useAuth();
+  const { session, user, onSignOut } = useAuth();
   return (
     <Layout>
       <NextHead title="Crypton - Create Your Portfolio Now" />
-      <Navigation session={session} />
+      <Navigation session={session} user={user} onSignOut={onSignOut} />
       <LayoutMain>
         <Flex
           height="100vh"

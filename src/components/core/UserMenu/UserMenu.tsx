@@ -8,29 +8,33 @@ import {
   Avatar,
   Center,
   MenuDivider,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-export const UserMenu = () => {
+interface IUserMenuProps {
+  onSignOut: () => void;
+}
+
+export const UserMenu = ({ onSignOut }: IUserMenuProps) => {
   return (
     <Menu>
       <MenuButton
         as={Button}
-        rounded={'full'}
-        variant={'link'}
-        cursor={'pointer'}
+        rounded={"full"}
+        variant={"link"}
+        cursor={"pointer"}
         minW={0}
       >
         <Avatar
-          size={'sm'}
-          src={'https://avatars.dicebear.com/api/male/username.svg'}
+          size={"sm"}
+          src={"https://avatars.dicebear.com/api/male/username.svg"}
         />
       </MenuButton>
-      <MenuList alignItems={'center'}>
+      <MenuList alignItems={"center"}>
         <br />
         <Center>
           <Avatar
-            size={'2xl'}
-            src={'https://avatars.dicebear.com/api/male/username.svg'}
+            size={"2xl"}
+            src={"https://avatars.dicebear.com/api/male/username.svg"}
           />
         </Center>
         <br />
@@ -41,7 +45,9 @@ export const UserMenu = () => {
         <MenuDivider />
         <MenuItem>Your Portfolio</MenuItem>
         <MenuItem>Account Settings</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem as={Button} onClick={() => onSignOut()}>
+          Logout
+        </MenuItem>
       </MenuList>
     </Menu>
   );

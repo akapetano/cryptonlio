@@ -1,17 +1,16 @@
-import { Session, User } from "@supabase/supabase-js";
-import Error from "next/error";
+import { Session } from "@supabase/supabase-js";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import { ISignUpFormValues } from "../types/auth";
+import { ISignUpFormValues, ILoginFormValues } from "../types/auth";
+import { useUser } from "@supabase/auth-helpers-react";
 import { supabase } from "../utils/supabaseClient";
 
 export const useAuth = () => {
-  const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
   const [session, setSession] = useState<Session | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const { user } = useUser();
+  const router = useRouter();
 
-  const handleSignUp = async ({
+  const onSignUp = async ({
     firstName,
     lastName,
     email,
@@ -19,55 +18,51 @@ export const useAuth = () => {
     passwordConfirmation,
     ageConfirmation,
   }: ISignUpFormValues) => {
-    try {
-      setLoading(true);
-      const { user: supabaseUser, error } = await supabase?.auth?.signUp(
-        {
-          email,
-          password,
+    const { user: supabaseUser, error } = await supabase?.auth?.signUp(
+      {
+        email,
+        password,
+      },
+      {
+        data: {
+          firstName,
+          lastName,
+          passwordConfirmation,
+          ageConfirmation,
         },
-        {
-          data: {
-            firstName,
-            lastName,
-            passwordConfirmation,
-            ageConfirmation,
-          },
-        }
-      );
-      setUser(supabaseUser);
-      if (error) throw error;
-    } catch (error) {
-      if (error) alert(error);
-    } finally {
-      setLoading(false);
-    }
+      }
+    );
+
+    const supabaseSession = supabase.auth.session();
+
+    if (error) throw error;
+    setSession(supabaseSession);
+    router.push("/");
+
+    console.log(user);
+    console.log(session);
+    return { user, session };
   };
 
-  const handleLogin = async (email: string) => {
-    try {
-      setLoading(true);
-      const { user: supabaseUser, error } = await supabase?.auth?.signIn({
-        email,
-      });
-      setUser(supabaseUser);
-      if (error) throw error;
-    } catch (error) {
-      if (error) alert(error);
-    } finally {
-      setLoading(false);
-    }
+  const onLogin = async ({ email, password }: ILoginFormValues) => {
+    const { user: supabaseUser, error } = await supabase?.auth?.signIn({
+      email,
+    });
+    if (error) throw error;
+    router.push("/");
+    return supabaseUser;
+  };
+
+  const onSignOut = async () => {
+    return supabase?.auth?.signOut();
   };
 
   return {
     user,
-    loading,
-    setLoading,
-    email,
-    setEmail,
-    handleLogin,
     session,
     setSession,
-    handleSignUp,
+    onLogin,
+    onSignUp,
+    onSignOut,
   };
 };

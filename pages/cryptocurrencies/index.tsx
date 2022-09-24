@@ -8,13 +8,14 @@ import { Footer } from "../../src/components/core/Footer/Footer";
 import { useAuth } from "../../hooks/useAuth";
 
 const Cryptocurrencies = () => {
-  const { session } = useAuth();
+  const { user, session, onSignOut } = useAuth();
+  console.log(user);
 
   return (
     <Layout>
       <NextHead title="Crypton - Top 100 cryptocurrencies" />
       <LayoutMain>
-        <Navigation session={session} />
+        <Navigation session={session} user={user} onSignOut={onSignOut} />
         <AllCoinsTable />
       </LayoutMain>
       <Footer />

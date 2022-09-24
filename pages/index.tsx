@@ -10,7 +10,7 @@ import { supabase } from "../utils/supabaseClient";
 import { useEffect } from "react";
 
 const HomePage = () => {
-  const { session, setSession } = useAuth();
+  const { session, setSession, user, onSignOut } = useAuth();
 
   useEffect(() => {
     setSession(supabase?.auth?.session());
@@ -20,10 +20,12 @@ const HomePage = () => {
     });
   });
 
+  console.log(user);
+
   return (
     <Layout>
       <NextHead title="Crypton - Explore the World of Cryptocurrencies" />
-      <Navigation session={session} />
+      <Navigation user={user} session={session} onSignOut={onSignOut} />
       <LayoutMain>
         <Welcome />
         <TopTenCoinsTable session={session} />

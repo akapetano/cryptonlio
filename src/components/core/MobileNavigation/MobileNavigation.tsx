@@ -6,10 +6,12 @@ import { Session } from "@supabase/supabase-js";
 
 interface IMobileNavigation extends FlexProps {
   session: Session | null;
+  onSignOut: () => void;
 }
 
 export const MobileNavigation = ({
   session,
+  onSignOut,
   ...restProps
 }: IMobileNavigation) => {
   const [isopen, setIsopen] = useState(false);
@@ -17,7 +19,7 @@ export const MobileNavigation = ({
   return (
     <Flex {...restProps}>
       <Burger isopen={isopen ? isopen : undefined} setIsopen={setIsopen} />
-      <MobileMenu session={session} isOpen={isopen} />
+      <MobileMenu session={session} isOpen={isopen} onSignOut={onSignOut} />
     </Flex>
   );
 };

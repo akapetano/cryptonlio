@@ -11,13 +11,15 @@ import {
   Spinner,
   Link as ChakraLink,
   useColorModeValue,
-  useToast,
 } from "@chakra-ui/react";
 import { SignInFormContainer } from "./SignInFormContainer";
 import { Logo } from "../../../core/Logo/Logo";
 import { useAuth } from "../../../../../hooks/useAuth";
-import { FormEvent, MouseEventHandler } from "react";
 import NextLink from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ISignUpFormValues } from "../../../../../types/auth";
 
 export const SignInForm = () => {
   const formBgColor = useColorModeValue("white", "gray.800");
@@ -26,21 +28,24 @@ export const SignInForm = () => {
     "0 1px 16px -1px rgba(0, 0, 0, .2)",
     "0 1px 16px 1px rgba(255, 255, 255, .05)"
   );
-  const toast = useToast();
-  const { email, setEmail, loading, setLoading, handleLogin } = useAuth();
-  const onSignIn: MouseEventHandler = async (e) => {
-    e.preventDefault();
-    const response = await handleLogin(email);
-    console.log(response);
-    toast({
-      position: "top",
-      title: "Magic link set.",
-      description: "Check your email for the login link!",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    });
-  };
+  const { onLogin } = useAuth();
+  const zodSchema = z.object({
+    email: z
+      .string({
+        required_error: "Email is required.",
+      })
+      .email("Please provide a valid email address.")
+      .min(2),
+    password: z
+      .string({
+        required_error: "Password is required.",
+      })
+      .min(6),
+  });
+  const {
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<ISignUpFormValues>({ resolver: zodResolver(zodSchema) });
 
   return (
     <SignInFormContainer>
@@ -71,7 +76,14 @@ export const SignInForm = () => {
             </NextLink>
           </Text>
         </VStack>
-        <SimpleGrid columns={2} columnGap={3} rowGap={6} w="full">
+        <SimpleGrid
+          as="form"
+          onSubmit={handleSubmit(onLogin)}
+          columns={2}
+          columnGap={3}
+          rowGap={6}
+          w="full"
+        >
           <GridItem colSpan={2}>
             <FormControl isRequired>
               <FormLabel>
@@ -80,10 +92,6 @@ export const SignInForm = () => {
                   type="email"
                   placeholder="Please enter your email address"
                   h="4rem"
-                  value={email}
-                  onChange={(e: FormEvent<HTMLInputElement>) =>
-                    setEmail(e?.currentTarget.value)
-                  }
                 />
               </FormLabel>
             </FormControl>
@@ -96,10 +104,6 @@ export const SignInForm = () => {
                   type="password"
                   placeholder="Please enter your password"
                   h="4rem"
-                  value={email}
-                  onChange={(e: FormEvent<HTMLInputElement>) =>
-                    setEmail(e?.currentTarget.value)
-                  }
                 />
               </FormLabel>
             </FormControl>
@@ -112,10 +116,9 @@ export const SignInForm = () => {
               size="lg"
               w="full"
               h="4rem"
-              disabled={!email || loading}
-              onClick={(e) => onSignIn(e)}
+              disabled={isSubmitting}
             >
-              {loading ? <Spinner color={spinnerColor} /> : "Sign In"}
+              {isSubmitting ? <Spinner color={spinnerColor} /> : "Sign In"}
             </Button>
           </GridItem>
         </SimpleGrid>

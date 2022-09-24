@@ -41,12 +41,12 @@ interface ICoinProps {
 }
 
 const Coin = ({ coin }: ICoinProps) => {
-  const { session } = useAuth();
+  const { session, user, onSignOut } = useAuth();
 
   return (
     <Layout>
       <NextHead title="Crypton - Top 100 cryptocurrencies" />
-      <Navigation session={session} />
+      <Navigation session={session} user={user} onSignOut={onSignOut} />
       <LayoutMain
         display="flex"
         alignItems="center"

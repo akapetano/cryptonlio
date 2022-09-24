@@ -7,15 +7,17 @@ import { NavLinks } from "../../core/NavLinks/NavLinks";
 import { NavigationWrapper } from "./NavigationWrapper/NavigationWrapper";
 import { ColorModeButton } from "../../core/ColorModeButton/ColorModeButton";
 import { MobileNavigation } from "../../core/MobileNavigation/MobileNavigation";
-import { Session } from "@supabase/supabase-js";
+import { Session, User } from "@supabase/supabase-js";
 
 interface INavigationProps {
+  user: User | null;
   session: Session | null;
+  onSignOut: () => void;
 }
 
-export const Navigation = ({ session }: INavigationProps) => {
+export const Navigation = ({ session, user, onSignOut }: INavigationProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <NavigationWrapper>
       <Logo width="75" height="75" />
@@ -25,13 +27,13 @@ export const Navigation = ({ session }: INavigationProps) => {
       />
       <HStack spacing={4} display={{ base: "none", md: "flex" }}>
         <ColorModeButton aria-label="Toggle color mode" />
-        {!isLoggedIn ? (
+        {!user ? (
           <NextLink href="/sign-in" passHref>
             <Button variant="secondary">Sign in</Button>
           </NextLink>
         ) : null}
-        {isLoggedIn ? (
-          <UserMenu />
+        {user ? (
+          <UserMenu onSignOut={onSignOut} />
         ) : (
           <NextLink href="/sign-up" passHref>
             <Button variant="primary">Get started</Button>
@@ -41,6 +43,7 @@ export const Navigation = ({ session }: INavigationProps) => {
       <MobileNavigation
         session={session}
         display={{ base: "flex", md: "none" }}
+        onSignOut={onSignOut}
       />
     </NavigationWrapper>
   );
