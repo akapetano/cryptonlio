@@ -86,40 +86,43 @@ export const SignInForm = () => {
           rowGap={6}
           w="full"
         >
-          <GridItem colSpan={2}>
-            <FormControl isInvalid={Boolean(errors.email)} isRequired>
-              <FormLabel>
-                Email
-                <Input
-                  {...register("email", { required: true })}
-                  type="email"
-                  placeholder="Please enter your email address"
-                  h="4rem"
-                />
-                {errors?.email ? (
-                  <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
-                ) : null}
-              </FormLabel>
-            </FormControl>
-          </GridItem>
-          <GridItem colSpan={2}>
-            <FormControl isInvalid={Boolean(errors.password)} isRequired>
-              <FormLabel>
-                Password
-                <Input
-                  {...register("password", { required: true })}
-                  type="password"
-                  placeholder="Please enter your password"
-                  h="4rem"
-                />
-                {errors?.password ? (
-                  <FormErrorMessage>
-                    {errors?.password?.message}
-                  </FormErrorMessage>
-                ) : null}
-              </FormLabel>
-            </FormControl>
-          </GridItem>
+          <FormControl
+            as={GridItem}
+            colSpan={2}
+            isInvalid={Boolean(errors.email)}
+          >
+            <FormLabel>
+              Email
+              <Input
+                {...register("email", { required: true })}
+                type="email"
+                placeholder="Please enter your email address"
+                h="4rem"
+              />
+              {errors?.email ? (
+                <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
+              ) : null}
+            </FormLabel>
+          </FormControl>
+
+          <FormControl
+            as={GridItem}
+            colSpan={2}
+            isInvalid={Boolean(errors.password)}
+          >
+            <FormLabel>
+              Password
+              <Input
+                {...register("password", { required: true })}
+                type="password"
+                placeholder="Please enter your password"
+                h="4rem"
+              />
+              {errors?.password ? (
+                <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
+              ) : null}
+            </FormLabel>
+          </FormControl>
 
           <GridItem colSpan={2}>
             <Button
