@@ -6,21 +6,26 @@ import { Footer } from "../src/components/core/Footer/Footer";
 import { LayoutMain } from "../src/components/shared/LayoutMain/LayoutMain";
 import { Layout } from "../src/components/shared/Layout/Layout";
 import { useAuth } from "../hooks/useAuth";
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "../lib/supabaseClient";
 import { useEffect } from "react";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useUser } from "@supabase/auth-helpers-react";
+import { useState } from "react";
 
 const HomePage = () => {
-  const { session, setSession, user, onSignOut } = useAuth();
+  const { user, error } = useUser();
+  const { session, setSession, onSignOut } = useAuth();
 
   useEffect(() => {
-    setSession(supabase?.auth?.session());
+    setSession(supabaseClient?.auth?.session());
 
-    supabase.auth.onAuthStateChange((_event, session) => {
+    supabaseClient.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-  });
+  }, [session, setSession]);
 
   console.log(user);
+  console.log(session);
 
   return (
     <Layout>

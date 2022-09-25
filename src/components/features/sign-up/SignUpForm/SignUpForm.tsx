@@ -23,6 +23,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ISignUpFormValues } from "../../../../../types/auth";
 import { useAuth } from "../../../../../hooks/useAuth";
+import { useUser } from "@supabase/auth-helpers-react";
 
 export const SignUpForm = () => {
   const colSpan = useBreakpointValue({ base: 2, md: 1 });
@@ -32,7 +33,7 @@ export const SignUpForm = () => {
     "0 1px 16px 1px rgba(255, 255, 255, .05)"
   );
   const spinnerColor = useColorModeValue("brand.400", "brand.800");
-  const { onSignUp } = useAuth();
+  const { onSignUp, user } = useAuth();
 
   const zodSchema = z
     .object({
@@ -76,6 +77,8 @@ export const SignUpForm = () => {
     register,
     formState: { errors, isSubmitting },
   } = useForm<ISignUpFormValues>({ resolver: zodResolver(zodSchema) });
+
+  console.log(user);
 
   return (
     <SignUpFormContainer>

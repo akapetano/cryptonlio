@@ -29,7 +29,7 @@ export const SignInForm = () => {
     "0 1px 16px -1px rgba(0, 0, 0, .2)",
     "0 1px 16px 1px rgba(255, 255, 255, .05)"
   );
-  const { onLogin } = useAuth();
+  const { onSignIn, user } = useAuth();
   const zodSchema = z.object({
     email: z
       .string({
@@ -48,6 +48,8 @@ export const SignInForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ISignUpFormValues>({ resolver: zodResolver(zodSchema) });
+
+  console.log(user);
 
   return (
     <SignInFormContainer>
@@ -80,7 +82,7 @@ export const SignInForm = () => {
         </VStack>
         <SimpleGrid
           as="form"
-          onSubmit={handleSubmit(onLogin)}
+          onSubmit={handleSubmit(onSignIn)}
           columns={2}
           columnGap={3}
           rowGap={6}
@@ -90,38 +92,36 @@ export const SignInForm = () => {
             as={GridItem}
             colSpan={2}
             isInvalid={Boolean(errors.email)}
+            isRequired
           >
-            <FormLabel>
-              Email
-              <Input
-                {...register("email", { required: true })}
-                type="email"
-                placeholder="Please enter your email address"
-                h="4rem"
-              />
-              {errors?.email ? (
-                <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
-              ) : null}
-            </FormLabel>
+            <FormLabel htmlFor="email">Email</FormLabel>
+            <Input
+              {...register("email", { required: true })}
+              type="email"
+              placeholder="Please enter your email address"
+              h="3rem"
+            />
+            {errors?.email ? (
+              <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
+            ) : null}
           </FormControl>
 
           <FormControl
             as={GridItem}
             colSpan={2}
             isInvalid={Boolean(errors.password)}
+            isRequired
           >
-            <FormLabel>
-              Password
-              <Input
-                {...register("password", { required: true })}
-                type="password"
-                placeholder="Please enter your password"
-                h="4rem"
-              />
-              {errors?.password ? (
-                <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
-              ) : null}
-            </FormLabel>
+            <FormLabel htmlFor="password">Password</FormLabel>
+            <Input
+              {...register("password", { required: true })}
+              type="password"
+              placeholder="Please enter your password"
+              h="3rem"
+            />
+            {errors?.password ? (
+              <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
+            ) : null}
           </FormControl>
 
           <GridItem colSpan={2}>
@@ -130,7 +130,7 @@ export const SignInForm = () => {
               type="submit"
               size="lg"
               w="full"
-              h="4rem"
+              h="3rem"
               disabled={isSubmitting}
             >
               {isSubmitting ? <Spinner color={spinnerColor} /> : "Sign In"}
