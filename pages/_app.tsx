@@ -2,8 +2,6 @@ import { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import { UserProvider } from "@supabase/auth-helpers-react";
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
-import { AuthProvider } from "../lib/auth";
-import { supabase } from "../lib/supabaseClient";
 
 import theme from "../src/theme";
 import "../src/theme/styles.css";
