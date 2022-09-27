@@ -33,7 +33,7 @@ export const Navigation = ({ session, user, onSignOut }: INavigationProps) => {
           </NextLink>
         ) : null}
         {user ? (
-          <UserMenu onSignOut={onSignOut} />
+          <UserMenu user={user} onSignOut={onSignOut} />
         ) : (
           <NextLink href="/sign-up" passHref>
             <Button variant="primary">Get started</Button>
