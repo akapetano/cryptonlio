@@ -7,7 +7,7 @@ import { MdConstruction } from "react-icons/md";
 import { Flex, Icon, useColorModeValue, Heading } from "@chakra-ui/react";
 import { useAuth } from "../hooks/useAuth";
 
-const CreateAPortfolio = () => {
+const Portfolio = () => {
   const constructionColor = useColorModeValue("brand.400", "brand.300");
   const { session, user, onSignOut } = useAuth();
   return (
@@ -31,4 +31,4 @@ const CreateAPortfolio = () => {
   );
 };
 
-export default CreateAPortfolio;
+export default Portfolio;

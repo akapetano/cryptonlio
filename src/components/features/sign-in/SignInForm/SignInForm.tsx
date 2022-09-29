@@ -13,7 +13,7 @@ import {
   Link as ChakraLink,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { SignInFormContainer } from "./SignInFormContainer";
+import { SignInFormContainer } from "./SignInFormContainer/SignInFormContainer";
 import { Logo } from "../../../core/Logo/Logo";
 import { useAuth } from "../../../../../hooks/useAuth";
 import NextLink from "next/link";
@@ -92,7 +92,6 @@ export const SignInForm = () => {
             as={GridItem}
             colSpan={2}
             isInvalid={Boolean(errors.email)}
-            isRequired
           >
             <FormLabel htmlFor="email">Email</FormLabel>
             <Input
@@ -110,7 +109,6 @@ export const SignInForm = () => {
             as={GridItem}
             colSpan={2}
             isInvalid={Boolean(errors.password)}
-            isRequired
           >
             <FormLabel htmlFor="password">Password</FormLabel>
             <Input

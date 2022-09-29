@@ -23,7 +23,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ISignUpFormValues } from "../../../../../types/auth";
 import { useAuth } from "../../../../../hooks/useAuth";
-import { useUser } from "@supabase/auth-helpers-react";
 
 export const SignUpForm = () => {
   const colSpan = useBreakpointValue({ base: 2, md: 1 });
