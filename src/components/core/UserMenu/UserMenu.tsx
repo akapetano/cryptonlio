@@ -10,7 +10,9 @@ import {
   MenuDivider,
   useColorModeValue,
   Flex,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { User } from "@supabase/supabase-js";
 
 interface IUserMenuProps {
@@ -52,12 +54,16 @@ export const UserMenu = ({ onSignOut, user }: IUserMenuProps) => {
         <br />
         <MenuDivider m={0} />
         <Flex flexDir="column">
-          <MenuItem _hover={{ bgColor: menuItemHoverBgColor, color: "#fff" }}>
-            Your Portfolio
-          </MenuItem>
-          <MenuItem _hover={{ bgColor: menuItemHoverBgColor, color: "#fff" }}>
-            Account Settings
-          </MenuItem>
+          <NextLink href="/portfolio" passHref>
+            <MenuItem _hover={{ bgColor: menuItemHoverBgColor, color: "#fff" }}>
+              Your Portfolio
+            </MenuItem>
+          </NextLink>
+          <NextLink href="/settings" passHref>
+            <MenuItem _hover={{ bgColor: menuItemHoverBgColor, color: "#fff" }}>
+              Account Settings
+            </MenuItem>
+          </NextLink>
           <MenuItem
             _hover={{ bgColor: menuItemHoverBgColor, color: "#fff" }}
             onClick={() => onSignOut()}
