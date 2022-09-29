@@ -1,5 +1,6 @@
 import {
   extendTheme,
+  StyleProps,
   theme as base,
   withDefaultColorScheme,
   withDefaultVariant,
@@ -23,7 +24,7 @@ const brandRing = {
 
 const inputSelectStyles = {
   variants: {
-    filled: (props: any) => ({
+    filled: (props: StyleProps) => ({
       field: {
         rounded: "lg",
         _placeholder: { color: mode("gray.400", "gray.500")(props) },
@@ -31,7 +32,7 @@ const inputSelectStyles = {
           borderColor: mode("brand.600", "brand.200")(props),
         },
         _active: {
-          borderColor: "none",
+          borderColor: mode("brand.600", "brand.200")(props),
         },
       },
     }),
@@ -39,7 +40,7 @@ const inputSelectStyles = {
   sizes: {
     md: {
       field: {
-        borderRadius: "none",
+        borderRadius: "md",
       },
     },
   },
@@ -48,7 +49,7 @@ const inputSelectStyles = {
 const theme = extendTheme(
   {
     styles: {
-      global: (props: any) => ({
+      global: (props: StyleProps) => ({
         "::-webkit-scrollbar": {
           width: "0.8em",
         },
@@ -91,7 +92,7 @@ const theme = extendTheme(
     components: {
       IconButton: {
         variants: {
-          primary: (props: any) => ({
+          primary: (props: StyleProps) => ({
             backgroundColor: mode("brand.200", "brand.100")(props),
             color: mode("white", "gray.800")(props),
             ...brandRing,
@@ -100,7 +101,7 @@ const theme = extendTheme(
               backgroundColor: mode("brand.300", "brand.50")(props),
             },
           }),
-          secondary: (props: any) => ({
+          secondary: (props: StyleProps) => ({
             backgroundColor: "black",
             color: mode("white", "gray.800")(props),
             transition: "background-color .3s ease",
@@ -115,7 +116,7 @@ const theme = extendTheme(
         },
       },
       Link: {
-        baseStyle: (props: any) => ({
+        baseStyle: (props: StyleProps) => ({
           color: mode("brand.200", "brand.50")(props),
           _hover: {
             color: mode("brand.300", "brand.100")(props),
@@ -125,7 +126,7 @@ const theme = extendTheme(
       },
       Badge: {
         variants: {
-          primary: (props: any) => ({
+          primary: (props: StyleProps) => ({
             backgroundColor: mode("gray.600", "gray.400")(props),
             color: mode("gray.100", "gray.800")(props),
             borderRadius: "10px",
@@ -135,7 +136,7 @@ const theme = extendTheme(
       },
       Button: {
         variants: {
-          primary: (props: any) => ({
+          primary: (props: StyleProps) => ({
             rounded: "md",
             ...brandRing,
             color: mode("white", "gray.800")(props),
@@ -149,7 +150,7 @@ const theme = extendTheme(
               backgroundColor: mode("brand.300", "brand.50")(props),
             },
           }),
-          secondary: (props: any) => ({
+          secondary: (props: StyleProps) => ({
             rounded: "md",
             ...brandRing,
             color: mode("brand.200", "brand.100")(props),

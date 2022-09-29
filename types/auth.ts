@@ -4,6 +4,8 @@ export interface ISignUpFormValues {
   email: string;
   password: string;
   passwordConfirmation: string;
+  favoriteCrypto: string;
+  selectAvatar: string;
   ageConfirmation: boolean;
 }
 

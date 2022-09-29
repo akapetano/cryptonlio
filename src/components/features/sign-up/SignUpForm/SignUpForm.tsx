@@ -11,6 +11,7 @@ import {
   GridItem,
   Checkbox,
   Button,
+  Select,
   useBreakpointValue,
   Link as ChakraLink,
   useColorModeValue,
@@ -62,6 +63,16 @@ export const SignUpForm = () => {
           required_error: "Password confirmation is required.",
         })
         .min(6),
+      favoriteCrypto: z
+        .string({
+          required_error: "Favorite crypto is required.",
+        })
+        .min(2),
+      selectAvatar: z
+        .string({
+          required_error: "Favorite crypto is required.",
+        })
+        .min(2),
       ageConfirmation: z.boolean({
         required_error: "You need to confirm your age.",
       }),
@@ -120,7 +131,6 @@ export const SignUpForm = () => {
             as={GridItem}
             colSpan={colSpan}
             isInvalid={Boolean(errors.firstName)}
-            isRequired
           >
             <FormLabel
               color={errors.firstName && "red.500"}
@@ -144,7 +154,6 @@ export const SignUpForm = () => {
             as={GridItem}
             colSpan={colSpan}
             isInvalid={Boolean(errors.lastName)}
-            isRequired
           >
             <FormLabel color={errors.lastName && "red.500"} htmlFor="lastName">
               Last Name
@@ -164,7 +173,6 @@ export const SignUpForm = () => {
             as={GridItem}
             colSpan={2}
             isInvalid={Boolean(errors.email)}
-            isRequired
           >
             <FormLabel color={errors.email && "red.500"} htmlFor="email">
               Email
@@ -185,7 +193,6 @@ export const SignUpForm = () => {
             as={GridItem}
             colSpan={2}
             isInvalid={Boolean(errors.password)}
-            isRequired
           >
             <FormLabel color={errors.password && "red.500"} htmlFor="password">
               Password
@@ -206,7 +213,6 @@ export const SignUpForm = () => {
             as={GridItem}
             colSpan={2}
             isInvalid={Boolean(errors.passwordConfirmation)}
-            isRequired
           >
             <FormLabel
               color={errors.passwordConfirmation && "red.500"}
@@ -231,8 +237,57 @@ export const SignUpForm = () => {
           <FormControl
             as={GridItem}
             colSpan={2}
+            isInvalid={Boolean(errors.favoriteCrypto)}
+          >
+            <FormLabel
+              color={errors.favoriteCrypto && "red.500"}
+              htmlFor="favoriteCrypto"
+            >
+              Favorite Cryptocurrency
+            </FormLabel>
+            <Input
+              {...register("favoriteCrypto", { required: true })}
+              placeholder="Enter your favorite cryptocurrency"
+              name="favoriteCrypto"
+              h="3rem"
+            />
+          </FormControl>
+
+          <FormControl
+            as={GridItem}
+            colSpan={2}
+            isInvalid={Boolean(errors.selectAvatar)}
+          >
+            <FormLabel
+              color={errors.selectAvatar && "red.500"}
+              htmlFor="selectAvatar"
+            >
+              Select Avatar
+            </FormLabel>
+            <Select
+              {...register("selectAvatar", { required: true })}
+              name="selectAvatar"
+              placeholder="Select your avatar"
+              rounded="md"
+              h="3rem"
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="human">Human</option>
+              <option value="identicon">Identicon</option>
+              <option value="initials">Initials</option>
+              <option value="bottts">Bot</option>
+              <option value="avataaars">Avatar</option>
+              <option value="jdenticon">Jdenticon</option>
+              <option value="gridy">Gridy</option>
+              <option value="micah">Micah</option>
+            </Select>
+          </FormControl>
+
+          <FormControl
+            as={GridItem}
+            colSpan={2}
             isInvalid={Boolean(errors.ageConfirmation)}
-            isRequired
           >
             <Checkbox
               {...register("ageConfirmation", { required: true })}

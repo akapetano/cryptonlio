@@ -20,6 +20,8 @@ export const useAuth = () => {
     email,
     password,
     passwordConfirmation,
+    favoriteCrypto,
+    selectAvatar,
     ageConfirmation,
   }: ISignUpFormValues) => {
     const {
@@ -36,6 +38,8 @@ export const useAuth = () => {
           firstName,
           lastName,
           passwordConfirmation,
+          favoriteCrypto,
+          selectAvatar,
           ageConfirmation,
         },
       }
