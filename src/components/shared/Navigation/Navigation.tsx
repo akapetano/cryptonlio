@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { HStack, useDisclosure, Button } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { Logo } from "../../core/Logo/Logo";
