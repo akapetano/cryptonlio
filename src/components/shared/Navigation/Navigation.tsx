@@ -40,8 +40,8 @@ export const Navigation = ({ session, user, onSignOut }: INavigationProps) => {
         )}
       </HStack>
       <MobileNavigation
-        session={session}
         display={{ base: "flex", md: "none" }}
+        user={user}
         onSignOut={onSignOut}
       />
     </NavigationWrapper>

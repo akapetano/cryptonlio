@@ -10,7 +10,6 @@ import {
   MenuDivider,
   useColorModeValue,
   Flex,
-  Link as ChakraLink,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { User } from "@supabase/supabase-js";
@@ -22,9 +21,7 @@ interface IUserMenuProps {
 
 export const UserMenu = ({ onSignOut, user }: IUserMenuProps) => {
   const menuItemHoverBgColor = useColorModeValue("brand.300", "brand.700");
-  console.log(
-    `https://avatars.dicebear.com/api/${user?.user_metadata?.selectAvatar}/${user?.user_metadata?.favoriteCrypto}.svg`
-  );
+
   return (
     <Menu>
       <MenuButton

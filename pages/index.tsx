@@ -11,29 +11,20 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useUser } from "@supabase/auth-helpers-react";
 
 const HomePage = () => {
-  const { user, error } = useUser();
+  const { user } = useUser();
   const { session, setSession, onSignOut } = useAuth();
 
-  useEffect(() => {
-    setSession(supabaseClient?.auth?.session());
-
-    supabaseClient.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, [session, setSession]);
-
-  console.log(user);
-  console.log(session);
-
   return (
-    <Layout>
-      <NextHead title="Crypton - Explore the World of Cryptocurrencies" />
-      <Navigation user={user} session={session} onSignOut={onSignOut} />
+    <Layout
+      headTitle="Crypton - Explore the World of Cryptocurrencies"
+      user={user}
+      session={session}
+      onSignOut={onSignOut}
+    >
       <LayoutMain>
         <Welcome />
         <TopTenCoinsTable session={session} />
       </LayoutMain>
-      <Footer />
     </Layout>
   );
 };

@@ -2,11 +2,28 @@ import { Stack, StackProps } from "@chakra-ui/react";
 import { NavLink } from "../NavLink/NavLink";
 
 const NAV_ITEMS = ["Home", "Cryptocurrencies", "Portfolio"];
+const MOBILE_NAV_ITEMS = [
+  "Home",
+  "Cryptocurrencies",
+  "Portfolio",
+  "Settings",
+  "Logout",
+];
 
-export const NavLinks = ({ ...restProps }: StackProps) => {
+interface INavLinksProps extends StackProps {
+  isMobile?: boolean;
+  hasUser?: boolean;
+}
+
+export const NavLinks = ({
+  isMobile = false,
+  hasUser = false,
+  ...restProps
+}: INavLinksProps) => {
+  const navItems = isMobile && hasUser ? MOBILE_NAV_ITEMS : NAV_ITEMS;
   return (
     <Stack as={"nav"} spacing={8} {...restProps}>
-      {NAV_ITEMS.map((navItem, index) => {
+      {navItems.map((navItem, index) => {
         return (
           <NavLink
             width={{ base: "135%", md: "auto" }}

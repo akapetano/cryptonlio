@@ -4,23 +4,20 @@ import {
   FlexProps,
   useColorModeValue,
   VStack,
+  Avatar,
 } from "@chakra-ui/react";
-import { Session } from "@supabase/supabase-js";
+import { User } from "@supabase/supabase-js";
 import { ColorModeButton } from "../../ColorModeButton/ColorModeButton";
 import { NavLinks } from "../../NavLinks/NavLinks";
-import { UserMenu } from "../../UserMenu/UserMenu";
+import NextLink from "next/link";
 
 interface IMobileMenuProps extends FlexProps {
   isOpen: boolean;
-  session: Session | null;
+  user: User | null;
   onSignOut: () => void;
 }
 
-export const MobileMenu = ({
-  isOpen,
-  session,
-  onSignOut,
-}: IMobileMenuProps) => {
+export const MobileMenu = ({ isOpen, user, onSignOut }: IMobileMenuProps) => {
   const overlayBgColor = useColorModeValue(
     "rgba(255,255,255,0.55)",
     "rgba(0,0,0,0.55)"
@@ -33,7 +30,7 @@ export const MobileMenu = ({
       bg={overlayBgColor}
       boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.37 )"
       backdropFilter="blur( 20px )"
-      pt="20rem"
+      pt="10rem"
       height="100vh"
       width="100%"
       textAlign="center"
@@ -44,28 +41,36 @@ export const MobileMenu = ({
       transition="transform 0.3s ease-in-out"
       zIndex="20"
     >
-      <VStack spacing={12}>
+      <VStack spacing={12} flexDir={!!user ? "column" : "column-reverse"}>
+        {!user ? (
+          <VStack spacing={6} mt={16}>
+            <NextLink href="/sign-in" passHref>
+              <Button variant="secondary" width="14rem">
+                Sign in
+              </Button>
+            </NextLink>
+            <NextLink href="/sign-up" passHref>
+              <Button variant="primary" width="14rem">
+                Get started
+              </Button>
+            </NextLink>
+          </VStack>
+        ) : (
+          <Avatar
+            size={"md"}
+            src={`https://avatars.dicebear.com/api/${user?.user_metadata?.selectAvatar}/${user?.user_metadata?.favoriteCrypto}.svg`}
+          />
+        )}
+
+        <ColorModeButton aria-label="Toggle color mode" />
         <NavLinks
           display={{ base: "flex", md: "none" }}
           direction="column"
           justifyContent="center"
           alignItems="center"
+          isMobile={true}
+          hasUser={!!user}
         />
-
-        {!session ? (
-          <Button variant="secondary" width="14rem">
-            Sign in
-          </Button>
-        ) : null}
-        {session ? (
-          <UserMenu onSignOut={onSignOut} />
-        ) : (
-          <Button variant="primary" width="14rem">
-            Get started
-          </Button>
-        )}
-
-        <ColorModeButton aria-label="Toggle color mode" />
       </VStack>
     </Flex>
   );
