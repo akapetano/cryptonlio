@@ -9,8 +9,7 @@ import { ApiError } from "next/dist/server/api-utils";
 
 export const useAuth = () => {
   const [session, setSession] = useState<Session | null>(null);
-  const { error } = useUser();
-  const [user, setUser] = useState<User | null>(null);
+  const { user, error } = useUser();
   const router = useRouter();
   const toast = useToast();
 
@@ -65,7 +64,7 @@ export const useAuth = () => {
         isClosable: true,
       });
       setSession(supabaseSession);
-      setUser(supabaseUser);
+
       if (user) {
         router.push("/sign-in");
       }
@@ -93,7 +92,7 @@ export const useAuth = () => {
     }
   };
 
-  const onSignOut = async () => {
+  const handleSignOut = async () => {
     const { error } = await supabaseClient?.auth?.signOut();
     if (error instanceof ApiError) {
       toast({
@@ -109,13 +108,16 @@ export const useAuth = () => {
     }
   };
 
+  const userAvatar = `https://avatars.dicebear.com/api/${user?.user_metadata?.selectAvatar}/${user?.user_metadata?.favoriteCrypto}.svg`;
+
   return {
     error,
     user,
+    userAvatar,
     session,
     setSession,
     onSignIn,
     onSignUp,
-    onSignOut,
+    handleSignOut,
   };
 };

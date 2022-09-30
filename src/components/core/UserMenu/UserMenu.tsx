@@ -12,15 +12,14 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { User } from "@supabase/supabase-js";
+import NextImage from "next/image";
+import { useUser } from "@supabase/auth-helpers-react";
+import { useAuth } from "../../../../hooks/useAuth";
 
-interface IUserMenuProps {
-  onSignOut: () => void;
-  user: User;
-}
-
-export const UserMenu = ({ onSignOut, user }: IUserMenuProps) => {
+export const UserMenu = () => {
   const menuItemHoverBgColor = useColorModeValue("brand.300", "brand.700");
+  const { user } = useUser();
+  const { handleSignOut, userAvatar } = useAuth();
 
   return (
     <Menu>
@@ -31,18 +30,12 @@ export const UserMenu = ({ onSignOut, user }: IUserMenuProps) => {
         cursor={"pointer"}
         minW={0}
       >
-        <Avatar
-          size={"md"}
-          src={`https://avatars.dicebear.com/api/${user?.user_metadata?.selectAvatar}/${user?.user_metadata?.favoriteCrypto}.svg`}
-        />
+        <Avatar size={"md"} src={userAvatar} />
       </MenuButton>
       <MenuList alignItems={"center"} m="0">
         <br />
         <Center>
-          <Avatar
-            size={"2xl"}
-            src={`https://avatars.dicebear.com/api/${user?.user_metadata?.selectAvatar}/${user?.user_metadata?.favoriteCrypto}.svg`}
-          />
+          <Avatar size={"2xl"} src={userAvatar} />
         </Center>
         <br />
         <Center>
@@ -63,7 +56,7 @@ export const UserMenu = ({ onSignOut, user }: IUserMenuProps) => {
           </NextLink>
           <MenuItem
             _hover={{ bgColor: menuItemHoverBgColor, color: "#fff" }}
-            onClick={() => onSignOut()}
+            onClick={() => handleSignOut()}
           >
             Logout
           </MenuItem>

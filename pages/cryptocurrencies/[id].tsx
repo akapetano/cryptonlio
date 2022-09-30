@@ -5,9 +5,6 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import { COINS_COINGECKO_API_URL } from "../../src/fetchers/cryptoFetcher";
 import { Coin, CoinById } from "../../types/crypto";
 import { useAuth } from "../../hooks/useAuth";
-import { useEffect } from "react";
-import { useUser } from "@supabase/auth-helpers-react";
-import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response = await fetch(COINS_COINGECKO_API_URL);
@@ -41,16 +38,10 @@ interface ICoinProps {
 }
 
 const Coin = ({ coin }: ICoinProps) => {
-  const { session, onSignOut } = useAuth();
-  const { user } = useUser();
+  const { session, user } = useAuth();
 
   return (
-    <Layout
-      headTitle={`Crypton - ${coin.name}`}
-      session={session}
-      user={user}
-      onSignOut={onSignOut}
-    >
+    <Layout headTitle={`Crypton - ${coin.name}`} session={session} user={user}>
       <LayoutMain
         display="flex"
         alignItems="center"

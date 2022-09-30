@@ -9,7 +9,6 @@ interface ILayoutProps extends BoxProps {
   hasNavigation?: boolean;
   user: User | null;
   session: Session | null;
-  onSignOut: () => void;
   hasFooter?: boolean;
 }
 
@@ -18,7 +17,7 @@ export const Layout = ({
   hasNavigation = true,
   user,
   session,
-  onSignOut,
+
   hasFooter = true,
   children,
   ...restProps
@@ -26,9 +25,7 @@ export const Layout = ({
   return (
     <Box {...restProps}>
       <NextHead title={headTitle} />
-      {hasNavigation ? (
-        <Navigation user={user} session={session} onSignOut={onSignOut} />
-      ) : null}
+      {hasNavigation ? <Navigation user={user} /> : null}
       {children}
       {hasFooter ? <Footer /> : null}
     </Box>

@@ -2,23 +2,24 @@ import {
   Link as ChakraLink,
   LinkProps,
   useColorModeValue,
-} from '@chakra-ui/react';
-import NextLink from 'next/link';
-import { useRouter } from 'next/router';
+} from "@chakra-ui/react";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 
 interface INavLinkProps extends LinkProps {
   to: string;
   linkName: string;
+  onClick?: () => void;
 }
 
 export const NavLink = ({ to, linkName, ...restProps }: INavLinkProps) => {
   const router = useRouter();
   const isActive = router.pathname === to;
-  const chakraLinkBg = useColorModeValue('brand.300', 'brand.200');
-  const chakraLinkActiveBg = useColorModeValue('brand.400', 'brand.200');
-  const chakraLinkColor = useColorModeValue('brand.200', 'brand.100');
-  const chakraActiveLinkColor = useColorModeValue('white', 'gray.800');
-  const chakraLinkColorHover = useColorModeValue('white', 'gray.800');
+  const chakraLinkBg = useColorModeValue("brand.300", "brand.200");
+  const chakraLinkActiveBg = useColorModeValue("brand.400", "brand.200");
+  const chakraLinkColor = useColorModeValue("brand.200", "brand.100");
+  const chakraActiveLinkColor = useColorModeValue("white", "gray.800");
+  const chakraLinkColorHover = useColorModeValue("white", "gray.800");
 
   return isActive ? (
     <NextLink href={to} passHref>
@@ -41,7 +42,7 @@ export const NavLink = ({ to, linkName, ...restProps }: INavLinkProps) => {
     <NextLink href={to} passHref>
       <ChakraLink
         color={chakraLinkColor}
-        rounded={'md'}
+        rounded={"md"}
         fontWeight="600"
         transition="color .3s ease-in, background-color .3s ease-in"
         fontSize="sm"
@@ -50,7 +51,7 @@ export const NavLink = ({ to, linkName, ...restProps }: INavLinkProps) => {
         _hover={{
           color: chakraLinkColorHover,
           bg: chakraLinkBg,
-          transition: 'color .3s ease-out, background-color .3s ease-out',
+          transition: "color .3s ease-out, background-color .3s ease-out",
         }}
         _active={{ bg: chakraLinkActiveBg }}
         {...restProps}

@@ -7,14 +7,13 @@ import { useUser } from "@supabase/auth-helpers-react";
 
 const Portfolio = () => {
   const constructionColor = useColorModeValue("brand.400", "brand.300");
-  const { session, onSignOut } = useAuth();
+  const { session } = useAuth();
   const { user } = useUser();
   return (
     <Layout
       headTitle="Crypton - Create Your Portfolio Now"
       session={session}
       user={user}
-      onSignOut={onSignOut}
     >
       <LayoutMain>
         <Flex

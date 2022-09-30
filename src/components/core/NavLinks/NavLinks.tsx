@@ -2,13 +2,7 @@ import { Stack, StackProps } from "@chakra-ui/react";
 import { NavLink } from "../NavLink/NavLink";
 
 const NAV_ITEMS = ["Home", "Cryptocurrencies", "Portfolio"];
-const MOBILE_NAV_ITEMS = [
-  "Home",
-  "Cryptocurrencies",
-  "Portfolio",
-  "Settings",
-  "Logout",
-];
+const MOBILE_NAV_ITEMS = ["Home", "Cryptocurrencies", "Portfolio", "Settings"];
 
 interface INavLinksProps extends StackProps {
   isMobile?: boolean;

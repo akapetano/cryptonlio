@@ -7,15 +7,10 @@ import { useUser } from "@supabase/auth-helpers-react";
 
 const Settings = () => {
   const constructionColor = useColorModeValue("brand.400", "brand.300");
-  const { session, onSignOut } = useAuth();
+  const { session } = useAuth();
   const { user } = useUser();
   return (
-    <Layout
-      headTitle="Crypton - User Settings"
-      session={session}
-      user={user}
-      onSignOut={onSignOut}
-    >
+    <Layout headTitle="Crypton - User Settings" session={session} user={user}>
       <LayoutMain>
         <Flex
           height="100vh"

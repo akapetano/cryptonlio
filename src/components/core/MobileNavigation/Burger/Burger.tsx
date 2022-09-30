@@ -3,14 +3,14 @@ import { BurgerLine } from "./BurgerLine/BurgerLine";
 
 interface IBurgerProps extends ButtonProps {
   isopen: boolean | undefined;
-  setIsopen: (param: boolean) => void;
+  setisopen: (isopen: boolean) => void;
 }
 
-export const Burger = ({ isopen, setIsopen, ...restProps }: IBurgerProps) => {
+export const Burger = ({ isopen, setisopen, ...restProps }: IBurgerProps) => {
   return (
     <Button
       isopen={isopen}
-      onClick={() => setIsopen(!isopen)}
+      onClick={() => setisopen(!isopen)}
       position="fixed"
       top="1.5rem"
       right="1.5rem"

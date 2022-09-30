@@ -12,12 +12,18 @@ import { NavLinks } from "../../NavLinks/NavLinks";
 import NextLink from "next/link";
 
 interface IMobileMenuProps extends FlexProps {
-  isOpen: boolean;
+  isopen: boolean | undefined;
   user: User | null;
-  onSignOut: () => void;
+  handleSignOut: () => void;
+  userAvatar: string;
 }
 
-export const MobileMenu = ({ isOpen, user, onSignOut }: IMobileMenuProps) => {
+export const MobileMenu = ({
+  isopen,
+  user,
+  userAvatar,
+  handleSignOut,
+}: IMobileMenuProps) => {
   const overlayBgColor = useColorModeValue(
     "rgba(255,255,255,0.55)",
     "rgba(0,0,0,0.55)"
@@ -37,7 +43,7 @@ export const MobileMenu = ({ isOpen, user, onSignOut }: IMobileMenuProps) => {
       position="fixed"
       top="0"
       right="0"
-      transform={isOpen ? "translateX(0)" : "translateX(100%)"}
+      transform={isopen ? "translateX(0)" : "translateX(100%)"}
       transition="transform 0.3s ease-in-out"
       zIndex="20"
     >
@@ -56,10 +62,7 @@ export const MobileMenu = ({ isOpen, user, onSignOut }: IMobileMenuProps) => {
             </NextLink>
           </VStack>
         ) : (
-          <Avatar
-            size={"md"}
-            src={`https://avatars.dicebear.com/api/${user?.user_metadata?.selectAvatar}/${user?.user_metadata?.favoriteCrypto}.svg`}
-          />
+          <Avatar size={"md"} src={userAvatar} />
         )}
 
         <ColorModeButton aria-label="Toggle color mode" />
@@ -71,6 +74,9 @@ export const MobileMenu = ({ isOpen, user, onSignOut }: IMobileMenuProps) => {
           isMobile={true}
           hasUser={!!user}
         />
+        <Button aria-label="logout" onClick={() => handleSignOut()}>
+          Logout
+        </Button>
       </VStack>
     </Flex>
   );

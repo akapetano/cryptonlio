@@ -4,14 +4,13 @@ import { Layout } from "../src/components/shared/Layout/Layout";
 import { useAuth } from "../hooks/useAuth";
 
 const SignUp = () => {
-  const { session, user, onSignOut } = useAuth();
+  const { session, user } = useAuth();
 
   return (
     <Layout
       headTitle="Crypton - Explore the World of Cryptocurrencies"
       user={user}
       session={session}
-      onSignOut={onSignOut}
       hasNavigation={false}
       hasFooter={false}
     >

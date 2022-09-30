@@ -6,15 +6,13 @@ import { NavLinks } from "../../core/NavLinks/NavLinks";
 import { NavigationWrapper } from "./NavigationWrapper/NavigationWrapper";
 import { ColorModeButton } from "../../core/ColorModeButton/ColorModeButton";
 import { MobileNavigation } from "../../core/MobileNavigation/MobileNavigation";
-import { Session, User } from "@supabase/supabase-js";
+import { User } from "@supabase/supabase-js";
 
 interface INavigationProps {
   user: User | null;
-  session: Session | null;
-  onSignOut: () => void;
 }
 
-export const Navigation = ({ session, user, onSignOut }: INavigationProps) => {
+export const Navigation = ({ user }: INavigationProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -32,18 +30,14 @@ export const Navigation = ({ session, user, onSignOut }: INavigationProps) => {
           </NextLink>
         ) : null}
         {user ? (
-          <UserMenu user={user} onSignOut={onSignOut} />
+          <UserMenu />
         ) : (
           <NextLink href="/sign-up" passHref>
             <Button variant="primary">Get started</Button>
           </NextLink>
         )}
       </HStack>
-      <MobileNavigation
-        display={{ base: "flex", md: "none" }}
-        user={user}
-        onSignOut={onSignOut}
-      />
+      <MobileNavigation display={{ base: "flex", md: "none" }} />
     </NavigationWrapper>
   );
 };
