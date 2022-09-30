@@ -51,7 +51,7 @@ export const AllCoinsTable = () => {
       : filteredCoins;
 
   return (
-    <AllCoinsSection h="100vh">
+    <AllCoinsSection maxHeight="170vh">
       <Search onChange={onChange} />
       <Card flexDir="column">
         <Table

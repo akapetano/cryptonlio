@@ -8,17 +8,22 @@ import {
   useColorModeValue,
   Skeleton,
   Heading,
-} from '@chakra-ui/react';
-import { Card } from '../../../core/Card/Card';
-import { useCrypto } from '../../../../../hooks/useCrypto';
-import Image from 'next/image';
-import { Coin } from '../../../../../types/crypto';
-import NextLink from 'next/link';
-import { TopTenCoinsSection } from '../TopTenCoinsSection/TopTenCoinsSection';
+} from "@chakra-ui/react";
+import { Card } from "../../../core/Card/Card";
+import { useCrypto } from "../../../../../hooks/useCrypto";
+import Image from "next/image";
+import { Coin } from "../../../../../types/crypto";
+import NextLink from "next/link";
+import { TopTenCoinsSection } from "../TopTenCoinsSection/TopTenCoinsSection";
+import { Session } from "@supabase/supabase-js";
 
-export const TopTenCoinsTable = () => {
-  const { data: cryptocurrencies, isLoading, isError } = useCrypto();
-  const tableRowHoverBgColor = useColorModeValue('gray.100', 'gray.700');
+interface ITopTenCoinsTableProps {
+  session: Session | null;
+}
+
+export const TopTenCoinsTable = ({ session }: ITopTenCoinsTableProps) => {
+  const { topTenCoins, isLoading, isError } = useCrypto();
+  const tableRowHoverBgColor = useColorModeValue("gray.100", "gray.700");
 
   return (
     <TopTenCoinsSection>
@@ -26,18 +31,18 @@ export const TopTenCoinsTable = () => {
         id="top-10-coins"
         as="h2"
         textAlign="center"
-        fontSize={{ base: '3xl', md: '4xl' }}
+        fontSize={{ base: "3xl", md: "4xl" }}
       >
         Top 10 Coins by <br /> Market Cap
       </Heading>
       <Card>
         <Table
-          display={['block', 'block', 'block', 'table', 'table']}
-          maxWidth={{ base: 'max-content', md: 'container.xl' }}
+          display={["block", "block", "block", "table", "table"]}
+          maxWidth={{ base: "max-content", md: "container.xl" }}
           margin="0 auto"
           overflowX="auto"
           whiteSpace="nowrap"
-          fontSize={{ base: 'sm', md: 'md' }}
+          fontSize={{ base: "sm", md: "md" }}
         >
           <Thead>
             <Tr>
@@ -53,9 +58,9 @@ export const TopTenCoinsTable = () => {
           </Thead>
           <Tbody>
             {isLoading ? (
-              <Skeleton noOfLines={10} />
+              <Skeleton noOfLines={10} as="tr" />
             ) : (
-              cryptocurrencies?.slice(0, 10).map((coin: Coin) => {
+              topTenCoins.map((coin: Coin) => {
                 return (
                   <Tr key={coin.id} _hover={{ bg: tableRowHoverBgColor }}>
                     <Td>{coin.market_cap_rank}</Td>
@@ -71,7 +76,7 @@ export const TopTenCoinsTable = () => {
                     </Td>
 
                     <NextLink href={`/cryptocurrencies/${coin.id}`} passHref>
-                      <Td _hover={{ cursor: 'pointer' }}>{coin.name}</Td>
+                      <Td _hover={{ cursor: "pointer" }}>{coin.name}</Td>
                     </NextLink>
 
                     <Td>{coin.symbol.toUpperCase()}</Td>
@@ -90,8 +95,8 @@ export const TopTenCoinsTable = () => {
                     <Td
                       color={
                         coin.price_change_percentage_24h > 0
-                          ? '#60AD65'
-                          : '#E53E3E'
+                          ? "#60AD65"
+                          : "#E53E3E"
                       }
                     >
                       {coin.price_change_percentage_24h.toFixed(2)}%

@@ -3,8 +3,8 @@ import {
   useColorModeValue,
   IconButton,
   IconButtonProps,
-} from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+} from "@chakra-ui/react";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 export const ColorModeButton = ({ ...restProps }: IconButtonProps) => {
   const { toggleColorMode } = useColorMode();
@@ -13,7 +13,7 @@ export const ColorModeButton = ({ ...restProps }: IconButtonProps) => {
   return (
     <IconButton
       variant="primary"
-      size="md"
+      size="lg"
       rounded="full"
       onClick={toggleColorMode}
       icon={<SwitchIcon />}

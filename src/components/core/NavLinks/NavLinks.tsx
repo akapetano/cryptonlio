@@ -1,20 +1,31 @@
-import { Stack, StackProps } from '@chakra-ui/react';
-import { NavLink } from '../NavLink/NavLink';
+import { Stack, StackProps } from "@chakra-ui/react";
+import { NavLink } from "../NavLink/NavLink";
 
-const NAV_ITEMS = ['Home', 'Cryptocurrencies', 'Create a Portfolio'];
+const NAV_ITEMS = ["Home", "Cryptocurrencies", "Portfolio"];
+const MOBILE_NAV_ITEMS = ["Home", "Cryptocurrencies", "Portfolio", "Settings"];
 
-export const NavLinks = ({ ...restProps }: StackProps) => {
+interface INavLinksProps extends StackProps {
+  isMobile?: boolean;
+  hasUser?: boolean;
+}
+
+export const NavLinks = ({
+  isMobile = false,
+  hasUser = false,
+  ...restProps
+}: INavLinksProps) => {
+  const navItems = isMobile && hasUser ? MOBILE_NAV_ITEMS : NAV_ITEMS;
   return (
-    <Stack as={'nav'} spacing={8} {...restProps}>
-      {NAV_ITEMS.map((navItem, index) => {
+    <Stack as={"nav"} spacing={8} {...restProps}>
+      {navItems.map((navItem, index) => {
         return (
           <NavLink
-            width={{ base: '135%', md: 'auto' }}
+            width={{ base: "135%", md: "auto" }}
             key={navItem + index}
             to={
-              navItem === 'Home'
-                ? '/'
-                : `/${navItem.replace(/\s+/g, '-').toLowerCase()}`
+              navItem === "Home"
+                ? "/"
+                : `/${navItem.replace(/\s+/g, "-").toLowerCase()}`
             }
             linkName={navItem}
           />

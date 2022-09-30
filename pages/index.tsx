@@ -1,23 +1,24 @@
-import { Navigation } from '../src/components/core/Navigation/Navigation';
-import { TopTenCoinsTable } from '../src/components/features/home/TopTenCoinsTable/TopTenCoinsTable';
-import { NextHead } from '../src/components/shared/NextHead/NextHead';
-import { Welcome } from '../src/components/features/home/Welcome/Welcome';
-import { SignUpForm } from '../src/components/core/SignUpForm/SignUpForm';
-import { Footer } from '../src/components/core/Footer/Footer';
-import { LayoutMain } from '../src/components/shared/LayoutMain/LayoutMain';
-import { Layout } from '../src/components/shared/Layout/Layout';
+import { TopTenCoinsTable } from "../src/components/features/home/TopTenCoinsTable/TopTenCoinsTable";
+import { Welcome } from "../src/components/features/home/Welcome/Welcome";
+import { LayoutMain } from "../src/components/shared/LayoutMain/LayoutMain";
+import { Layout } from "../src/components/shared/Layout/Layout";
+import { useAuth } from "../hooks/useAuth";
+import { useUser } from "@supabase/auth-helpers-react";
 
 const HomePage = () => {
+  const { user } = useUser();
+  const { session } = useAuth();
+
   return (
-    <Layout>
-      <NextHead title="Crypton - Explore the World of Cryptocurrencies" />
-      <Navigation />
+    <Layout
+      headTitle="Crypton - Explore the World of Cryptocurrencies"
+      user={user}
+      session={session}
+    >
       <LayoutMain>
         <Welcome />
-        <TopTenCoinsTable />
-        {/* <SignUpForm /> */}
+        <TopTenCoinsTable session={session} />
       </LayoutMain>
-      <Footer />
     </Layout>
   );
 };

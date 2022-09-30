@@ -1,16 +1,16 @@
-import { Button, ButtonProps } from '@chakra-ui/react';
-import { BurgerLine } from './BurgerLine/BurgerLine';
+import { Button, ButtonProps } from "@chakra-ui/react";
+import { BurgerLine } from "./BurgerLine/BurgerLine";
 
 interface IBurgerProps extends ButtonProps {
-  isOpen: boolean;
-  setIsOpen: (param: boolean) => void;
+  isopen: boolean | undefined;
+  setisopen: (isopen: boolean) => void;
 }
 
-export const Burger = ({ isOpen, setIsOpen, ...restProps }: IBurgerProps) => {
+export const Burger = ({ isopen, setisopen, ...restProps }: IBurgerProps) => {
   return (
     <Button
-      isOpen={isOpen}
-      onClick={() => setIsOpen(!isOpen)}
+      isopen={isopen}
+      onClick={() => setisopen(!isopen)}
       position="fixed"
       top="1.5rem"
       right="1.5rem"
@@ -24,14 +24,14 @@ export const Burger = ({ isOpen, setIsOpen, ...restProps }: IBurgerProps) => {
       cursor="pointer"
       padding="0"
       zIndex="25"
-      _hover={{ background: 'transparent' }}
-      _active={{ background: 'transparent' }}
-      _focus={{ outline: 'none' }}
+      _hover={{ background: "transparent" }}
+      _active={{ background: "transparent" }}
+      _focus={{ outline: "none" }}
       {...restProps}
     >
-      <BurgerLine isOpen={isOpen} />
-      <BurgerLine isOpen={isOpen} />
-      <BurgerLine isOpen={isOpen} />
+      <BurgerLine isopen={isopen ? isopen : undefined} />
+      <BurgerLine isopen={isopen ? isopen : undefined} />
+      <BurgerLine isopen={isopen ? isopen : undefined} />
     </Button>
   );
 };

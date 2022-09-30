@@ -1,20 +1,22 @@
-import { Box } from '@chakra-ui/react';
-import { NextHead } from '../../src/components/shared/NextHead/NextHead';
-import { Navigation } from '../../src/components/core/Navigation/Navigation';
-import { AllCoinsTable } from '../../src/components/features/cryptocurrencies/AllCoinsTable/AllCoinsTable';
-import { Layout } from '../../src/components/shared/Layout/Layout';
-import { LayoutMain } from '../../src/components/shared/LayoutMain/LayoutMain';
-import { Footer } from '../../src/components/core/Footer/Footer';
+import { AllCoinsTable } from "../../src/components/features/cryptocurrencies/AllCoinsTable/AllCoinsTable";
+import { Layout } from "../../src/components/shared/Layout/Layout";
+import { LayoutMain } from "../../src/components/shared/LayoutMain/LayoutMain";
+import { useAuth } from "../../hooks/useAuth";
+import { useUser } from "@supabase/auth-helpers-react";
 
 const Cryptocurrencies = () => {
+  const { session } = useAuth();
+  const { user } = useUser();
+
   return (
-    <Layout>
-      <NextHead title="Crypton - Top 100 cryptocurrencies" />
+    <Layout
+      headTitle="Crypton - Top 100 cryptocurrencies"
+      session={session}
+      user={user}
+    >
       <LayoutMain>
-        <Navigation />
         <AllCoinsTable />
       </LayoutMain>
-      <Footer />
     </Layout>
   );
 };
