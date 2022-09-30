@@ -59,7 +59,7 @@ export const useAuth = () => {
         position: "top",
         title: "Success!",
         description:
-          "Your account has been successfully created, please check your email and confirm your signup.",
+          "Thanks for signing up - just one more step to exploration. Verify your email address by clicking the link in your confirmation email.",
         status: "success",
         duration: 4000,
         isClosable: true,
