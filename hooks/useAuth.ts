@@ -1,7 +1,11 @@
 import { Session, User } from "@supabase/supabase-js";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { ISignUpFormValues, ILoginFormValues } from "../types/auth";
+import {
+  ISignUpFormValues,
+  ILoginFormValues,
+  IResetPasswordFormValues,
+} from "../types/auth";
 import { useUser } from "@supabase/auth-helpers-react";
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useToast } from "@chakra-ui/react";
@@ -108,6 +112,31 @@ export const useAuth = () => {
     }
   };
 
+  const onForgotPassword = async ({ email }: IResetPasswordFormValues) => {
+    const { data, error } =
+      await supabaseClient?.auth?.api?.resetPasswordForEmail(email);
+    if (error) {
+      toast({
+        position: "top",
+        title: "Error!",
+        description: error?.message,
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        position: "top",
+        title: "Success!",
+        description:
+          "Link successfully sent to your email address. Click the link to reset your password.",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
+  };
+
   const userAvatar = `https://avatars.dicebear.com/api/${user?.user_metadata?.selectAvatar}/${user?.user_metadata?.favoriteCrypto}.svg`;
 
   return {
@@ -118,6 +147,7 @@ export const useAuth = () => {
     setSession,
     onSignIn,
     onSignUp,
+    onForgotPassword,
     handleSignOut,
   };
 };

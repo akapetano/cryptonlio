@@ -104,9 +104,9 @@ export const SignUpForm = () => {
         bg={formBgColor}
         boxShadow={formBoxShadow}
       >
-        <Logo width="100" height="100" />
+        <Logo width="150" height="150" />
         <VStack spacing={3} alignItems="flex-start">
-          <Heading size="2xl">Sign Up</Heading>
+          <Heading size="xl">Sign Up</Heading>
           <Text>
             If you already have an account, click{" "}
             <NextLink href="/sign-in" passHref>
@@ -192,51 +192,6 @@ export const SignUpForm = () => {
           <FormControl
             as={GridItem}
             colSpan={2}
-            isInvalid={Boolean(errors.password)}
-          >
-            <FormLabel color={errors.password && "red.500"} htmlFor="password">
-              Password
-            </FormLabel>
-            <Input
-              {...register("password", { required: true })}
-              name="password"
-              type="password"
-              placeholder="Password"
-              h="3rem"
-            />
-            {errors?.password?.message ? (
-              <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
-            ) : null}
-          </FormControl>
-
-          <FormControl
-            as={GridItem}
-            colSpan={2}
-            isInvalid={Boolean(errors.passwordConfirmation)}
-          >
-            <FormLabel
-              color={errors.passwordConfirmation && "red.500"}
-              htmlFor="passwordConfirmation"
-            >
-              Password Confirmation
-            </FormLabel>
-            <Input
-              {...register("passwordConfirmation", { required: true })}
-              name="passwordConfirmation"
-              type="password"
-              placeholder="Password"
-              h="3rem"
-            />
-            {errors?.passwordConfirmation?.message ? (
-              <FormErrorMessage>
-                {errors?.passwordConfirmation?.message}
-              </FormErrorMessage>
-            ) : null}
-          </FormControl>
-
-          <FormControl
-            as={GridItem}
-            colSpan={2}
             isInvalid={Boolean(errors.favoriteCrypto)}
           >
             <FormLabel
@@ -282,6 +237,51 @@ export const SignUpForm = () => {
               <option value="gridy">Gridy</option>
               <option value="micah">Micah</option>
             </Select>
+          </FormControl>
+
+          <FormControl
+            as={GridItem}
+            colSpan={2}
+            isInvalid={Boolean(errors.password)}
+          >
+            <FormLabel color={errors.password && "red.500"} htmlFor="password">
+              Password
+            </FormLabel>
+            <Input
+              {...register("password", { required: true })}
+              name="password"
+              type="password"
+              placeholder="Password"
+              h="3rem"
+            />
+            {errors?.password?.message ? (
+              <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
+            ) : null}
+          </FormControl>
+
+          <FormControl
+            as={GridItem}
+            colSpan={2}
+            isInvalid={Boolean(errors.passwordConfirmation)}
+          >
+            <FormLabel
+              color={errors.passwordConfirmation && "red.500"}
+              htmlFor="passwordConfirmation"
+            >
+              Password Confirmation
+            </FormLabel>
+            <Input
+              {...register("passwordConfirmation", { required: true })}
+              name="passwordConfirmation"
+              type="password"
+              placeholder="Password"
+              h="3rem"
+            />
+            {errors?.passwordConfirmation?.message ? (
+              <FormErrorMessage>
+                {errors?.passwordConfirmation?.message}
+              </FormErrorMessage>
+            ) : null}
           </FormControl>
 
           <FormControl

@@ -5,7 +5,6 @@ import {
   Text,
   Button,
   MenuButton,
-  Avatar,
   Center,
   MenuDivider,
   useColorModeValue,
@@ -29,21 +28,24 @@ export const UserMenu = () => {
         variant={"link"}
         cursor={"pointer"}
         minW={0}
+        m={0}
       >
         <UserAvatar width={48} height={48} />
       </MenuButton>
-      <MenuList alignItems={"center"} m="0">
+      <MenuList alignItems={"center"} m={0}>
         <br />
         <Center>
           <UserAvatar width={128} height={128} />
         </Center>
         <br />
         <Center>
-          <Text>{`${user?.user_metadata?.firstName} ${user?.user_metadata?.lastName}`}</Text>
+          <Text
+            m={0}
+          >{`${user?.user_metadata?.firstName} ${user?.user_metadata?.lastName}`}</Text>
         </Center>
         <br />
         <MenuDivider m={0} />
-        <Flex flexDir="column">
+        <Flex flexDir="column" m={0}>
           <NextLink href="/portfolio" passHref>
             <MenuItem _hover={{ bgColor: menuItemHoverBgColor, color: "#fff" }}>
               Your Portfolio

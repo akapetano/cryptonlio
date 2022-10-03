@@ -13,3 +13,7 @@ export interface ILoginFormValues {
   email: string;
   password: string;
 }
+
+export interface IResetPasswordFormValues {
+  email: string;
+}

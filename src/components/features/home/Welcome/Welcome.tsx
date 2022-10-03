@@ -4,14 +4,17 @@ import { WelcomeText } from "./WelcomeText/WelcomeText";
 import { VStack } from "@chakra-ui/react";
 import { GetStartedButton } from "./GetStartedButton/GetStartedButton";
 import { TopTenCoinsLink } from "../TopTenCoinsLink/TopTenCoinsLink";
+import { useUser } from "@supabase/auth-helpers-react";
 
 export const Welcome = () => {
+  const { user } = useUser();
+
   return (
     <WelcomeContainer>
       <VStack spacing="2rem">
         <TopTenCoinsLink />
         <WelcomeText />
-        <GetStartedButton />
+        {!user ? <GetStartedButton /> : null}
       </VStack>
       <CryptoCard />
     </WelcomeContainer>
