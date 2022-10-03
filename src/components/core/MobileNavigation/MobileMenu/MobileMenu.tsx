@@ -10,6 +10,7 @@ import { User } from "@supabase/supabase-js";
 import { ColorModeButton } from "../../ColorModeButton/ColorModeButton";
 import { NavLinks } from "../../NavLinks/NavLinks";
 import NextLink from "next/link";
+import { UserAvatar } from "../../UserAvatar/UserAvatar";
 
 interface IMobileMenuProps extends FlexProps {
   isopen: boolean | undefined;
@@ -62,7 +63,7 @@ export const MobileMenu = ({
             </NextLink>
           </VStack>
         ) : (
-          <Avatar size={"md"} src={userAvatar} />
+          <UserAvatar width={48} height={48} />
         )}
 
         <ColorModeButton aria-label="Toggle color mode" />

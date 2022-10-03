@@ -12,14 +12,14 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import NextImage from "next/image";
+import { UserAvatar } from "../UserAvatar/UserAvatar";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useAuth } from "../../../../hooks/useAuth";
 
 export const UserMenu = () => {
   const menuItemHoverBgColor = useColorModeValue("brand.300", "brand.700");
   const { user } = useUser();
-  const { handleSignOut, userAvatar } = useAuth();
+  const { handleSignOut } = useAuth();
 
   return (
     <Menu>
@@ -30,12 +30,12 @@ export const UserMenu = () => {
         cursor={"pointer"}
         minW={0}
       >
-        <Avatar size={"md"} src={userAvatar} />
+        <UserAvatar width={48} height={48} />
       </MenuButton>
       <MenuList alignItems={"center"} m="0">
         <br />
         <Center>
-          <Avatar size={"2xl"} src={userAvatar} />
+          <UserAvatar width={128} height={128} />
         </Center>
         <br />
         <Center>
