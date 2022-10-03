@@ -13,16 +13,15 @@ import NextLink from "next/link";
 import { UserAvatar } from "../../UserAvatar/UserAvatar";
 
 interface IMobileMenuProps extends FlexProps {
-  isopen: boolean | undefined;
   user: User | null;
   handleSignOut: () => void;
-  userAvatar: string;
+  mobileMenuIsOpen: boolean;
+  setMobileMenuIsOpen: (mobileMenuIsOpen: boolean) => void;
 }
 
 export const MobileMenu = ({
-  isopen,
   user,
-  userAvatar,
+  mobileMenuIsOpen,
   handleSignOut,
 }: IMobileMenuProps) => {
   const overlayBgColor = useColorModeValue(
@@ -44,7 +43,7 @@ export const MobileMenu = ({
       position="fixed"
       top="0"
       right="0"
-      transform={isopen ? "translateX(0)" : "translateX(100%)"}
+      transform={mobileMenuIsOpen ? "translateX(0)" : "translateX(100%)"}
       transition="transform 0.3s ease-in-out"
       zIndex="20"
     >

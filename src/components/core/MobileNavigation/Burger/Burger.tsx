@@ -2,15 +2,17 @@ import { Button, ButtonProps } from "@chakra-ui/react";
 import { BurgerLine } from "./BurgerLine/BurgerLine";
 
 interface IBurgerProps extends ButtonProps {
-  isopen: boolean | undefined;
-  setisopen: (isopen: boolean) => void;
+  mobileMenuIsOpen: boolean;
+  setMobileMenuIsOpen: (isopen: boolean) => void;
 }
 
-export const Burger = ({ isopen, setisopen, ...restProps }: IBurgerProps) => {
+export const Burger = ({
+  mobileMenuIsOpen,
+  setMobileMenuIsOpen,
+}: IBurgerProps) => {
   return (
     <Button
-      isopen={isopen}
-      onClick={() => setisopen(!isopen)}
+      onClick={() => setMobileMenuIsOpen(!mobileMenuIsOpen)}
       position="fixed"
       top="1.5rem"
       right="1.5rem"
@@ -27,11 +29,10 @@ export const Burger = ({ isopen, setisopen, ...restProps }: IBurgerProps) => {
       _hover={{ background: "transparent" }}
       _active={{ background: "transparent" }}
       _focus={{ outline: "none" }}
-      {...restProps}
     >
-      <BurgerLine isopen={isopen ? isopen : undefined} />
-      <BurgerLine isopen={isopen ? isopen : undefined} />
-      <BurgerLine isopen={isopen ? isopen : undefined} />
+      <BurgerLine mobileMenuIsOpen={mobileMenuIsOpen} />
+      <BurgerLine mobileMenuIsOpen={mobileMenuIsOpen} />
+      <BurgerLine mobileMenuIsOpen={mobileMenuIsOpen} />
     </Button>
   );
 };
