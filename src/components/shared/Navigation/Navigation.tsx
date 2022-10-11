@@ -1,4 +1,4 @@
-import { Flex, useDisclosure, Button } from "@chakra-ui/react";
+import { Flex, Button } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { Logo } from "../../core/Logo/Logo";
 import { UserMenu } from "../../core/UserMenu/UserMenu";
@@ -13,8 +13,6 @@ interface INavigationProps {
 }
 
 export const Navigation = ({ user }: INavigationProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <NavigationWrapper>
       <Logo width="75" height="75" />
