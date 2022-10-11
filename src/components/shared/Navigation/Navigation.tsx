@@ -1,4 +1,4 @@
-import { HStack, useDisclosure, Button } from "@chakra-ui/react";
+import { Flex, useDisclosure, Button } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { Logo } from "../../core/Logo/Logo";
 import { UserMenu } from "../../core/UserMenu/UserMenu";
@@ -22,7 +22,7 @@ export const Navigation = ({ user }: INavigationProps) => {
         display={{ base: "none", md: "flex" }}
         direction={{ base: "column", md: "row" }}
       />
-      <HStack spacing={4} display={{ base: "none", md: "flex" }}>
+      <Flex gap={4} display={{ base: "none", md: "flex" }}>
         <ColorModeButton aria-label="Toggle color mode" />
         {!user ? (
           <NextLink href="/sign-in" passHref>
@@ -36,7 +36,7 @@ export const Navigation = ({ user }: INavigationProps) => {
             <Button variant="primary">Get started</Button>
           </NextLink>
         )}
-      </HStack>
+      </Flex>
       <MobileNavigation display={{ base: "flex", md: "none" }} />
     </NavigationWrapper>
   );
