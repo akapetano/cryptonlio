@@ -9,12 +9,18 @@ import { useRouter } from "next/router";
 interface INavLinkProps extends LinkProps {
   to: string;
   linkName: string;
+  isMobile?: boolean;
   onClick?: () => void;
 }
 
-export const NavLink = ({ to, linkName, ...restProps }: INavLinkProps) => {
+export const NavLink = ({
+  to,
+  linkName,
+  onClick,
+  ...restProps
+}: INavLinkProps) => {
   const router = useRouter();
-  const isActive = router.pathname === to;
+  const isActive = router.pathname === to && linkName !== "Logout";
   const chakraLinkBg = useColorModeValue("brand.300", "brand.200");
   const chakraLinkActiveBg = useColorModeValue("brand.400", "brand.200");
   const chakraLinkColor = useColorModeValue("brand.200", "brand.100");
@@ -33,6 +39,7 @@ export const NavLink = ({ to, linkName, ...restProps }: INavLinkProps) => {
         p="0.7rem"
         _hover={{ bg: chakraLinkActiveBg }}
         _active={{ bg: chakraLinkActiveBg }}
+        onClick={onClick}
         {...restProps}
       >
         {linkName}
@@ -48,6 +55,7 @@ export const NavLink = ({ to, linkName, ...restProps }: INavLinkProps) => {
         fontSize="sm"
         textTransform="uppercase"
         p="0.7rem"
+        onClick={onClick}
         _hover={{
           color: chakraLinkColorHover,
           bg: chakraLinkBg,

@@ -66,17 +66,21 @@ export const MobileMenu = ({
         )}
 
         <ColorModeButton aria-label="Toggle color mode" />
-        <NavLinks
-          display={{ base: "flex", md: "none" }}
-          direction="column"
+        <Flex
+          flexDir="column"
           justifyContent="center"
           alignItems="center"
-          isMobile={true}
-          hasUser={!!user}
-        />
-        <Button aria-label="logout" onClick={() => handleSignOut()}>
-          Logout
-        </Button>
+          w="5rem"
+        >
+          <NavLinks
+            display={{ base: "flex", md: "none" }}
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            isMobile={true}
+            hasUser={!!user}
+          />
+        </Flex>
       </VStack>
     </Flex>
   );
