@@ -1,6 +1,6 @@
 import { UserAvatar } from "../../../core/UserAvatar/UserAvatar";
 import { Card } from "../../../core/Card/Card";
-import { Container, Flex, Text } from "@chakra-ui/react";
+import { Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
 
 export const PortfolioUserHeader = () => {
@@ -19,19 +19,10 @@ export const PortfolioUserHeader = () => {
       ]}
     >
       <Card>
-        <Flex justifyContent="start" alignItems="center" gap="1rem">
-          <UserAvatar height={48} width={48} />
-          <Text fontWeight="bold">
-            {`${user?.user_metadata?.firstName} ${user?.user_metadata?.lastName}`}
-            , a fellow Cryptonian
-          </Text>
-        </Flex>
-      </Card>
-      <Card>
-        <Flex justifyContent="start" alignItems="center" gap="1rem">
-          <Text fontWeight="bold" fontSize="2xl">
+        <Flex justifyContent="start" alignItems="start" gap="1rem">
+          <Heading as="h4" size="md">
             My Portfolio
-          </Text>
+          </Heading>
         </Flex>
       </Card>
     </Container>
