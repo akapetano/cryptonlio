@@ -1,15 +1,15 @@
-import { UserAvatar } from "../../../core/UserAvatar/UserAvatar";
 import { Card } from "../../../core/Card/Card";
 import { Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
+import { PortfolioEmptyState } from "../PortfolioEmptyState/PortfolioEmptyState";
 
-export const PortfolioUserHeader = () => {
+export const PortfolioContent = () => {
   const { user } = useUser();
 
   return (
     <Container
       display="flex"
-      gap="2rem"
+      flexDir="column"
       maxWidth={[
         "25rem",
         "container.sm",
@@ -18,13 +18,10 @@ export const PortfolioUserHeader = () => {
         "container.xl",
       ]}
     >
-      <Card>
-        <Flex justifyContent="start" alignItems="start" gap="1rem">
-          <Heading as="h4" size="md">
-            My Portfolio
-          </Heading>
-        </Flex>
-      </Card>
+      <Heading as="h4" size="md" m="0" mt="1rem">
+        My Portfolio
+      </Heading>
+      <PortfolioEmptyState />
     </Container>
   );
 };

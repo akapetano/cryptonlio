@@ -1,9 +1,8 @@
 import { LayoutMain } from "../src/components/shared/LayoutMain/LayoutMain";
 import { Layout } from "../src/components/shared/Layout/Layout";
-
 import { useAuth } from "../hooks/useAuth";
 import { useUser } from "@supabase/auth-helpers-react";
-import { PortfolioUserHeader } from "../src/components/features/portfolio/PortfolioUserHeader/PortfolioUserHeader";
+import { PortfolioContent } from "../src/components/features/portfolio/PortfolioContent/PortfolioContent";
 
 const Portfolio = () => {
   const { session } = useAuth();
@@ -15,7 +14,7 @@ const Portfolio = () => {
       user={user}
     >
       <LayoutMain>
-        <PortfolioUserHeader />
+        <PortfolioContent />
       </LayoutMain>
     </Layout>
   );
