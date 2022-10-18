@@ -11,7 +11,7 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useToast } from "@chakra-ui/react";
 import { ApiError } from "next/dist/server/api-utils";
 
-export const useAuth = () => {
+export function useAuth() {
   const [session, setSession] = useState<Session | null>(null);
   const { user, error } = useUser();
   const router = useRouter();
@@ -150,4 +150,4 @@ export const useAuth = () => {
     onForgotPassword,
     handleSignOut,
   };
-};
+}

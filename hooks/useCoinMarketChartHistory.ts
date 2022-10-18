@@ -1,15 +1,15 @@
-import useSWR from 'swr';
+import useSWR from "swr";
 import {
   getMarketChartKey,
   marketChartFetcher,
-} from '../src/fetchers/marketChartHistoryFetcher';
-import { CoinMarketHistory } from '../types/crypto';
+} from "../src/fetchers/marketChartHistoryFetcher";
+import { CoinMarketHistory } from "../types/crypto";
 
-export const useCoinMarketChartHistory = (
+export function useCoinMarketChartHistory(
   id: string,
   days: string,
   interval: string
-) => {
+) {
   const { data, error } = useSWR<CoinMarketHistory>(
     getMarketChartKey(id, days, interval),
     marketChartFetcher
@@ -20,4 +20,4 @@ export const useCoinMarketChartHistory = (
     isLoading: !error && !data,
     isError: error,
   };
-};
+}

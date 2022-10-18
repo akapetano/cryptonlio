@@ -18,22 +18,27 @@ import {
 } from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { FaPlus } from "react-icons/fa";
-import { useRef, useState } from "react";
-FaPlus;
+import { ChangeEvent, useState } from "react";
+import { PortfolioList } from "../PortfolioList/PortfolioList";
+import { usePortfolio } from "../../../../../hooks/usePortfolio";
 
 export const PortfolioEmptyState = () => {
   const { user } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const linkColor = useColorModeValue("brand.300", "brand.200");
-  const [porfolioList, setPortfolioList] = useState([]);
-  const portfolioNameRef = useRef(null);
+  const { portfolioName, setPortfolioName, portfolioList, setPortfolioList } =
+    usePortfolio();
 
-  const onCreatePorfolio = (event: any) => {
-    setPortfolioList(
-      porfolioList.concat(
-        <Card key={porfolioList.length}>{portfolioNameRef.current}</Card>
-      )
-    );
+  function handleChange(event: ChangeEvent) {
+    const eventTarget = event.target as HTMLInputElement;
+    setPortfolioName(eventTarget.value);
+  }
+
+  const onCreatePortfolio = () => {
+    setPortfolioList((prevState) => {
+      return [...prevState, portfolioName];
+    });
+    onClose();
   };
 
   return (
@@ -45,7 +50,11 @@ export const PortfolioEmptyState = () => {
           gap="1rem"
           flexDirection="column"
         >
-          <Text fontSize="xl">You currently don&apos;t have a porfolio.</Text>
+          {portfolioList.length === 0 ? (
+            <Text fontSize="xl">You currently don&apos;t have a porfolio.</Text>
+          ) : (
+            portfolioList
+          )}
           <Box
             onClick={onOpen}
             _hover={{
@@ -59,23 +68,32 @@ export const PortfolioEmptyState = () => {
               <Text>Create Portfolio</Text>
             </Flex>
           </Box>
+          {portfolioList.length !== 0 ? (
+            <PortfolioList portfolioList={portfolioList} />
+          ) : null}
         </Flex>
       </Card>
-      {porfolioList}
+
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>New Portfolio</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Input placeholder="My Porfolio" size="lg" ref={portfolioNameRef} />
+            <Input
+              placeholder="My Porfolio"
+              size="lg"
+              type="text"
+              value={portfolioName}
+              onChange={handleChange}
+            />
           </ModalBody>
 
           <ModalFooter display="flex" gap="0.5rem" w="full">
             <Button variant="secondary" w="full" onClick={onClose}>
               Close
             </Button>
-            <Button variant="primary" w="full" onClick={onClose}>
+            <Button variant="primary" w="full" onClick={onCreatePortfolio}>
               Create
             </Button>
           </ModalFooter>
