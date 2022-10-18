@@ -6,7 +6,7 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import theme from "../src/theme";
 import "../src/theme/styles.css";
 
-const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={theme}>
       <UserProvider supabaseClient={supabaseClient}>
