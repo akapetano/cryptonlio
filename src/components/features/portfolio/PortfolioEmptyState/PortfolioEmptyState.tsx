@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { FaPlus } from "react-icons/fa";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { PortfolioList } from "../PortfolioList/PortfolioList";
 import { usePortfolio } from "../../../../../hooks/usePortfolio";
 
