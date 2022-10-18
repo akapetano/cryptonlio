@@ -32,8 +32,7 @@ export const CoinDetails = ({ coin }: ICoinDetails) => {
   const [readMore, setReadMore] = useState(false);
 
   const coinDescription = parse(
-    coin.description.en,
-    // readMore ? coin?.description?.en : coin?.description?.en?.slice(0, 350),
+    readMore ? coin?.description?.en : coin?.description?.en?.slice(0, 350),
     {
       replace: (domNode) => {
         if (domNode instanceof Element && domNode.name === "a") {
