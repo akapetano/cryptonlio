@@ -26,7 +26,6 @@ import { StatCard } from "../StatCard/StatCard";
 export const PortfolioEmptyState = () => {
   const { user } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const linkColor = useColorModeValue("brand.300", "brand.200");
   const { portfolioName, setPortfolioName, portfolioList, setPortfolioList } =
     usePortfolio();
 
