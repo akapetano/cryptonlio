@@ -21,6 +21,7 @@ import { FaPlus } from "react-icons/fa";
 import { ChangeEvent } from "react";
 import { PortfolioList } from "../PortfolioList/PortfolioList";
 import { usePortfolio } from "../../../../../hooks/usePortfolio";
+import { StatCard } from "../StatCard/StatCard";
 
 export const PortfolioEmptyState = () => {
   const { user } = useUser();
@@ -42,8 +43,32 @@ export const PortfolioEmptyState = () => {
   };
 
   return (
-    <>
-      <Card p="1rem" mt="1rem" mb="2rem">
+    <Box>
+      <Flex gap="1rem" justifyContent="space-between">
+        <Flex gap="1rem" flexBasis="50%">
+          <StatCard statTitle="Total Amount" amount={500.0} />
+          <StatCard
+            statTitle="24h Portfolio Change"
+            amount={10}
+            percentage={2.56}
+          />
+          <StatCard
+            statTitle="Total Profit Gain"
+            amount={1000}
+            percentage={100}
+          />
+        </Flex>
+        <Button
+          variant="primary"
+          leftIcon={<Icon as={FaPlus} />}
+          onClick={onOpen}
+          flexBasis="20%"
+          mt="3rem"
+        >
+          Create Portfolio
+        </Button>
+      </Flex>
+      <Card p="1rem" mt="1rem" mb="20rem">
         <Flex
           justifyContent="center"
           alignItems="center"
@@ -55,25 +80,12 @@ export const PortfolioEmptyState = () => {
           ) : (
             portfolioList
           )}
-          <Box
-            onClick={onOpen}
-            _hover={{
-              cursor: "pointer",
-              color: linkColor,
-              textDecoration: "underline",
-            }}
-          >
-            <Flex justifyContent="center" alignItems="center" gap="0.5rem">
-              <Icon as={FaPlus} width={5} height={5} />
-              <Text>Create Portfolio</Text>
-            </Flex>
-          </Box>
+
           {portfolioList.length !== 0 ? (
             <PortfolioList portfolioList={portfolioList} />
           ) : null}
         </Flex>
       </Card>
-
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -99,6 +111,6 @@ export const PortfolioEmptyState = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </Box>
   );
 };

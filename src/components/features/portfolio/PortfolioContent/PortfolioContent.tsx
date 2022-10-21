@@ -8,8 +8,6 @@ export const PortfolioContent = () => {
 
   return (
     <Container
-      display="flex"
-      flexDir="column"
       maxWidth={[
         "25rem",
         "container.sm",

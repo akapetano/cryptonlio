@@ -8,28 +8,30 @@ import {
   useColorModeValue,
   Skeleton,
   Text,
-} from '@chakra-ui/react';
-import { useCrypto } from '../../../../../hooks/useCrypto';
-import Image from 'next/image';
-import { Coin } from '../../../../../types/crypto';
-import { Card } from '../../../core/Card/Card';
-import NextLink from 'next/link';
-import { BsStarFill, BsStar } from 'react-icons/bs';
-import { AllCoinsSection } from '../AllCoinsSection/AllCoinsSection';
-import { TablePaginationActions } from '../TablePaginationActions/TablePaginationActions';
-import { Search } from '../Search/Search';
-import { useState } from 'react';
+} from "@chakra-ui/react";
+import { useCrypto } from "../../../../../hooks/useCrypto";
+import Image from "next/image";
+import { Coin } from "../../../../../types/crypto";
+import { Card } from "../../../core/Card/Card";
+import NextLink from "next/link";
+import { BsStarFill, BsStar } from "react-icons/bs";
+import { AllCoinsSection } from "../AllCoinsSection/AllCoinsSection";
+import { TablePaginationActions } from "../TablePaginationActions/TablePaginationActions";
+import { Search } from "../../../core/Search/Search";
+import { useState } from "react";
+import { useSearch } from "../../../../../hooks/useSearch";
 
 export const AllCoinsTable = () => {
-  const { data: cryptocurrencies, isLoading, isError } = useCrypto();
-  const [search, setSearch] = useState('');
+  const {
+    data: cryptocurrencies,
+    filteredCoins,
+    isLoading,
+    isError,
+    onChange,
+  } = useCrypto();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const tableRowHoverBgColor = useColorModeValue('gray.100', 'gray.700');
-
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
-  };
+  const tableRowHoverBgColor = useColorModeValue("gray.100", "gray.700");
 
   const onPageChange = (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -37,10 +39,6 @@ export const AllCoinsTable = () => {
   ) => {
     setPage(newPage);
   };
-
-  const filteredCoins = cryptocurrencies?.filter((coin: Coin) =>
-    coin.name.toLowerCase().includes(search.toLowerCase())
-  );
 
   const filteredAndPaginatedCoins =
     rowsPerPage > 0
@@ -52,15 +50,15 @@ export const AllCoinsTable = () => {
 
   return (
     <AllCoinsSection maxHeight="170vh">
-      <Search onChange={onChange} />
+      <Search placeholder="Search a coin" onChange={onChange} />
       <Card flexDir="column">
         <Table
-          display={['block', 'block', 'block', 'table', 'table']}
-          maxWidth={{ base: 'max-content', md: 'container.xl' }}
+          display={["block", "block", "block", "table", "table"]}
+          maxWidth={{ base: "max-content", md: "container.xl" }}
           margin="0 auto 1rem auto"
           overflowX="auto"
           whiteSpace="nowrap"
-          fontSize={{ base: 'sm', md: 'md' }}
+          fontSize={{ base: "sm", md: "md" }}
         >
           <Thead>
             <Tr>
@@ -91,7 +89,7 @@ export const AllCoinsTable = () => {
                   >
                     <Tr
                       key={coin.id}
-                      _hover={{ bg: tableRowHoverBgColor, cursor: 'pointer' }}
+                      _hover={{ bg: tableRowHoverBgColor, cursor: "pointer" }}
                     >
                       <Td>{coin.market_cap_rank}</Td>
                       <Td>
@@ -123,8 +121,8 @@ export const AllCoinsTable = () => {
                       <Td
                         color={
                           coin.price_change_percentage_24h > 0
-                            ? '#60AD65'
-                            : '#E53E3E'
+                            ? "#60AD65"
+                            : "#E53E3E"
                         }
                       >
                         {coin.price_change_percentage_24h.toFixed(2)}%

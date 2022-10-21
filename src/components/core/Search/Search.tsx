@@ -1,4 +1,4 @@
-import { Card } from "../../../core/Card/Card";
+import { Card } from "../Card/Card";
 import {
   Flex,
   Input,
@@ -11,9 +11,10 @@ import { BiSearch } from "react-icons/bi";
 
 interface ISearchProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
 }
 
-export const Search = ({ onChange }: ISearchProps) => {
+export const Search = ({ onChange, placeholder }: ISearchProps) => {
   const iconColor = useColorModeValue("gray.300", "gray.500");
 
   return (
@@ -25,7 +26,7 @@ export const Search = ({ onChange }: ISearchProps) => {
           </InputLeftElement>
           <Input
             width="16rem"
-            placeholder="Search a cryptocurrency"
+            placeholder={placeholder}
             variant="filled"
             onChange={onChange}
           />
