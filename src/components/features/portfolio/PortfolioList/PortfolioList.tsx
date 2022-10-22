@@ -6,14 +6,15 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalCloseButton,
   ModalBody,
-  ModalFooter,
-  Input,
+  Box,
+  Menu,
+  MenuItem,
+  Divider,
 } from "@chakra-ui/react";
+import Image from "next/image";
 import { useCrypto } from "../../../../../hooks/useCrypto";
-import { useSearch } from "../../../../../hooks/useSearch";
+import { Coin } from "../../../../../types/crypto";
 import { Search } from "../../../core/Search/Search";
 
 interface IPortfolioListProps {
@@ -22,41 +23,60 @@ interface IPortfolioListProps {
 
 export const PortfolioList = ({ portfolioList }: IPortfolioListProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { filteredCoins, onChange } = useCrypto();
+  const { filteredCoins, search, onChange } = useCrypto();
 
   return (
-    <Flex gap="1rem">
+    <>
       {portfolioList.map((portfolio) => (
-        <Flex key={portfolio} p="5rem" py="2rem" flexDir="column">
-          <Text fontSize="2xl">{portfolio}</Text>
-          <Button variant="primary" onClick={onOpen}>
-            Add Coin
-          </Button>
+        <Box key={portfolio}>
+          <Flex justifyContent="space-between" alignItems="center">
+            <Text fontSize="xl">Portfolio Name: {portfolio}</Text>
+            <Button variant="primary" onClick={onOpen}>
+              Add New Coin
+            </Button>
+          </Flex>
 
           <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>{portfolio}</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
+              <ModalBody p="0.5rem">
                 <Search
-                  placeholder="Search your favorite coin"
+                  placeholder="Search a coin"
                   onChange={onChange}
+                  w="full"
+                  inputSize="lg"
                 />
+                {search ? (
+                  <Menu>
+                    <Divider mt="1rem" />
+                    {filteredCoins.map((coin: Coin) => (
+                      <MenuItem
+                        key={coin.id}
+                        _hover={{ bg: "brand.500", color: "white" }}
+                        m={0}
+                        p="1rem"
+                        display="flex"
+                        gap="1rem"
+                        alignItems="center"
+                      >
+                        <Image
+                          loader={() => coin.image}
+                          src={coin.image}
+                          alt={coin.name}
+                          height="30px"
+                          width="30px"
+                          unoptimized
+                        />
+                        <Text>{coin.name}</Text>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                ) : null}
               </ModalBody>
-
-              <ModalFooter display="flex" gap="0.5rem" w="full">
-                <Button variant="secondary" w="full" onClick={onClose}>
-                  Close
-                </Button>
-                <Button variant="primary" w="full" onClick={onClose}>
-                  Add New Coin
-                </Button>
-              </ModalFooter>
             </ModalContent>
           </Modal>
-        </Flex>
+        </Box>
       ))}
-    </Flex>
+    </>
   );
 };

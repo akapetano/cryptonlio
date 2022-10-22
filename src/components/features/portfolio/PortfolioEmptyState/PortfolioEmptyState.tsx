@@ -75,10 +75,10 @@ export const PortfolioEmptyState = () => {
           flexDirection="column"
         >
           {portfolioList.length === 0 ? (
-            <Text fontSize="xl">You currently don&apos;t have a porfolio.</Text>
-          ) : (
-            portfolioList
-          )}
+            <Text py="8rem" fontSize="xl">
+              You currently don&apos;t have a porfolio.
+            </Text>
+          ) : null}
 
           {portfolioList.length !== 0 ? (
             <PortfolioList portfolioList={portfolioList} />

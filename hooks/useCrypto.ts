@@ -21,6 +21,7 @@ export function useCrypto() {
     isLoading: !error && !data,
     isError: error,
     filteredCoins,
+    search,
     onChange,
   };
 }

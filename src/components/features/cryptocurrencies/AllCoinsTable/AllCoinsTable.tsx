@@ -7,7 +7,7 @@ import {
   Td,
   useColorModeValue,
   Skeleton,
-  Text,
+  Flex,
 } from "@chakra-ui/react";
 import { useCrypto } from "../../../../../hooks/useCrypto";
 import Image from "next/image";
@@ -19,7 +19,6 @@ import { AllCoinsSection } from "../AllCoinsSection/AllCoinsSection";
 import { TablePaginationActions } from "../TablePaginationActions/TablePaginationActions";
 import { Search } from "../../../core/Search/Search";
 import { useState } from "react";
-import { useSearch } from "../../../../../hooks/useSearch";
 
 export const AllCoinsTable = () => {
   const {
@@ -50,7 +49,11 @@ export const AllCoinsTable = () => {
 
   return (
     <AllCoinsSection maxHeight="170vh">
-      <Search placeholder="Search a coin" onChange={onChange} />
+      <Card justifyContent="start" alignItems="center" p="1rem">
+        <Flex maxWidth={{ base: "container.xs", md: "container.xl" }}>
+          <Search placeholder="Search a coin" onChange={onChange} />
+        </Flex>
+      </Card>
       <Card flexDir="column">
         <Table
           display={["block", "block", "block", "table", "table"]}
