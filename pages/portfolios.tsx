@@ -2,9 +2,9 @@ import { LayoutMain } from "../src/components/shared/LayoutMain/LayoutMain";
 import { Layout } from "../src/components/shared/Layout/Layout";
 import { useAuth } from "../hooks/useAuth";
 import { useUser } from "@supabase/auth-helpers-react";
-import { PortfolioContent } from "../src/components/features/portfolio/PortfolioContent/PortfolioContent";
+import { PortfolioContent } from "../src/components/features/portfolios/PortfolioContent/PortfolioContent";
 
-const Portfolio = () => {
+const Portfolios = () => {
   const { session } = useAuth();
   const { user } = useUser();
   return (
@@ -20,4 +20,4 @@ const Portfolio = () => {
   );
 };
 
-export default Portfolio;
+export default Portfolios;

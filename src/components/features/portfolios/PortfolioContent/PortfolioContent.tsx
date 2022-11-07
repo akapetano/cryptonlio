@@ -1,7 +1,6 @@
-import { Card } from "../../../core/Card/Card";
-import { Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Container, Heading } from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
-import { PortfolioEmptyState } from "../PortfolioEmptyState/PortfolioEmptyState";
+import { PortfoliosList } from "../PortfoliosList/PortfoliosList";
 
 export const PortfolioContent = () => {
   const { user } = useUser();
@@ -17,9 +16,9 @@ export const PortfolioContent = () => {
       ]}
     >
       <Heading as="h4" size="md" m="0" mt="1rem">
-        My Portfolio
+        My Portfolios
       </Heading>
-      <PortfolioEmptyState />
+      <PortfoliosList />
     </Container>
   );
 };

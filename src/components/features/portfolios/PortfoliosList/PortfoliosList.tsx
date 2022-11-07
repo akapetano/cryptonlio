@@ -19,11 +19,11 @@ import {
 import { useUser } from "@supabase/auth-helpers-react";
 import { FaPlus } from "react-icons/fa";
 import { ChangeEvent } from "react";
-import { PortfolioList } from "../PortfolioList/PortfolioList";
+import { PortfolioCoinList } from "../PortfolioCoinList/PortfolioCoinList";
 import { usePortfolio } from "../../../../../hooks/usePortfolio";
 import { StatCard } from "../StatCard/StatCard";
 
-export const PortfolioEmptyState = () => {
+export const PortfoliosList = () => {
   const { user } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { portfolioName, setPortfolioName, portfolioList, setPortfolioList } =
@@ -36,7 +36,8 @@ export const PortfolioEmptyState = () => {
 
   const onCreatePortfolio = () => {
     setPortfolioList((prevState) => {
-      return [...prevState, portfolioName];
+      const name = portfolioName === "" ? "My Portfolio" : portfolioName;
+      return [...prevState, name];
     });
     onClose();
   };
@@ -81,7 +82,7 @@ export const PortfolioEmptyState = () => {
           ) : null}
 
           {portfolioList.length !== 0 ? (
-            <PortfolioList portfolioList={portfolioList} />
+            <PortfolioCoinList portfolioList={portfolioList} />
           ) : null}
         </Flex>
       </Card>

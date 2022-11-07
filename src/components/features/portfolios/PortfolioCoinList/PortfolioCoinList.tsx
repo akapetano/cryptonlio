@@ -14,17 +14,28 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useCrypto } from "../../../../../hooks/useCrypto";
-import { Coin } from "../../../../../types/crypto";
+import { Coin, PortfolioCoin } from "../../../../../types/crypto";
 import { Search } from "../../../core/Search/Search";
+import { PortfolioCoinsTable } from "../PortfolioCoinsTable/PortfolioCoinsTable";
 
-interface IPortfolioListProps {
+interface IPortfolioCoinListProps {
   portfolioList: string[];
 }
 
-export const PortfolioList = ({ portfolioList }: IPortfolioListProps) => {
+export const PortfolioCoinList = ({
+  portfolioList,
+}: IPortfolioCoinListProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { filteredCoins, search, onChange } = useCrypto();
+  const { data, filteredCoins, search, onChange, addCoinToPortfolio } =
+    useCrypto();
 
+  const portfolioCoins: PortfolioCoin[] = [];
+
+  const onAddCoinToPortfolio = (coinId: string) => {
+    const portfolioCoin = data.filter((coin: Coin) => coin.id === coinId);
+    console.log(portfolioCoin);
+    return portfolioCoin;
+  };
   return (
     <>
       {portfolioList.map((portfolio) => (
@@ -58,6 +69,11 @@ export const PortfolioList = ({ portfolioList }: IPortfolioListProps) => {
                         display="flex"
                         gap="1rem"
                         alignItems="center"
+                        onClick={() => {
+                          const portfolioCoin = onAddCoinToPortfolio(coin.id);
+                          portfolioCoins.push(portfolioCoin);
+                          onClose();
+                        }}
                       >
                         <Image
                           loader={() => coin.image}
@@ -75,6 +91,9 @@ export const PortfolioList = ({ portfolioList }: IPortfolioListProps) => {
               </ModalBody>
             </ModalContent>
           </Modal>
+          {portfolioCoins.length ? (
+            <PortfolioCoinsTable portfolioCoins={portfolioCoins} />
+          ) : null}
         </Box>
       ))}
     </>

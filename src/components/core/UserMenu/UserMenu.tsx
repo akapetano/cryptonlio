@@ -16,11 +16,13 @@ import { UserAvatar } from "../UserAvatar/UserAvatar";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useAuth } from "../../../../hooks/useAuth";
 import { FaDollarSign, FaSignOutAlt, FaCogs } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 export const UserMenu = () => {
   const menuItemHoverBgColor = useColorModeValue("brand.300", "brand.200");
   const { user } = useUser();
   const { handleSignOut } = useAuth();
+  const { route } = useRouter();
 
   return (
     <Menu>
@@ -34,7 +36,14 @@ export const UserMenu = () => {
       >
         <UserAvatar width={48} height={48} />
       </MenuButton>
-      <MenuList alignItems={"center"} m={0} p={0} outline={0} borderWidth={0}>
+      <MenuList
+        alignItems={"center"}
+        m={0}
+        p={0}
+        outline={0}
+        borderWidth={0}
+        boxShadow="md"
+      >
         <br />
         <Center>
           <UserAvatar width={128} height={128} />
@@ -48,15 +57,17 @@ export const UserMenu = () => {
         <br />
         <MenuDivider m={0} />
         <Flex flexDir="column" m={0}>
-          <NextLink href="/portfolio" passHref>
+          <NextLink href="/portfolios" passHref>
             <MenuItem
               display="flex"
               p="0.7rem"
               gap="0.5rem"
               _hover={{ bgColor: menuItemHoverBgColor, color: "#fff" }}
+              bgColor={route === "/portfolios" ? menuItemHoverBgColor : ""}
+              color={route === "/portfolios" ? "#fff" : ""}
             >
               <Icon as={FaDollarSign} w={4} h={4} />
-              <span>My Portfolio</span>
+              <span>My Portfolios</span>
             </MenuItem>
           </NextLink>
           <NextLink href="/settings" passHref>
@@ -65,6 +76,8 @@ export const UserMenu = () => {
               p="0.7rem"
               gap="0.5rem"
               _hover={{ bgColor: menuItemHoverBgColor, color: "#fff" }}
+              bgColor={route === "/settings" ? menuItemHoverBgColor : ""}
+              color={route === "/settings" ? "#fff" : ""}
             >
               <Icon as={FaCogs} w={4} h={4} />
               <span>Account Settings</span>

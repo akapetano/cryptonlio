@@ -2,11 +2,11 @@ import { Stack, StackProps } from "@chakra-ui/react";
 import { useAuth } from "../../../../hooks/useAuth";
 import { NavLink } from "../NavLink/NavLink";
 
-const NAV_ITEMS = ["Home", "Cryptocurrencies", "Portfolio"];
+const NAV_ITEMS = ["Home", "Cryptocurrencies", "Portfolios"];
 const MOBILE_NAV_ITEMS = [
   "Home",
   "Cryptocurrencies",
-  "Portfolio",
+  "Portfolios",
   "Settings",
   "Logout",
 ];

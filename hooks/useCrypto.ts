@@ -1,11 +1,13 @@
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import useSWR from "swr";
 import { cryptoFetcher } from "../src/fetchers/cryptoFetcher";
 import { COINS_COINGECKO_API_URL } from "../src/fetchers/cryptoFetcher";
-import { Coin } from "../types/crypto";
+import { Coin, PortfolioCoin } from "../types/crypto";
 import { useSearch } from "./useSearch";
 
 export function useCrypto() {
   const { data, error } = useSWR(COINS_COINGECKO_API_URL, cryptoFetcher);
+  const portfolioCoins: PortfolioCoin[] = [];
 
   const { search, onChange } = useSearch();
 
@@ -15,6 +17,11 @@ export function useCrypto() {
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  const addCoinToPortfolio = (coinId: string) => {
+    const portfolioCoin = data.filter((coin: Coin) => coin.id === coinId);
+    return portfolioCoins.push(portfolioCoin);
+  };
+
   return {
     data,
     topTenCoins,
@@ -23,5 +30,7 @@ export function useCrypto() {
     filteredCoins,
     search,
     onChange,
+    addCoinToPortfolio,
+    portfolioCoins,
   };
 }
