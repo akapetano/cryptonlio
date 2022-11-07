@@ -27,6 +27,10 @@ export type Coin = {
   total_volume: number;
 };
 
+export interface PortfolioCoin extends Coin {
+  holdings: number;
+}
+
 export type CoinById = {
   additional_notices: [];
   asset_platform_id: string | null;
