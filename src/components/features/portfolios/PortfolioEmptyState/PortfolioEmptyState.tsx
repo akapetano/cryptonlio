@@ -17,9 +17,7 @@ export const PortfolioEmptyState = ({ message }: IPortfolioEmptyStateProps) => {
       my="4rem"
     >
       <CoinBag width="75" height="75" />
-      <Text fontSize={{ base: "md", md: "lg" }}>
-        You currently don&apos;t have a porfolio.
-      </Text>
+      <Text fontSize={{ base: "md", md: "lg" }}>{message}</Text>
     </Flex>
   );
 };

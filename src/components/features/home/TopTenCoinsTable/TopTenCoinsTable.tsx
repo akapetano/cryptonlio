@@ -35,7 +35,7 @@ export const TopTenCoinsTable = ({ session }: ITopTenCoinsTableProps) => {
       >
         Top 10 Coins by <br /> Market Cap
       </Heading>
-      <Card>
+      <Card m="3rem auto 3rem auto">
         <Table
           display={["block", "block", "block", "table", "table"]}
           maxWidth={{ base: "max-content", md: "container.xl" }}
