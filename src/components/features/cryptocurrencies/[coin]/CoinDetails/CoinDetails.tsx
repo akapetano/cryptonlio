@@ -31,22 +31,19 @@ interface ICoinDetails {
 export const CoinDetails = ({ coin }: ICoinDetails) => {
   const [readMore, setReadMore] = useState(false);
 
-  const coinDescription = parse(
-    readMore ? coin?.description?.en : coin?.description?.en?.slice(0, 350),
-    {
-      replace: (domNode) => {
-        if (domNode instanceof Element && domNode.name === "a") {
-          const props = attributesToProps(domNode?.attribs);
-          const text = (domNode.children[0] as TextType).data;
-          return (
-            <Link textDecoration="none" target="_blank" {...props}>
-              {text}
-            </Link>
-          );
-        }
-      },
-    }
-  );
+  const coinDescription = parse(coin?.description?.en, {
+    replace: (domNode) => {
+      if (domNode instanceof Element && domNode.name === "a") {
+        const props = attributesToProps(domNode?.attribs);
+        const text = (domNode.children[0] as TextType).data;
+        return (
+          <Link textDecoration="none" target="_blank" {...props}>
+            {text}
+          </Link>
+        );
+      }
+    },
+  });
 
   return (
     <Box>
