@@ -16,6 +16,7 @@ import {
   Container,
   Icon,
   MenuDivider,
+  Badge,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useCrypto } from "../../../../../hooks/useCrypto";
@@ -24,17 +25,34 @@ import { Search } from "../../../core/Search/Search";
 import { PortfolioCoinsTable } from "../PortfolioCoinsTable/PortfolioCoinsTable";
 import { BiCoin, BiChevronDown, BiBookAdd } from "react-icons/bi";
 import { useState } from "react";
+import { AddPortfolioModal } from "../PortfoliosList/AddPortfolioModal/AddPortfolioModal";
+import { ChangeEvent } from "react";
 
 interface IPortfolioCoinListProps {
   portfolioList: string[];
+  onAddPortfolioModalClose: () => void;
+  onAddPortfolioModalOpen: () => void;
+  onCreatePortfolio: () => void;
+  addPortfolioModalIsOpen: boolean;
 }
 
 export const PortfolioCoinList = ({
   portfolioList,
+  onAddPortfolioModalClose,
+  onAddPortfolioModalOpen,
+  onCreatePortfolio,
+  addPortfolioModalIsOpen,
 }: IPortfolioCoinListProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, filteredCoins, search, onChange, addCoinToPortfolio } =
     useCrypto();
+
+  const [portfolioName, setPortfolioName] = useState("");
+
+  function handleChange(event: ChangeEvent) {
+    const eventTarget = event.target as HTMLInputElement;
+    setPortfolioName(eventTarget.value);
+  }
 
   const portfolioCoins: PortfolioCoin[] = [];
 
@@ -70,11 +88,29 @@ export const PortfolioCoinList = ({
                   <Icon as={BiChevronDown} />
                 </Flex>
               </MenuButton>
-              <MenuList>
-                <MenuItem>{portfolio}</MenuItem>
-                <MenuItem>View All Transactions</MenuItem>
-                <MenuDivider />
-                <MenuItem>
+              <MenuList p="0">
+                <MenuItem
+                  display="flex"
+                  justifyContent="start"
+                  alignItems="center"
+                  gap="0.5rem"
+                  py="0.7rem"
+                >
+                  <Text>{portfolio}</Text>
+                  <Badge variant="solid" colorScheme="green" rounded="xl">
+                    Main
+                  </Badge>
+                </MenuItem>
+                <MenuDivider m="0" />
+                <MenuItem
+                  py="1rem"
+                  _hover={{
+                    bg: "brand.200",
+                    roundedBottom: "md",
+                    textColor: "#fff",
+                  }}
+                  onClick={onAddPortfolioModalOpen}
+                >
                   <Flex
                     gap={"0.5rem"}
                     justifyContent="center"
@@ -96,6 +132,14 @@ export const PortfolioCoinList = ({
               Add New Coin
             </Button>
           </Flex>
+
+          <AddPortfolioModal
+            portfolioName={portfolioName}
+            handleChange={handleChange}
+            onCreatePortfolio={onCreatePortfolio}
+            onClose={onAddPortfolioModalClose}
+            isOpen={addPortfolioModalIsOpen}
+          />
 
           <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />

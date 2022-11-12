@@ -33,6 +33,9 @@ export const PortfolioCoinsTable = ({
   ...restProps
 }: IPortfolioCoinsTableProps) => {
   const tableRowHoverBgColor = useColorModeValue("gray.100", "gray.700");
+  const textColor = useColorModeValue("brand.300", "brand.200");
+  const coinSymbolColor = useColorModeValue("gray.400", "gray.500");
+  const coinSymbolHoverColor = useColorModeValue("gray.500", "gray.400");
   const { data } = useCrypto();
 
   const portfolioCoins = data?.filter(
@@ -88,12 +91,12 @@ export const PortfolioCoinsTable = ({
                   gap="0.2rem"
                   className="group"
                 >
-                  <Text _groupHover={{ textColor: "brand.100" }}>
+                  <Text _groupHover={{ textColor: textColor }}>
                     {coin.name}
                   </Text>
                   <Text
-                    textColor="gray.400"
-                    _groupHover={{ textColor: "gray.500" }}
+                    textColor={coinSymbolColor}
+                    _groupHover={{ textColor: coinSymbolHoverColor }}
                   >
                     {coin.symbol.toUpperCase()}
                   </Text>
@@ -120,22 +123,23 @@ export const PortfolioCoinsTable = ({
               </Td>
               <Td>${coin.total_volume.toLocaleString()}</Td>
               <Td>${coin.market_cap.toLocaleString()}</Td>
-              <Td display="flex" flexDir="column">
-                <span>
+              <Td display="flex" flexDir="column" gap="0.2rem">
+                <Text>
                   $
                   {holdings.toLocaleString(undefined, {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}
-                </span>
+                </Text>
                 <Flex gap="0.2rem">
                   <span>{coinAmount}</span>
                   <span>{coin.symbol.toUpperCase()}</span>
                 </Flex>
               </Td>
               <Td>
-                <Flex>
-                  <span>+$240.67</span>
+                <Flex flexDir="column">
+                  <Text>+$240.67</Text>
+                  <Text textColor="#60AD65">+5.29%</Text>
                 </Flex>
               </Td>
               <Td>
@@ -145,7 +149,7 @@ export const PortfolioCoinsTable = ({
                   </MenuButton>
                   <MenuList>
                     <MenuItem>Add Transaction</MenuItem>
-                    <MenuItem>View Transactions</MenuItem>
+                    <MenuItem>View All Transactions</MenuItem>
                     <MenuItem>Details</MenuItem>
                   </MenuList>
                 </Menu>

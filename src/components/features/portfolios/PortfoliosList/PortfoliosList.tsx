@@ -72,7 +72,13 @@ export const PortfoliosList = () => {
           flexDirection="column"
         >
           {portfolioList.length !== 0 ? (
-            <PortfolioCoinList portfolioList={portfolioList} />
+            <PortfolioCoinList
+              portfolioList={portfolioList}
+              onCreatePortfolio={onCreatePortfolio}
+              onAddPortfolioModalClose={onClose}
+              onAddPortfolioModalOpen={onOpen}
+              addPortfolioModalIsOpen={isOpen}
+            />
           ) : (
             <PortfolioEmptyState message="You currently don't have a porfolio." />
           )}
