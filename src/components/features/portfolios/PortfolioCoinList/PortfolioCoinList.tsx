@@ -46,7 +46,7 @@ export const PortfolioCoinList = ({
   return (
     <>
       {portfolioList.map((portfolio) => (
-        <Box key={portfolio} overflowX="auto">
+        <Flex key={portfolio} flexDir="column" w="100%" overflowX="auto">
           <Flex
             flexDir={{ base: "column", md: "row" }}
             w="100%"
@@ -117,7 +117,7 @@ export const PortfolioCoinList = ({
             portfolioCoinsId={["bitcoin", "ethereum", "cardano"]}
           />
           {/* ) : null} */}
-        </Box>
+        </Flex>
       ))}
     </>
   );

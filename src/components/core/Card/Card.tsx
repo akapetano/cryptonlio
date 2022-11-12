@@ -13,9 +13,6 @@ export const Card = ({ ...restProps }: TableContainerProps) => {
 
   return (
     <Container
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
       maxWidth={[
         "25rem",
         "container.sm",
