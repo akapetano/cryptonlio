@@ -49,12 +49,17 @@ export const AllCoinsTable = () => {
 
   return (
     <AllCoinsSection maxHeight="170vh">
-      <Card justifyContent="start" alignItems="center" p="1rem">
+      <Card
+        m="3rem auto 3rem auto"
+        justifyContent="start"
+        alignItems="center"
+        p="1rem"
+      >
         <Flex maxWidth={{ base: "container.xs", md: "container.xl" }}>
           <Search placeholder="Search a coin" onChange={onChange} />
         </Flex>
       </Card>
-      <Card flexDir="column">
+      <Card m="3rem auto 3rem auto" flexDir="column">
         <Table
           display={["block", "block", "block", "table", "table"]}
           maxWidth={{ base: "max-content", md: "container.xl" }}

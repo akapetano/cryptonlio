@@ -17,11 +17,12 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
-import { FaPlus } from "react-icons/fa";
+import { BiBookAdd } from "react-icons/bi";
 import { ChangeEvent } from "react";
 import { PortfolioCoinList } from "../PortfolioCoinList/PortfolioCoinList";
 import { usePortfolio } from "../../../../../hooks/usePortfolio";
 import { StatCard } from "../StatCard/StatCard";
+import { PortfolioEmptyState } from "../PortfolioEmptyState/PortfolioEmptyState";
 
 export const PortfoliosList = () => {
   const { user } = useUser();
@@ -43,9 +44,17 @@ export const PortfoliosList = () => {
   };
 
   return (
-    <Box>
-      <Flex gap="1rem" justifyContent="space-between">
-        <Flex gap="1rem" flexBasis="50%">
+    <Box mt="2rem">
+      <Flex
+        flexDir={{ base: "column", md: "row" }}
+        justifyContent="space-between"
+        alignItems={{ md: "flex-start" }}
+      >
+        <Flex
+          flexDir={{ base: "column", md: "row" }}
+          gap={{ base: "1rem", md: "1rem" }}
+          flexBasis="50%"
+        >
           <StatCard statTitle="Total Amount" amount={500.0} />
           <StatCard
             statTitle="24h Portfolio Change"
@@ -60,10 +69,10 @@ export const PortfoliosList = () => {
         </Flex>
         <Button
           variant="primary"
-          leftIcon={<Icon as={FaPlus} />}
+          leftIcon={<Icon as={BiBookAdd} />}
           onClick={onOpen}
-          flexBasis="20%"
-          mt="3rem"
+          mt={{ base: "3rem", md: "0" }}
+          p="0.5rem"
         >
           Create Portfolio
         </Button>
@@ -75,15 +84,11 @@ export const PortfoliosList = () => {
           gap="1rem"
           flexDirection="column"
         >
-          {portfolioList.length === 0 ? (
-            <Text py="8rem" fontSize="xl">
-              You currently don&apos;t have a porfolio.
-            </Text>
-          ) : null}
-
           {portfolioList.length !== 0 ? (
             <PortfolioCoinList portfolioList={portfolioList} />
-          ) : null}
+          ) : (
+            <PortfolioEmptyState message="You currently don't have a porfolio." />
+          )}
         </Flex>
       </Card>
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>

@@ -11,12 +11,14 @@ import {
   Menu,
   MenuItem,
   Divider,
+  Container,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useCrypto } from "../../../../../hooks/useCrypto";
 import { Coin, PortfolioCoin } from "../../../../../types/crypto";
 import { Search } from "../../../core/Search/Search";
 import { PortfolioCoinsTable } from "../PortfolioCoinsTable/PortfolioCoinsTable";
+import { BiCoin } from "react-icons/bi";
 
 interface IPortfolioCoinListProps {
   portfolioList: string[];
@@ -32,17 +34,36 @@ export const PortfolioCoinList = ({
   const portfolioCoins: PortfolioCoin[] = [];
 
   const onAddCoinToPortfolio = (coinId: string) => {
-    const portfolioCoin = data.filter((coin: Coin) => coin.id === coinId);
-    console.log(portfolioCoin);
+    const portfolioCoin = data.filter((coin: Coin) => {
+      if (coin.id === coinId) {
+        return coin.id;
+      }
+    });
+    portfolioCoins.push(portfolioCoin);
+    console.log(portfolioCoins);
     return portfolioCoin;
   };
   return (
     <>
       {portfolioList.map((portfolio) => (
-        <Box key={portfolio}>
-          <Flex justifyContent="space-between" alignItems="center">
-            <Text fontSize="xl">Portfolio Name: {portfolio}</Text>
-            <Button variant="primary" onClick={onOpen}>
+        <Box key={portfolio} overflowX="auto">
+          <Flex
+            flexDir={{ base: "column", md: "row" }}
+            w="100%"
+            gap="5rem"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Flex gap="0.2rem" fontSize="lg">
+              <Text>Portfolio Name:</Text>
+              <Text fontWeight="bold">{portfolio}</Text>
+            </Flex>
+            <Button
+              leftIcon={<BiCoin />}
+              variant="primary"
+              onClick={onOpen}
+              px="1rem"
+            >
               Add New Coin
             </Button>
           </Flex>
@@ -91,9 +112,11 @@ export const PortfolioCoinList = ({
               </ModalBody>
             </ModalContent>
           </Modal>
-          {portfolioCoins.length ? (
-            <PortfolioCoinsTable portfolioCoins={portfolioCoins} />
-          ) : null}
+          {/* {portfolioCoins.length ? ( */}
+          <PortfolioCoinsTable
+            portfolioCoinsId={["bitcoin", "ethereum", "cardano"]}
+          />
+          {/* ) : null} */}
         </Box>
       ))}
     </>

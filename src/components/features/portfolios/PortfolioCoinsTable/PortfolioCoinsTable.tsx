@@ -8,27 +8,36 @@ import {
   Tbody,
   Skeleton,
   useColorModeValue,
+  TableProps,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useCrypto } from "../../../../../hooks/useCrypto";
-import { PortfolioCoin } from "../../../../../types/crypto";
+import { PortfolioCoin, Coin } from "../../../../../types/crypto";
 
-interface IPortfolioCoinsTableProps {
-  portfolioCoins: PortfolioCoin[];
+interface IPortfolioCoinsTableProps extends TableProps {
+  portfolioCoinsId: string[];
 }
 
 export const PortfolioCoinsTable = ({
-  portfolioCoins,
+  portfolioCoinsId,
+  ...restProps
 }: IPortfolioCoinsTableProps) => {
   const tableRowHoverBgColor = useColorModeValue("gray.100", "gray.700");
+  const { data } = useCrypto();
+
+  const portfolioCoins = data?.filter(
+    (coin: Coin) => portfolioCoinsId?.indexOf(coin.id) > -1
+  );
   return (
     <Table
       display={["block", "block", "block", "table", "table"]}
       maxWidth={{ base: "max-content", md: "container.xl" }}
       margin="0 auto 1rem auto"
+      mt="2rem"
       overflowX="auto"
       whiteSpace="nowrap"
       fontSize={{ base: "sm", md: "md" }}
+      {...restProps}
     >
       <Thead>
         <Tr>
@@ -40,10 +49,11 @@ export const PortfolioCoinsTable = ({
           <Th>24h</Th>
           <Th>Volume</Th>
           <Th>Market Cap</Th>
+          <Th>Holdings</Th>
         </Tr>
       </Thead>
       <Tbody>
-        {portfolioCoins?.map((coin: PortfolioCoin) => {
+        {portfolioCoins?.map((coin: Coin) => {
           return (
             <NextLink
               key={coin.id}
