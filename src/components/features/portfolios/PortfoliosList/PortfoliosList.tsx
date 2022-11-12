@@ -1,21 +1,5 @@
 import { Card } from "../../../core/Card/Card";
-import {
-  Icon,
-  Flex,
-  Text,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalCloseButton,
-  ModalBody,
-  Button,
-  Box,
-  Input,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Icon, Flex, useDisclosure, Button, Box } from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { BiBookAdd } from "react-icons/bi";
 import { ChangeEvent } from "react";
@@ -23,6 +7,7 @@ import { PortfolioCoinList } from "../PortfolioCoinList/PortfolioCoinList";
 import { usePortfolio } from "../../../../../hooks/usePortfolio";
 import { StatCard } from "../StatCard/StatCard";
 import { PortfolioEmptyState } from "../PortfolioEmptyState/PortfolioEmptyState";
+import { AddPortfolioModal } from "./AddPortfolioModal/AddPortfolioModal";
 
 export const PortfoliosList = () => {
   const { user } = useUser();
@@ -67,15 +52,17 @@ export const PortfoliosList = () => {
             percentage={100}
           />
         </Flex>
-        <Button
-          variant="primary"
-          leftIcon={<Icon as={BiBookAdd} />}
-          onClick={onOpen}
-          mt={{ base: "3rem", md: "0" }}
-          p="0.5rem"
-        >
-          Create Portfolio
-        </Button>
+        {portfolioList.length === 0 ? (
+          <Button
+            variant="primary"
+            leftIcon={<Icon as={BiBookAdd} />}
+            onClick={onOpen}
+            mt={{ base: "3rem", md: "0" }}
+            p="0.5rem 1rem"
+          >
+            Create Portfolio
+          </Button>
+        ) : null}
       </Flex>
       <Card p="1rem" mt="1rem" mb="20rem">
         <Flex
@@ -91,31 +78,13 @@ export const PortfoliosList = () => {
           )}
         </Flex>
       </Card>
-      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>New Portfolio</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Input
-              placeholder="My Porfolio"
-              size="lg"
-              type="text"
-              value={portfolioName}
-              onChange={handleChange}
-            />
-          </ModalBody>
-
-          <ModalFooter display="flex" gap="0.5rem" w="full">
-            <Button variant="secondary" w="full" onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="primary" w="full" onClick={onCreatePortfolio}>
-              Create
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <AddPortfolioModal
+        portfolioName={portfolioName}
+        handleChange={handleChange}
+        onCreatePortfolio={onCreatePortfolio}
+        onClose={onClose}
+        isOpen={isOpen}
+      />
     </Box>
   );
 };

@@ -9,16 +9,21 @@ import {
   ModalBody,
   Box,
   Menu,
+  MenuButton,
+  MenuList,
   MenuItem,
   Divider,
   Container,
+  Icon,
+  MenuDivider,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useCrypto } from "../../../../../hooks/useCrypto";
 import { Coin, PortfolioCoin } from "../../../../../types/crypto";
 import { Search } from "../../../core/Search/Search";
 import { PortfolioCoinsTable } from "../PortfolioCoinsTable/PortfolioCoinsTable";
-import { BiCoin } from "react-icons/bi";
+import { BiCoin, BiChevronDown, BiBookAdd } from "react-icons/bi";
+import { useState } from "react";
 
 interface IPortfolioCoinListProps {
   portfolioList: string[];
@@ -54,10 +59,34 @@ export const PortfolioCoinList = ({
             justifyContent="space-between"
             alignItems="center"
           >
-            <Flex gap="0.2rem" fontSize="lg">
-              <Text>Portfolio Name:</Text>
-              <Text fontWeight="bold">{portfolio}</Text>
-            </Flex>
+            <Menu>
+              <MenuButton fontWeight={"bold"} fontSize="lg">
+                <Flex
+                  gap="0.2rem"
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                >
+                  <Text>{portfolio}</Text>
+                  <Icon as={BiChevronDown} />
+                </Flex>
+              </MenuButton>
+              <MenuList>
+                <MenuItem>{portfolio}</MenuItem>
+                <MenuItem>View All Transactions</MenuItem>
+                <MenuDivider />
+                <MenuItem>
+                  <Flex
+                    gap={"0.5rem"}
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <Icon as={BiBookAdd} />
+                    <Text>Add Portfolio</Text>
+                  </Flex>
+                </MenuItem>
+              </MenuList>
+            </Menu>
+
             <Button
               leftIcon={<BiCoin />}
               variant="primary"
