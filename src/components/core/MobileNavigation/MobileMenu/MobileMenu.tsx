@@ -34,7 +34,6 @@ export const MobileMenu = ({
       as="nav"
       flexDir="column"
       bg={overlayBgColor}
-      boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.37 )"
       backdropFilter="blur( 20px )"
       pt="10rem"
       height="100vh"

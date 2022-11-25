@@ -1,6 +1,14 @@
 import { ContentCard } from "../ContentCard/ContentCard";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
-import { Flex, Heading, Box, Text, Button, Collapse } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Box,
+  Text,
+  Button,
+  Collapse,
+  Icon,
+} from "@chakra-ui/react";
 
 interface ICoinDescriptionProps {
   description: string | JSX.Element | JSX.Element[];
@@ -28,7 +36,7 @@ export const CoinDescription = ({
 
           <Button
             onClick={() => (readMore ? setReadMore(false) : setReadMore(true))}
-            rightIcon={readMore ? <MdExpandLess /> : <MdExpandMore />}
+            rightIcon={<Icon as={readMore ? MdExpandLess : MdExpandMore} />}
             size="sm"
             variant="primary"
             mt={readMore ? "" : "1rem"}

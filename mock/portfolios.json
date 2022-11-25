@@ -1,0 +1,25 @@
+[
+  {
+    "portfolioName": "Test",
+    "coins": [
+      { "coinId": "bitcoin", "coinName": "Bitcoin", "coinHoldings": 20 },
+      { "coinId": "ethereum", "coinName": "Ethereum", "coinHoldings": 50 },
+      { "coinId": "cardano", "coinName": "Cardano", "coinHoldings": 10000 }
+    ]
+  },
+  {
+    "portfolioName": "Another test with much more characters",
+    "coins": [
+      { "coinId": "bitcoin", "coinName": "Bitcoin", "coinHoldings": 100 },
+      { "coinId": "solana", "coinName": "Solana", "coinHoldings": 1000 },
+      { "coinId": "polkadot", "coinName": "Polkadot", "coinHoldings": 10000 }
+    ]
+  },
+  {
+    "portfolioName": "Ishcoiner",
+    "coins": [
+      { "coinId": "doge", "coinName": "Doge", "coinHoldings": 5000000000 },
+      { "coinId": "shibainu", "coinName": "Shiba Inu", "coinHoldings": 5000000 }
+    ]
+  }
+]

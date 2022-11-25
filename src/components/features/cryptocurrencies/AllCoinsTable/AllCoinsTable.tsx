@@ -56,7 +56,11 @@ export const AllCoinsTable = () => {
         p="1rem"
       >
         <Flex maxWidth={{ base: "container.xs", md: "container.xl" }}>
-          <Search placeholder="Search a coin" onChange={onChange} />
+          <Search
+            placeholder="Search a coin"
+            onChange={onChange}
+            w={{ base: "100%", md: "33%" }}
+          />
         </Flex>
       </Card>
       <Card m="3rem auto 3rem auto" flexDir="column">

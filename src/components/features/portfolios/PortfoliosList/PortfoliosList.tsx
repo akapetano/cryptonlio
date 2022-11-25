@@ -1,31 +1,65 @@
 import { Card } from "../../../core/Card/Card";
-import { Icon, Flex, useDisclosure, Button, Box } from "@chakra-ui/react";
+import {
+  Icon,
+  Flex,
+  useDisclosure,
+  Button,
+  Box,
+  useToast,
+} from "@chakra-ui/react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { BiBookAdd } from "react-icons/bi";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { PortfolioCoinList } from "../PortfolioCoinList/PortfolioCoinList";
 import { usePortfolio } from "../../../../../hooks/usePortfolio";
 import { StatCard } from "../StatCard/StatCard";
 import { PortfolioEmptyState } from "../PortfolioEmptyState/PortfolioEmptyState";
 import { AddPortfolioModal } from "./AddPortfolioModal/AddPortfolioModal";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export const PortfoliosList = () => {
   const { user } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { portfolioName, setPortfolioName, portfolioList, setPortfolioList } =
     usePortfolio();
+  const [isLoading, setIsLoading] = useState(false);
+  const toast = useToast();
 
   function handleChange(event: ChangeEvent) {
     const eventTarget = event.target as HTMLInputElement;
     setPortfolioName(eventTarget.value);
   }
 
-  const onCreatePortfolio = () => {
-    setPortfolioList((prevState) => {
-      const name = portfolioName === "" ? "My Portfolio" : portfolioName;
-      return [...prevState, name];
-    });
-    onClose();
+  const onCreatePortfolio = async () => {
+    try {
+      setIsLoading(true);
+
+      setPortfolioName(portfolioName === "" ? "My Portfolio" : portfolioName);
+      const payload = { portfolio_name: portfolioName };
+      setPortfolioList((prevState) => {
+        const name = portfolioName === "" ? "My Portfolio" : portfolioName;
+        return [...prevState, name];
+      });
+      let { error, status, data } = await supabaseClient
+        .from("portfolios")
+        .upsert(payload);
+      console.log("STATUS", status);
+      console.log("DATA", data);
+      if (error) throw error;
+      onClose();
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          position: "top",
+          title: "Error!",
+          description: error?.message,
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      }
+      onClose();
+    }
   };
 
   return (

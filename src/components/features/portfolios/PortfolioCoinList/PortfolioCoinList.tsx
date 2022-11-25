@@ -23,7 +23,7 @@ import { useCrypto } from "../../../../../hooks/useCrypto";
 import { Coin, PortfolioCoin } from "../../../../../types/crypto";
 import { Search } from "../../../core/Search/Search";
 import { PortfolioCoinsTable } from "../PortfolioCoinsTable/PortfolioCoinsTable";
-import { BiCoin, BiChevronDown, BiBookAdd } from "react-icons/bi";
+import { BiCoin, BiChevronDown, BiChevronUp, BiBookAdd } from "react-icons/bi";
 import { useState } from "react";
 import { AddPortfolioModal } from "../PortfoliosList/AddPortfolioModal/AddPortfolioModal";
 import { ChangeEvent } from "react";
@@ -85,7 +85,7 @@ export const PortfolioCoinList = ({
                   alignItems={"center"}
                 >
                   <Text>{portfolio}</Text>
-                  <Icon as={BiChevronDown} />
+                  <Icon as={isOpen ? BiChevronUp : BiChevronDown} />
                 </Flex>
               </MenuButton>
               <MenuList p="0">
