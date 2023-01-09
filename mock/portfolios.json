@@ -1,5 +1,6 @@
 [
   {
+    "portfolioId": 122321341,
     "portfolioName": "Test",
     "coins": [
       { "coinId": "bitcoin", "coinName": "Bitcoin", "coinHoldings": 20 },
@@ -8,6 +9,7 @@
     ]
   },
   {
+    "portfolioId": 434356352,
     "portfolioName": "Another test with much more characters",
     "coins": [
       { "coinId": "bitcoin", "coinName": "Bitcoin", "coinHoldings": 100 },
@@ -16,6 +18,7 @@
     ]
   },
   {
+    "portfolioId": 321321412,
     "portfolioName": "Ishcoiner",
     "coins": [
       { "coinId": "doge", "coinName": "Doge", "coinHoldings": 5000000000 },

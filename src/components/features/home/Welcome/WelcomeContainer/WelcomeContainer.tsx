@@ -12,7 +12,6 @@ export const WelcomeContainer = ({ ...restProps }) => {
       mt={{ base: "0", md: "10rem" }}
       p={5}
       rounded="md"
-      height="100vh"
       {...restProps}
     />
   );

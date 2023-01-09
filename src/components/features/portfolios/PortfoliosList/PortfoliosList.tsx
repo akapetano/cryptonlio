@@ -35,11 +35,12 @@ export const PortfoliosList = () => {
       setIsLoading(true);
 
       setPortfolioName(portfolioName === "" ? "My Portfolio" : portfolioName);
-      const payload = { portfolio_name: portfolioName };
+
       setPortfolioList((prevState) => {
         const name = portfolioName === "" ? "My Portfolio" : portfolioName;
         return [...prevState, name];
       });
+      const payload = { portfolio_name: portfolioName };
       let { error, status, data } = await supabaseClient
         .from("portfolios")
         .upsert(payload);

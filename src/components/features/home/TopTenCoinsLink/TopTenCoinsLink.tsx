@@ -1,4 +1,4 @@
-import { FaCoins, FaArrowRight } from "react-icons/fa";
+import { FaCoins, FaArrowDown } from "react-icons/fa";
 import { Icon, Text, Flex, useColorModeValue, Link } from "@chakra-ui/react";
 
 export const TopTenCoinsLink = () => {
@@ -20,7 +20,6 @@ export const TopTenCoinsLink = () => {
       >
         <Icon as={FaCoins} h={6} w={6} />
         <Text>Go to Top 10 Coins</Text>
-        <Icon as={FaArrowRight} />
       </Flex>
     </Link>
   );
