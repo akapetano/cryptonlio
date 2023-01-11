@@ -44,17 +44,16 @@ export const UserMenu = () => {
         borderWidth={0}
         boxShadow="md"
       >
-        <br />
-        <Center>
+        <Center mb={"1rem"}>
           <UserAvatar width={128} height={128} />
         </Center>
-        <br />
-        <Center>
+
+        <Center mb={"1rem"}>
           <Text
             m={0}
           >{`${user?.user_metadata?.firstName} ${user?.user_metadata?.lastName}`}</Text>
         </Center>
-        <br />
+
         <MenuDivider m={0} />
         <Flex flexDir="column" m={0}>
           <NextLink href="/portfolios" passHref>

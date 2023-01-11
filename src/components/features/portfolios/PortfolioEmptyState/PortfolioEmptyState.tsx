@@ -1,11 +1,18 @@
-import { Flex, Text } from "@chakra-ui/react";
-import { CoinBag } from "../../../core/Icons/CoinBag";
+import { Flex, Icon, Text, Button } from "@chakra-ui/react";
+import { BlankCanvasIllustration } from "../../../core/Illustrations/BlankCanvasIllustration/BlankCanvasIllustration";
+import { BiBookAdd } from "react-icons/bi";
 
 interface IPortfolioEmptyStateProps {
   message: string;
+  portfolioList: string[];
+  onOpen: () => void;
 }
 
-export const PortfolioEmptyState = ({ message }: IPortfolioEmptyStateProps) => {
+export const PortfolioEmptyState = ({
+  message,
+  portfolioList,
+  onOpen,
+}: IPortfolioEmptyStateProps) => {
   return (
     <Flex
       flexDir="column"
@@ -13,11 +20,28 @@ export const PortfolioEmptyState = ({ message }: IPortfolioEmptyStateProps) => {
       alignItems="center"
       fontSize="xl"
       textAlign="center"
-      gap="1rem"
-      my="4rem"
     >
-      <CoinBag width="75" height="75" />
-      <Text fontSize={{ base: "md", md: "lg" }}>{message}</Text>
+      <Text mt="2rem" fontSize={{ base: "lg", md: "xl" }}>
+        {message}
+      </Text>
+      {portfolioList.length === 0 ? (
+        <Button
+          variant="primary"
+          leftIcon={<Icon as={BiBookAdd} />}
+          onClick={onOpen}
+          p="0.5rem 1rem"
+          mt="2rem"
+          mb={{ base: "-10rem", md: "-5rem" }}
+        >
+          Create Portfolio
+        </Button>
+      ) : null}
+      <Flex
+        maxW={{ base: "10rem", sm: "15rem", md: "20rem" }}
+        mb={{ base: "-10rem", sm: "-5rem" }}
+      >
+        <BlankCanvasIllustration />
+      </Flex>
     </Flex>
   );
 };

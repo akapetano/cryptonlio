@@ -87,7 +87,7 @@ export const PortfoliosList = () => {
             percentage={100}
           />
         </Flex>
-        {portfolioList.length === 0 ? (
+        {portfolioList.length !== 0 ? (
           <Button
             variant="primary"
             leftIcon={<Icon as={BiBookAdd} />}
@@ -115,7 +115,11 @@ export const PortfoliosList = () => {
               addPortfolioModalIsOpen={isOpen}
             />
           ) : (
-            <PortfolioEmptyState message="You currently don't have a porfolio." />
+            <PortfolioEmptyState
+              portfolioList={portfolioList}
+              onOpen={onOpen}
+              message="You currently don't have a porfolio."
+            />
           )}
         </Flex>
       </Card>

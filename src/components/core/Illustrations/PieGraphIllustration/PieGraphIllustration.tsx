@@ -1,4 +1,4 @@
-import { useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { useColorMode } from "@chakra-ui/react";
 
 export const PieGraphIllustration = () => {
   const { colorMode } = useColorMode();
