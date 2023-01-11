@@ -1,4 +1,4 @@
-import { Flex, Text, FlexProps } from "@chakra-ui/react";
+import { Flex, FlexProps, Box } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
 interface IIllustrationTextWrapperProps extends FlexProps {
@@ -24,14 +24,14 @@ export const IllustrationTextWrapper = ({
       <Flex maxW={{ base: "25rem", sm: "30rem", md: "40rem" }}>
         {illustration}
       </Flex>
-      <Text
+      <Box
         fontWeight={"bold"}
         fontSize={{ base: "2xl", md: "3xl" }}
         textAlign={"center"}
         fontFamily="heading"
       >
         {text}
-      </Text>
+      </Box>
     </Flex>
   );
 };
