@@ -20,7 +20,9 @@ export const NavLink = ({
   ...restProps
 }: INavLinkProps) => {
   const router = useRouter();
-  const isActive = router.pathname === to && linkName !== "Logout";
+  const isActive =
+    router.pathname === to ||
+    (router.pathname.includes(linkName.toLowerCase()) && linkName !== "Logout");
   const chakraLinkBg = useColorModeValue("brand.300", "brand.200");
   const chakraLinkActiveBg = useColorModeValue("brand.400", "brand.200");
   const chakraLinkColor = useColorModeValue("brand.200", "brand.100");

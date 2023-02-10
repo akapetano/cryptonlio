@@ -13,7 +13,7 @@ export const ColorModeButton = ({ ...restProps }: IconButtonProps) => {
   return (
     <IconButton
       variant="primary"
-      size="lg"
+      size="md"
       rounded="full"
       onClick={toggleColorMode}
       icon={<SwitchIcon />}

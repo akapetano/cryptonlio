@@ -20,7 +20,7 @@ export const WelcomeText = () => {
           <Button
             display="flex"
             flexDir="column"
-            fontSize={["md", "md", "lg", "xl", "xl"]}
+            fontSize={{ base: "md", md: "lg" }}
             textAlign="center"
             letterSpacing="1px"
             mb="2rem"

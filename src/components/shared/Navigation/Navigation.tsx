@@ -20,7 +20,12 @@ export const Navigation = ({ user }: INavigationProps) => {
         display={{ base: "none", md: "flex" }}
         direction={{ base: "column", md: "row" }}
       />
-      <Flex gap={4} display={{ base: "none", md: "flex" }}>
+      <Flex
+        gap={4}
+        display={{ base: "none", md: "flex" }}
+        justifyContent="center"
+        alignItems="center"
+      >
         <ColorModeButton aria-label="Toggle color mode" />
         {!user ? (
           <NextLink href="/sign-in" passHref>
