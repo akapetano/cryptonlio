@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from "next/head";
 
 interface INextHeadProps {
   title: string;
@@ -9,7 +9,10 @@ export const NextHead = ({ title }: INextHeadProps) => {
     <Head>
       <link rel="icon" href="/favicon.ico" />
       <title>{title}</title>
-      <meta name="description" content="Crypton is a cryptocurrency website" />
+      <meta
+        name="description"
+        content="Cryptonlio is a cryptocurrency website"
+      />
       <meta
         property="og:image"
         content={`https://og-image.vercel.app/${encodeURI(

@@ -8,7 +8,7 @@ const SignUp = () => {
 
   return (
     <Layout
-      headTitle="Crypton - Explore the World of Cryptocurrencies"
+      headTitle="Cryptonlio - Explore the World of Cryptocurrencies"
       user={user}
       session={session}
       hasNavigation={false}

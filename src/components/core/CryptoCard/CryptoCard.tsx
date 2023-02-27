@@ -59,7 +59,7 @@ export const CryptoCard = () => {
             fontSize="xl"
             mt={1}
           >
-            Crypton
+            Cryptonlio
           </Text>
         </Box>
       </Flex>

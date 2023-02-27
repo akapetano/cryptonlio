@@ -9,7 +9,7 @@ const Portfolios = () => {
   const { user } = useUser();
   return (
     <Layout
-      headTitle="Crypton - Create Your Portfolio Now"
+      headTitle="Cryptonlio - Create Your Portfolio Now"
       session={session}
       user={user}
     >

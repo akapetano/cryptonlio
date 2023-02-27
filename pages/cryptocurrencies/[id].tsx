@@ -41,7 +41,11 @@ const Coin = ({ coin }: ICoinProps) => {
   const { session, user } = useAuth();
 
   return (
-    <Layout headTitle={`Crypton - ${coin.name}`} session={session} user={user}>
+    <Layout
+      headTitle={`Cryptonlio - ${coin.name}`}
+      session={session}
+      user={user}
+    >
       <LayoutMain
         display="flex"
         alignItems="center"

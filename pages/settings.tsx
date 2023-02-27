@@ -10,7 +10,11 @@ const Settings = () => {
   const { session } = useAuth();
   const { user } = useUser();
   return (
-    <Layout headTitle="Crypton - User Settings" session={session} user={user}>
+    <Layout
+      headTitle="Cryptonlio - User Settings"
+      session={session}
+      user={user}
+    >
       <LayoutMain>
         <Flex
           height="100vh"
