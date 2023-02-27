@@ -1,4 +1,5 @@
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useState } from "react";
 import useSWR from "swr";
 import { cryptoFetcher } from "../src/fetchers/cryptoFetcher";
 import { COINS_COINGECKO_API_URL } from "../src/fetchers/cryptoFetcher";
@@ -7,7 +8,9 @@ import { useSearch } from "./useSearch";
 
 export function useCrypto() {
   const { data, error } = useSWR(COINS_COINGECKO_API_URL, cryptoFetcher);
-  const portfolioCoins: PortfolioCoin[] = [];
+  const [portfolioCoins, setPortfolioCoins] = useState<PortfolioCoin[] | null>(
+    null
+  );
 
   const { search, onChange } = useSearch();
 
@@ -17,9 +20,21 @@ export function useCrypto() {
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const addCoinToPortfolio = (coinId: string) => {
-    const portfolioCoin = data.filter((coin: Coin) => coin.id === coinId);
-    return portfolioCoins.push(portfolioCoin);
+  const onAddCoinToPortfolio = (coinId: string) => {
+    const portfolioCoinId =
+      data && data.find((coin: Coin) => coin.id === coinId)?.id;
+    setPortfolioCoins((prevState) => {
+      if (Array.isArray(prevState) && prevState !== null) {
+        const nextCoins = [
+          ...prevState,
+          { coinId: portfolioCoinId, holdings: 0 },
+        ];
+        return nextCoins;
+      } else {
+        return [{ coinId: portfolioCoinId, holdings: 0 }];
+      }
+    });
+    return portfolioCoinId;
   };
 
   return {
@@ -30,7 +45,7 @@ export function useCrypto() {
     filteredCoins,
     search,
     onChange,
-    addCoinToPortfolio,
+    onAddCoinToPortfolio,
     portfolioCoins,
   };
 }

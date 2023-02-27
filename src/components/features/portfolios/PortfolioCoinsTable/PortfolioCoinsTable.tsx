@@ -23,13 +23,13 @@ import { PortfolioCoin, Coin } from "../../../../../types/crypto";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 interface IPortfolioCoinsTableProps extends TableProps {
-  portfolioCoinsId: string[];
+  portfolioCoins: PortfolioCoin[] | null;
 }
 
 const coinAmount = 20;
 
 export const PortfolioCoinsTable = ({
-  portfolioCoinsId,
+  portfolioCoins,
   ...restProps
 }: IPortfolioCoinsTableProps) => {
   const tableRowHoverBgColor = useColorModeValue("gray.100", "gray.700");
@@ -38,9 +38,12 @@ export const PortfolioCoinsTable = ({
   const coinSymbolHoverColor = useColorModeValue("gray.500", "gray.400");
   const { data } = useCrypto();
 
-  const portfolioCoins = data?.filter(
-    (coin: Coin) => portfolioCoinsId?.indexOf(coin.id) > -1
-  );
+  const userCoins =
+    data &&
+    portfolioCoins &&
+    data?.filter((coin: Coin) =>
+      portfolioCoins?.find((userCoin) => userCoin.coinId === coin.id)
+    );
   return (
     <Table
       display={["block", "block", "block", "table", "table"]}
@@ -65,7 +68,7 @@ export const PortfolioCoinsTable = ({
         </Tr>
       </Thead>
       <Tbody>
-        {portfolioCoins?.map((coin: Coin) => {
+        {userCoins?.map((coin: Coin) => {
           const holdings = coin.current_price * coinAmount;
 
           return (

@@ -38,7 +38,15 @@ export const PortfoliosList = () => {
 
       setPortfolioList((prevState) => {
         const name = portfolioName === "" ? "My Portfolio" : portfolioName;
-        return [...prevState, name];
+        if (prevState && prevState.length) {
+          const nextState = [
+            ...prevState,
+            { portfolioName: name, portfolioCoins: null },
+          ];
+          return nextState;
+        } else {
+          return [{ portfolioName: name, portfolioCoins: [] }];
+        }
       });
       const payload = { portfolio_name: portfolioName };
       let { error, status, data } = await supabaseClient
@@ -87,7 +95,7 @@ export const PortfoliosList = () => {
             percentage={100}
           />
         </Flex>
-        {portfolioList.length !== 0 ? (
+        {portfolioList && portfolioList.length !== 0 ? (
           <Button
             variant="primary"
             leftIcon={<Icon as={BiBookAdd} />}
@@ -106,7 +114,7 @@ export const PortfoliosList = () => {
           gap="1rem"
           flexDirection="column"
         >
-          {portfolioList.length !== 0 ? (
+          {portfolioList && portfolioList.length !== 0 ? (
             <PortfolioCoinList
               portfolioList={portfolioList}
               onCreatePortfolio={onCreatePortfolio}

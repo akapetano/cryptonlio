@@ -1,10 +1,11 @@
 import { Flex, Icon, Text, Button } from "@chakra-ui/react";
 import { BlankCanvasIllustration } from "../../../core/Illustrations/BlankCanvasIllustration/BlankCanvasIllustration";
 import { BiBookAdd } from "react-icons/bi";
+import { Portfolio } from "../../../../../types/portfolio";
 
 interface IPortfolioEmptyStateProps {
   message: string;
-  portfolioList: string[];
+  portfolioList: Portfolio[] | null;
   onOpen: () => void;
 }
 
@@ -24,7 +25,7 @@ export const PortfolioEmptyState = ({
       <Text mt="2rem" fontSize={{ base: "lg", md: "xl" }}>
         {message}
       </Text>
-      {portfolioList.length === 0 ? (
+      {!portfolioList ? (
         <Button
           variant="primary"
           leftIcon={<Icon as={BiBookAdd} />}

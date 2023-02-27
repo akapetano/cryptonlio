@@ -8,8 +8,6 @@ import {
   ModalCloseButton,
   ModalBody,
   Input,
-  useDisclosure,
-  ModalProps,
 } from "@chakra-ui/react";
 import { ChangeEvent } from "react";
 
