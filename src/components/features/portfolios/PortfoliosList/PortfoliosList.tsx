@@ -16,6 +16,7 @@ import { StatCard } from "../StatCard/StatCard";
 import { PortfolioEmptyState } from "../PortfolioEmptyState/PortfolioEmptyState";
 import { AddPortfolioModal } from "./AddPortfolioModal/AddPortfolioModal";
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { PortfolioStats } from "./PortfolioStats/PortfolioStats";
 
 export const PortfoliosList = () => {
   const { user } = useUser();
@@ -39,23 +40,39 @@ export const PortfoliosList = () => {
       setPortfolioList((prevState) => {
         const name = portfolioName === "" ? "My Portfolio" : portfolioName;
         if (prevState && prevState.length) {
-          const nextState = [
-            ...prevState,
-            { portfolioName: name, portfolioCoins: null },
-          ];
-          return nextState;
+          const sameName = prevState.some(
+            (portfolio) => portfolio?.portfolioName === portfolioName
+          );
+          if (sameName) {
+            toast({
+              position: "bottom",
+              title: "Duplicate portfolio name",
+              description: `"${portfolioName}" already present, please provide a new name`,
+              status: "error",
+              duration: 4000,
+              isClosable: true,
+            });
+            return [...prevState];
+          } else {
+            const nextState = [
+              ...prevState,
+              { portfolioName: name, portfolioCoins: null },
+            ];
+            onClose();
+            return nextState;
+          }
         } else {
+          onClose();
           return [{ portfolioName: name, portfolioCoins: [] }];
         }
       });
-      const payload = { portfolio_name: portfolioName };
-      let { error, status, data } = await supabaseClient
-        .from("portfolios")
-        .upsert(payload);
-      console.log("STATUS", status);
-      console.log("DATA", data);
-      if (error) throw error;
-      onClose();
+      // const payload = { portfolio_name: portfolioName };
+      // let { error, status, data } = await supabaseClient
+      //   .from("portfolios")
+      //   .upsert(payload);
+      // console.log("STATUS", status);
+      // console.log("DATA", data);
+      // if (error) throw error;
     } catch (error) {
       if (error instanceof Error) {
         toast({
@@ -78,23 +95,7 @@ export const PortfoliosList = () => {
         justifyContent="space-between"
         alignItems={{ md: "flex-start" }}
       >
-        <Flex
-          flexDir={{ base: "column", md: "row" }}
-          gap={{ base: "1rem", md: "1rem" }}
-          flexBasis="50%"
-        >
-          <StatCard statTitle="Total Amount" amount={500.0} />
-          <StatCard
-            statTitle="24h Portfolio Change"
-            amount={10}
-            percentage={2.56}
-          />
-          <StatCard
-            statTitle="Total Profit Gain"
-            amount={1000}
-            percentage={100}
-          />
-        </Flex>
+        <PortfolioStats />
         {portfolioList && portfolioList.length !== 0 ? (
           <Button
             variant="primary"
@@ -117,6 +118,7 @@ export const PortfoliosList = () => {
           {portfolioList && portfolioList.length !== 0 ? (
             <PortfolioCoinList
               portfolioList={portfolioList}
+              setPortfolioList={setPortfolioList}
               onCreatePortfolio={onCreatePortfolio}
               onAddPortfolioModalClose={onClose}
               onAddPortfolioModalOpen={onOpen}

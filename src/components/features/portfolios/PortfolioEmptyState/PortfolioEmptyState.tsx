@@ -5,7 +5,7 @@ import { Portfolio } from "../../../../../types/portfolio";
 
 interface IPortfolioEmptyStateProps {
   message: string;
-  portfolioList: Portfolio[] | null;
+  portfolioList: Portfolio[] | null | undefined;
   onOpen: () => void;
 }
 

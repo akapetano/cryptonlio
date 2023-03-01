@@ -10,7 +10,7 @@ const Cryptocurrencies = () => {
 
   return (
     <Layout
-      headTitle="Cryptonlio - Top 100 cryptocurrencies"
+      headTitle="Cryptonlio - Top 250 cryptocurrencies"
       session={session}
       user={user}
     >
