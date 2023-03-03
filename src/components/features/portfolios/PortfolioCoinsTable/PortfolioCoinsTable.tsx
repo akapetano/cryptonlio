@@ -16,11 +16,13 @@ import {
   MenuList,
   Icon,
   MenuItem,
+  useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useCrypto } from "../../../../../hooks/useCrypto";
 import { PortfolioCoin, Coin } from "../../../../../types/crypto";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { TransactionsModal } from "./TransactionsModal/TransactionsModal";
 
 interface IPortfolioCoinsTableProps extends TableProps {
   portfolioCoins: PortfolioCoin[] | null;
@@ -37,6 +39,7 @@ export const PortfolioCoinsTable = ({
   const coinSymbolColor = useColorModeValue("gray.400", "gray.500");
   const coinSymbolHoverColor = useColorModeValue("gray.500", "gray.400");
   const { data } = useCrypto();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const userCoins =
     data &&
@@ -44,6 +47,7 @@ export const PortfolioCoinsTable = ({
     data?.filter((coin: Coin) =>
       portfolioCoins?.find((userCoin) => userCoin.coinId === coin.id)
     );
+
   return (
     <Table
       display={["block", "block", "block", "table", "table"]}
@@ -152,11 +156,20 @@ export const PortfolioCoinsTable = ({
                   </MenuButton>
                   <MenuList>
                     <MenuItem>Add Transaction</MenuItem>
-                    <MenuItem>View All Transactions</MenuItem>
+                    <MenuItem onClick={() => onOpen()}>
+                      View All Transactions
+                    </MenuItem>
                     <MenuItem>Details</MenuItem>
                   </MenuList>
                 </Menu>
               </Td>
+              {isOpen && (
+                <TransactionsModal
+                  coin={coin}
+                  isOpen={isOpen}
+                  onClose={onClose}
+                />
+              )}
             </Tr>
           );
         })}

@@ -19,7 +19,7 @@ interface IAddCoinModalProps {
   isOpen: boolean;
   onClose: () => void;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onAddCoinToPortfolio: (coinId: string) => string;
+  onAddCoinToPortfolio: (coinId: string) => void;
 }
 
 export const AddCoinModal = ({

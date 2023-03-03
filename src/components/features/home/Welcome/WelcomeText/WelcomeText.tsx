@@ -16,7 +16,7 @@ export const WelcomeText = () => {
       </Heading>
       <Heading></Heading>
       {user ? (
-        <NextLink href="/portfolio" passHref>
+        <NextLink href="/portfolios" passHref>
           <Button
             display="flex"
             flexDir="column"

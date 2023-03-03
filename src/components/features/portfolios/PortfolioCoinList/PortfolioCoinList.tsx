@@ -8,7 +8,6 @@ import { ChangeEvent } from "react";
 import { AddCoinModal } from "./AddCoinModal/AddCoinModal";
 import { Portfolio } from "../../../../../types/portfolio";
 import { PortfolioMenu } from "./PortfolioMenu/PortfolioMenu";
-import { Coin, PortfolioCoin } from "../../../../../types/crypto";
 import { SetStateAction } from "react";
 import { Dispatch } from "react";
 
@@ -23,7 +22,6 @@ interface IPortfolioCoinListProps {
 
 export const PortfolioCoinList = ({
   portfolioList,
-  setPortfolioList,
   onAddPortfolioModalClose,
   onAddPortfolioModalOpen,
   onCreatePortfolio,
@@ -34,11 +32,9 @@ export const PortfolioCoinList = ({
     filteredCoins,
     search,
     onChange,
-    data,
     portfolioCoins,
     onAddCoinToPortfolio,
   } = useCrypto();
-
   const [portfolioName, setPortfolioName] = useState("");
   const [activePortfolio, setActivePortfolio] = useState<
     Portfolio | null | undefined
@@ -109,7 +105,9 @@ export const PortfolioCoinList = ({
           onAddCoinToPortfolio={onAddCoinToPortfolio}
         />
 
-        <PortfolioCoinsTable portfolioCoins={portfolioCoins} />
+        {portfolioCoins && portfolioCoins.length ? (
+          <PortfolioCoinsTable portfolioCoins={portfolioCoins} />
+        ) : null}
       </Flex>
     </>
   );
