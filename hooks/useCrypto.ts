@@ -3,10 +3,11 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 import useSWR from "swr";
 import { cryptoFetcher } from "../src/fetchers/cryptoFetcher";
-import { COINS_COINGECKO_API_URL } from "../src/fetchers/cryptoFetcher";
+import { COINS_COINGECKO_API_URL } from "../constants/globals";
 import { Coin, PortfolioCoin } from "../types/crypto";
 import { Portfolio } from "../types/portfolio";
 import { useSearch } from "./useSearch";
+import { convertSnakeCaseToCamelCase } from "../utils/index";
 
 export function useCrypto() {
   const { data, error } = useSWR(COINS_COINGECKO_API_URL, cryptoFetcher);

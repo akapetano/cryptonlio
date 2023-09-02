@@ -46,12 +46,12 @@ export const PortfolioMenu = ({
           {portfolioList && portfolioList.length
             ? portfolioList.map(({ portfolioName }, index) => (
                 <MenuItemOption
+                  key={portfolioName}
                   display="flex"
                   justifyContent="start"
                   alignItems="center"
                   gap="0.5rem"
                   py="0.7rem"
-                  key={portfolioName}
                   value={portfolioName}
                   onClick={handleActivePortfolioChange}
                 >

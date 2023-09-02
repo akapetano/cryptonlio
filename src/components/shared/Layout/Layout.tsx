@@ -17,7 +17,6 @@ export const Layout = ({
   hasNavigation = true,
   user,
   session,
-
   hasFooter = true,
   children,
   ...restProps

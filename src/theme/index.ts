@@ -167,6 +167,35 @@ const theme = extendTheme(
               color: mode("brand.300", "brand.50")(props),
             },
           }),
+          ["danger-primary"]: (props: StyleProps) => ({
+            rounded: "md",
+            color: mode("white", "gray.800")(props),
+            backgroundColor: mode("red.400", "red.300")(props),
+
+            _hover: {
+              backgroundColor: mode("red.500", "red.200")(props),
+            },
+
+            _active: {
+              backgroundColor: mode("red.500", "red.200")(props),
+            },
+          }),
+          ["danger-secondary"]: (props: StyleProps) => ({
+            rounded: "md",
+            color: mode("red.400", "red.300")(props),
+            backgroundColor: "transparent",
+            border: "2px solid",
+
+            _hover: {
+              color: mode("white", "gray.800")(props),
+              backgroundColor: mode("red.400", "red.300")(props),
+              borderColor: mode("red.400", "red.300")(props),
+            },
+
+            _active: {
+              color: mode("red.400", "red.300")(props),
+            },
+          }),
         },
       },
       Input: { ...inputSelectStyles },

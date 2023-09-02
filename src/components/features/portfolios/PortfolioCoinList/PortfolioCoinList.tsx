@@ -1,7 +1,7 @@
 import { Flex, Button, useDisclosure } from "@chakra-ui/react";
 import { useCrypto } from "../../../../../hooks/useCrypto";
 import { PortfolioCoinsTable } from "../PortfolioCoinsTable/PortfolioCoinsTable";
-import { BiCoin } from "react-icons/bi";
+import { BiCoin, BiTrash } from "react-icons/bi";
 import { MouseEvent, useState } from "react";
 import { AddPortfolioModal } from "../PortfoliosList/AddPortfolioModal/AddPortfolioModal";
 import { ChangeEvent } from "react";
@@ -10,24 +10,39 @@ import { Portfolio } from "../../../../../types/portfolio";
 import { PortfolioMenu } from "./PortfolioMenu/PortfolioMenu";
 import { SetStateAction } from "react";
 import { Dispatch } from "react";
+import { DeletePortfolioModal } from "./DeletePortfolioModal/DeletePortfolioModal";
 
 interface IPortfolioCoinListProps {
+  portfolioName: string;
+  setPortfolioName: Dispatch<SetStateAction<string>>;
   portfolioList: Portfolio[] | null;
   setPortfolioList: Dispatch<SetStateAction<Portfolio[] | null>>;
   onAddPortfolioModalClose: () => void;
   onAddPortfolioModalOpen: () => void;
+  onDeletePortfolio: (
+    portfolioIdToUpdate: string,
+    onClose: () => void
+  ) => Promise<any[] | undefined>;
   onCreatePortfolio: () => void;
   addPortfolioModalIsOpen: boolean;
 }
 
 export const PortfolioCoinList = ({
+  portfolioName,
+  setPortfolioName,
   portfolioList,
   onAddPortfolioModalClose,
   onAddPortfolioModalOpen,
+  onDeletePortfolio,
   onCreatePortfolio,
   addPortfolioModalIsOpen,
 }: IPortfolioCoinListProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: deletePortfolioModalIsOpen,
+    onOpen: onDeletePortfolioModalOpen,
+    onClose: onDeletePortfolioModalClose,
+  } = useDisclosure();
   const {
     filteredCoins,
     search,
@@ -35,7 +50,6 @@ export const PortfolioCoinList = ({
     portfolioCoins,
     onAddCoinToPortfolio,
   } = useCrypto();
-  const [portfolioName, setPortfolioName] = useState("");
   const [activePortfolio, setActivePortfolio] = useState<
     Portfolio | null | undefined
   >(
@@ -61,6 +75,8 @@ export const PortfolioCoinList = ({
     setActivePortfolio(newActivePortfolio);
   }
 
+  console.log({ portfolioName });
+
   return (
     <>
       <Flex flexDir="column" w="100%" overflowX="auto">
@@ -78,14 +94,24 @@ export const PortfolioCoinList = ({
             handleActivePortfolioChange={handleActivePortfolioChange}
             onAddPortfolioModalOpen={onAddPortfolioModalOpen}
           />
-          <Button
-            leftIcon={<BiCoin />}
-            variant="primary"
-            onClick={onOpen}
-            px="1rem"
-          >
-            Add New Coin
-          </Button>
+          <Flex gap="0.5rem">
+            <Button
+              leftIcon={<BiTrash />}
+              variant="danger-secondary"
+              onClick={onDeletePortfolioModalOpen}
+              px="1rem"
+            >
+              Delete Portfolio
+            </Button>
+            <Button
+              leftIcon={<BiCoin />}
+              variant="primary"
+              onClick={onOpen}
+              px="1rem"
+            >
+              Add New Coin
+            </Button>
+          </Flex>
         </Flex>
 
         <AddPortfolioModal
@@ -95,6 +121,18 @@ export const PortfolioCoinList = ({
           onClose={onAddPortfolioModalClose}
           isOpen={addPortfolioModalIsOpen}
         />
+
+        {activePortfolio &&
+        activePortfolio?.portfolioId &&
+        activePortfolio?.portfolioName ? (
+          <DeletePortfolioModal
+            portfolioId={activePortfolio?.portfolioId}
+            portfolioName={activePortfolio?.portfolioName}
+            onDeletePortfolio={onDeletePortfolio}
+            onClose={onDeletePortfolioModalClose}
+            isOpen={deletePortfolioModalIsOpen}
+          />
+        ) : null}
 
         <AddCoinModal
           filteredCoins={filteredCoins}

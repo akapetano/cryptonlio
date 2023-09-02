@@ -30,6 +30,8 @@ export type Coin = {
 export interface PortfolioCoin {
   coinId: string;
   holdings: number;
+  price_in_usd?: number;
+  price_in_eur?: number;
 }
 
 export type CoinById = {

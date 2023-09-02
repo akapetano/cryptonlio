@@ -2,7 +2,7 @@ import { Layout } from "../../src/components/shared/Layout/Layout";
 import { LayoutMain } from "../../src/components/shared/LayoutMain/LayoutMain";
 import { CoinDetails } from "../../src/components/features/cryptocurrencies/[coin]/CoinDetails/CoinDetails";
 import { GetStaticProps, GetStaticPaths } from "next";
-import { COINS_COINGECKO_API_URL } from "../../src/fetchers/cryptoFetcher";
+import { COINS_COINGECKO_API_URL } from "../../constants/globals";
 import { Coin, CoinById } from "../../types/crypto";
 import { useAuth } from "../../hooks/useAuth";
 
