@@ -59,7 +59,7 @@ export const TopTenCoinsTable = ({ session }: ITopTenCoinsTableProps) => {
           <Tbody>
             {isLoading ? (
               <Skeleton noOfLines={10} as="tr" />
-            ) : (
+            ) : topTenCoins ? (
               topTenCoins.map((coin: Coin) => {
                 return (
                   <Tr key={coin.id} _hover={{ bg: tableRowHoverBgColor }}>
@@ -106,7 +106,7 @@ export const TopTenCoinsTable = ({ session }: ITopTenCoinsTableProps) => {
                   </Tr>
                 );
               })
-            )}
+            ) : null}
           </Tbody>
         </Table>
       </Card>

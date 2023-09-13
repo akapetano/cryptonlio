@@ -2,7 +2,7 @@ import { Flex, Button, useDisclosure } from "@chakra-ui/react";
 import { useCrypto } from "../../../../../hooks/useCrypto";
 import { PortfolioCoinsTable } from "../PortfolioCoinsTable/PortfolioCoinsTable";
 import { BiCoin, BiTrash } from "react-icons/bi";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { AddPortfolioModal } from "../PortfoliosList/AddPortfolioModal/AddPortfolioModal";
 import { ChangeEvent } from "react";
 import { AddCoinModal } from "./AddCoinModal/AddCoinModal";
@@ -37,19 +37,17 @@ export const PortfolioCoinList = ({
   onCreatePortfolio,
   addPortfolioModalIsOpen,
 }: IPortfolioCoinListProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: addCoinModalIsOpen,
+    onOpen: onAddCoinModalOpen,
+    onClose: onAddCoinModalClose,
+  } = useDisclosure();
   const {
     isOpen: deletePortfolioModalIsOpen,
     onOpen: onDeletePortfolioModalOpen,
     onClose: onDeletePortfolioModalClose,
   } = useDisclosure();
-  const {
-    filteredCoins,
-    search,
-    onChange,
-    portfolioCoins,
-    onAddCoinToPortfolio,
-  } = useCrypto();
+
   const [activePortfolio, setActivePortfolio] = useState<
     Portfolio | null | undefined
   >(
@@ -59,6 +57,14 @@ export const PortfolioCoinList = ({
       ? portfolioList[portfolioList.length - 1]
       : null
   );
+  const {
+    filteredCoins,
+    search,
+    onChange,
+    portfolioCoins,
+    onAddCoinToPortfolio,
+    getPortfolioCoins,
+  } = useCrypto(activePortfolio?.portfolioId ?? null, true);
 
   function handlePortfolioNameChange(event: ChangeEvent) {
     const eventTarget = event.target as HTMLInputElement;
@@ -75,8 +81,6 @@ export const PortfolioCoinList = ({
     setActivePortfolio(newActivePortfolio);
   }
 
-  console.log({ portfolioName });
-
   return (
     <>
       <Flex flexDir="column" w="100%" overflowX="auto">
@@ -90,7 +94,7 @@ export const PortfolioCoinList = ({
           <PortfolioMenu
             activePortfolio={activePortfolio}
             portfolioList={portfolioList}
-            isOpen={isOpen}
+            isOpen={addCoinModalIsOpen}
             handleActivePortfolioChange={handleActivePortfolioChange}
             onAddPortfolioModalOpen={onAddPortfolioModalOpen}
           />
@@ -106,7 +110,7 @@ export const PortfolioCoinList = ({
             <Button
               leftIcon={<BiCoin />}
               variant="primary"
-              onClick={onOpen}
+              onClick={onAddCoinModalOpen}
               px="1rem"
             >
               Add New Coin
@@ -137,8 +141,8 @@ export const PortfolioCoinList = ({
         <AddCoinModal
           filteredCoins={filteredCoins}
           search={search}
-          isOpen={isOpen}
-          onClose={onClose}
+          isOpen={addCoinModalIsOpen}
+          onClose={onAddCoinModalClose}
           onChange={onChange}
           onAddCoinToPortfolio={onAddCoinToPortfolio}
         />

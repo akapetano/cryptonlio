@@ -31,8 +31,6 @@ export const PortfolioMenu = ({
   handleActivePortfolioChange,
   onAddPortfolioModalOpen,
 }: IPortfolioMenuProps) => {
-  console.log(activePortfolio);
-
   return (
     <Menu>
       <MenuButton fontWeight={"bold"} fontSize="lg">

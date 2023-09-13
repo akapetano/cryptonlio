@@ -28,8 +28,6 @@ interface IPortfolioCoinsTableProps extends TableProps {
   portfolioCoins: PortfolioCoin[] | null;
 }
 
-const coinAmount = 20;
-
 export const PortfolioCoinsTable = ({
   portfolioCoins,
   ...restProps
@@ -73,7 +71,11 @@ export const PortfolioCoinsTable = ({
       </Thead>
       <Tbody>
         {userCoins?.map((coin: Coin) => {
-          const holdings = coin.current_price * coinAmount;
+          const { holdings } = portfolioCoins?.find(
+            (userCoin) => userCoin.coinId === coin.id
+          ) as PortfolioCoin;
+
+          const userHoldingsInFiat = coin.current_price * holdings;
 
           return (
             <Tr key={coin.id} _hover={{ bg: tableRowHoverBgColor }}>
@@ -133,13 +135,14 @@ export const PortfolioCoinsTable = ({
               <Td display="flex" flexDir="column" gap="0.2rem">
                 <Text>
                   $
-                  {holdings.toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
+                  {userHoldingsInFiat &&
+                    userHoldingsInFiat.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
                 </Text>
                 <Flex gap="0.2rem">
-                  <span>{coinAmount}</span>
+                  <span>{holdings}</span>
                   <span>{coin.symbol.toUpperCase()}</span>
                 </Flex>
               </Td>
