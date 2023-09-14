@@ -8,17 +8,17 @@ import {
   TabPanelProps,
   useColorModeValue,
   HStack,
-} from '@chakra-ui/react';
-import { ContentCard } from '../../CoinDetails/ContentCard/ContentCard';
-import { CoinLineChart } from '../CoinLineChart/CoinLineChart';
+} from "@chakra-ui/react";
+import { ContentCard } from "../../CoinDetails/ContentCard/ContentCard";
+import { CoinLineChart } from "../CoinLineChart/CoinLineChart";
 
 interface IChartSelector extends TabPanelProps {
   coinId: string;
 }
 
 export const ChartSelector = ({ coinId, ...restProps }: IChartSelector) => {
-  const tabBgColor = useColorModeValue('brand.300', 'brand.100');
-  const tabTextColor = useColorModeValue('white', 'gray.900');
+  const tabBgColor = useColorModeValue("brand.300", "brand.100");
+  const tabTextColor = useColorModeValue("white", "gray.900");
 
   return (
     <ContentCard>
@@ -31,13 +31,6 @@ export const ChartSelector = ({ coinId, ...restProps }: IChartSelector) => {
       >
         <TabList>
           <HStack spacing="0.5rem">
-            <Tab
-              rounded="xl"
-              _focus={{ bg: tabBgColor }}
-              _selected={{ color: tabTextColor, bg: tabBgColor }}
-            >
-              1D
-            </Tab>
             <Tab
               rounded="xl"
               _focus={{ bg: tabBgColor }}
@@ -70,31 +63,25 @@ export const ChartSelector = ({ coinId, ...restProps }: IChartSelector) => {
         </TabList>
         <TabPanels>
           <TabPanel
-            maxWidth={{ base: 'container.sm', md: 'container.xl' }}
-            width="45rem"
-          >
-            <CoinLineChart coinId={coinId} days="1" interval="hourly" />
-          </TabPanel>
-          <TabPanel
-            maxWidth={{ base: 'container.sm', md: 'container.xl' }}
+            maxWidth={{ base: "container.sm", md: "container.xl" }}
             width="45rem"
           >
             <CoinLineChart coinId={coinId} days="7" interval="daily" />
           </TabPanel>
           <TabPanel
-            maxWidth={{ base: 'container.sm', md: 'container.xl' }}
+            maxWidth={{ base: "container.sm", md: "container.xl" }}
             width="45rem"
           >
             <CoinLineChart coinId={coinId} days="30" interval="daily" />
           </TabPanel>
           <TabPanel
-            maxWidth={{ base: 'container.sm', md: 'container.xl' }}
+            maxWidth={{ base: "container.sm", md: "container.xl" }}
             width="45rem"
           >
             <CoinLineChart coinId={coinId} days="90" interval="daily" />
           </TabPanel>
           <TabPanel
-            maxWidth={{ base: 'container.sm', md: 'container.xl' }}
+            maxWidth={{ base: "container.sm", md: "container.xl" }}
             width="45rem"
           >
             <CoinLineChart coinId={coinId} days="365" interval="daily" />
