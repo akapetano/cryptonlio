@@ -5,3 +5,11 @@ export const SUPABASE_ANON_KEY = process.env
   .NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
 export const COINS_COINGECKO_API_URL =
   "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false";
+
+export const COIN_COINGECKO_API_URL = (id: string) => {
+  if (!id) {
+    return null;
+  } else {
+    return `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true`;
+  }
+};
