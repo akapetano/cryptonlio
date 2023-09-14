@@ -43,7 +43,6 @@ export function useCrypto(
         ) as PortfolioCoin[];
         setPortfolioCoins(convertedData);
       }
-      console.log({ data, error });
     } catch (error) {
       if (error instanceof Error) {
         toast({
