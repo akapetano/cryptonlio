@@ -10,7 +10,7 @@ export const Welcome = () => {
 
   return (
     <WelcomeContainer>
-      <VStack spacing="2rem" mt="2rem">
+      <VStack spacing="2rem" mt="2rem" w={{ base: "full", md: "auto" }}>
         <WelcomeText />
         {!user ? <GetStartedButton /> : null}
       </VStack>
