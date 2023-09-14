@@ -13,7 +13,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const response = await fetch(COINS_COINGECKO_API_URL);
   const coins: Coin[] = await response.json();
 
-  const paths = coins.map(({ id }) => {
+  const paths = coins.slice(0, 11).map(({ id }) => {
     return {
       params: { id: id },
     };
