@@ -14,8 +14,8 @@ export const Burger = ({
     <Button
       onClick={() => setMobileMenuIsOpen(!mobileMenuIsOpen)}
       position="fixed"
-      top="1.5rem"
-      right="1.5rem"
+      top="1rem"
+      right="1rem"
       display="flex"
       flexDirection="column"
       justifyContent="space-around"

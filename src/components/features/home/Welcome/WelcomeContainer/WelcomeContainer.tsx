@@ -5,11 +5,11 @@ export const WelcomeContainer = ({ ...restProps }) => {
     <Container
       display="flex"
       flexDir={{ base: "column-reverse", md: "row" }}
-      gap="6rem"
+      gap={{ base: "2rem", md: "6rem" }}
       justifyContent={{ base: "center", md: "space-between" }}
       alignItems={{ base: "center", md: "start" }}
       maxW={{ base: "container.lg", md: "container.xl" }}
-      mt={{ base: "0", md: "10rem" }}
+      mt={{ base: "2.5rem", md: "10rem" }}
       p={5}
       rounded="md"
       {...restProps}
