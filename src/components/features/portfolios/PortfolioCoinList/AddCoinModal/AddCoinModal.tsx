@@ -19,7 +19,12 @@ interface IAddCoinModalProps {
   isOpen: boolean;
   onClose: () => void;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onAddCoinToPortfolio: (coinId: string) => void;
+  onAddCoinToPortfolio: (
+    coinId: string,
+    coinName: string,
+    portfolioId: string
+  ) => Promise<any[] | null>;
+  activePortfolioId?: string | null;
 }
 
 export const AddCoinModal = ({
@@ -29,6 +34,7 @@ export const AddCoinModal = ({
   onClose,
   onChange,
   onAddCoinToPortfolio,
+  activePortfolioId,
 }: IAddCoinModalProps) => {
   return (
     <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
@@ -55,7 +61,13 @@ export const AddCoinModal = ({
                     gap="1rem"
                     alignItems="center"
                     onClick={() => {
-                      onAddCoinToPortfolio(coin.id);
+                      if (activePortfolioId) {
+                        onAddCoinToPortfolio(
+                          coin.id,
+                          coin.name,
+                          activePortfolioId
+                        );
+                      }
                       onClose();
                     }}
                   >
@@ -80,7 +92,13 @@ export const AddCoinModal = ({
                     gap="1rem"
                     alignItems="center"
                     onClick={() => {
-                      onAddCoinToPortfolio(coin.id);
+                      if (activePortfolioId) {
+                        onAddCoinToPortfolio(
+                          coin.id,
+                          coin.name,
+                          activePortfolioId
+                        );
+                      }
                       onClose();
                     }}
                   >

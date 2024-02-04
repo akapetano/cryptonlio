@@ -27,8 +27,6 @@ export function useAuth() {
     selectAvatar,
     ageConfirmation,
   }: ISignUpFormValues) => {
-
-
     const {
       user: supabaseUser,
       session: supabaseSession,
@@ -138,7 +136,6 @@ export function useAuth() {
       });
     }
   };
-
 
   const userAvatar = `https://avatars.dicebear.com/api/${user?.user_metadata?.selectAvatar}/${user?.user_metadata?.favoriteCrypto}.svg`;
 

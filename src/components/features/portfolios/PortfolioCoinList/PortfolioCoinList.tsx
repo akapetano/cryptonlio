@@ -11,6 +11,7 @@ import { PortfolioMenu } from "./PortfolioMenu/PortfolioMenu";
 import { SetStateAction } from "react";
 import { Dispatch } from "react";
 import { DeletePortfolioModal } from "./DeletePortfolioModal/DeletePortfolioModal";
+import { PortfolioCoin } from "../../../../../types/crypto";
 
 interface IPortfolioCoinListProps {
   portfolioName: string;
@@ -25,6 +26,14 @@ interface IPortfolioCoinListProps {
   ) => Promise<any[] | undefined>;
   onCreatePortfolio: () => void;
   addPortfolioModalIsOpen: boolean;
+  activePortfolio: Portfolio | null;
+  handleActivePortfolioChange: (event: MouseEvent<HTMLButtonElement>) => void;
+  onAddCoinToPortfolio: (
+    coinId: string,
+    coinName: string,
+    portfolioId: string
+  ) => Promise<any[] | null>;
+  activePortfolioCoins: PortfolioCoin[] | null;
 }
 
 export const PortfolioCoinList = ({
@@ -36,6 +45,10 @@ export const PortfolioCoinList = ({
   onDeletePortfolio,
   onCreatePortfolio,
   addPortfolioModalIsOpen,
+  activePortfolio,
+  handleActivePortfolioChange,
+  onAddCoinToPortfolio,
+  activePortfolioCoins,
 }: IPortfolioCoinListProps) => {
   const {
     isOpen: addCoinModalIsOpen,
@@ -48,37 +61,11 @@ export const PortfolioCoinList = ({
     onClose: onDeletePortfolioModalClose,
   } = useDisclosure();
 
-  const [activePortfolio, setActivePortfolio] = useState<
-    Portfolio | null | undefined
-  >(
-    portfolioList &&
-      portfolioList.length &&
-      portfolioList[portfolioList.length - 1]
-      ? portfolioList[portfolioList.length - 1]
-      : null
-  );
-  const {
-    filteredCoins,
-    search,
-    onChange,
-    portfolioCoins,
-    onAddCoinToPortfolio,
-    getPortfolioCoins,
-  } = useCrypto(activePortfolio?.portfolioId ?? null, true);
+  const { filteredCoins, search, onChange } = useCrypto();
 
   function handlePortfolioNameChange(event: ChangeEvent) {
     const eventTarget = event.target as HTMLInputElement;
     setPortfolioName(eventTarget.value);
-  }
-
-  function handleActivePortfolioChange(event: MouseEvent<HTMLButtonElement>) {
-    const eventTarget = event.target as HTMLButtonElement;
-    const newActivePortfolio =
-      portfolioList &&
-      portfolioList.find(
-        (portfolio) => portfolio.portfolioName === eventTarget.innerText
-      );
-    setActivePortfolio(newActivePortfolio);
   }
 
   return (
@@ -145,10 +132,13 @@ export const PortfolioCoinList = ({
           onClose={onAddCoinModalClose}
           onChange={onChange}
           onAddCoinToPortfolio={onAddCoinToPortfolio}
+          activePortfolioId={activePortfolio?.portfolioId}
         />
 
-        {portfolioCoins && portfolioCoins.length ? (
-          <PortfolioCoinsTable portfolioCoins={portfolioCoins} />
+        {activePortfolioCoins &&
+        Array.isArray(activePortfolioCoins) &&
+        activePortfolioCoins.length ? (
+          <PortfolioCoinsTable portfolioCoins={activePortfolioCoins} />
         ) : null}
       </Flex>
     </>

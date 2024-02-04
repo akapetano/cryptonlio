@@ -14,6 +14,8 @@ export const PortfolioEmptyState = ({
   portfolioList,
   onOpen,
 }: IPortfolioEmptyStateProps) => {
+  console.log({ portfolioList });
+
   return (
     <Flex
       flexDir="column"
@@ -25,7 +27,10 @@ export const PortfolioEmptyState = ({
       <Text mt="2rem" fontSize={{ base: "lg", md: "xl" }}>
         {message}
       </Text>
-      {!portfolioList ? (
+      {!portfolioList ||
+      (portfolioList &&
+        Array.isArray(portfolioList) &&
+        portfolioList.length === 0) ? (
         <Button
           variant="primary"
           leftIcon={<Icon as={BiBookAdd} />}

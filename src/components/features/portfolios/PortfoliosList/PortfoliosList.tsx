@@ -18,16 +18,16 @@ export const PortfoliosList = () => {
     onCreatePortfolio,
     onDeletePortfolio,
     getPortfolios,
+    activePortfolio,
+    handleActivePortfolioChange,
+    onAddCoinToPortfolio,
+    activePortfolioCoins,
   } = usePortfolio({ onClose });
 
   function handleChange(event: ChangeEvent) {
     const eventTarget = event.target as HTMLInputElement;
     setPortfolioName(eventTarget.value);
   }
-
-  useEffect(() => {
-    getPortfolios();
-  }, []);
 
   return (
     <Box mt="2rem">
@@ -67,6 +67,10 @@ export const PortfoliosList = () => {
               onAddPortfolioModalClose={onClose}
               onAddPortfolioModalOpen={onOpen}
               addPortfolioModalIsOpen={isOpen}
+              activePortfolio={activePortfolio}
+              handleActivePortfolioChange={handleActivePortfolioChange}
+              onAddCoinToPortfolio={onAddCoinToPortfolio}
+              activePortfolioCoins={activePortfolioCoins}
             />
           ) : (
             <PortfolioEmptyState
