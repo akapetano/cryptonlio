@@ -1,5 +1,5 @@
 import { Flex, Button, useDisclosure } from "@chakra-ui/react";
-import { useCrypto } from "../../../../../hooks/useCrypto";
+import { useCoins } from "../../../../../hooks/useCoins";
 import { PortfolioCoinsTable } from "../PortfolioCoinsTable/PortfolioCoinsTable";
 import { BiCoin, BiTrash } from "react-icons/bi";
 import { MouseEvent, useEffect, useState } from "react";
@@ -61,7 +61,7 @@ export const PortfolioCoinList = ({
     onClose: onDeletePortfolioModalClose,
   } = useDisclosure();
 
-  const { filteredCoins, search, onChange } = useCrypto();
+  const { filteredCoins, search, onChange } = useCoins();
 
   function handlePortfolioNameChange(event: ChangeEvent) {
     const eventTarget = event.target as HTMLInputElement;

@@ -28,7 +28,7 @@ export const Navigation = ({ user }: INavigationProps) => {
       >
         <ColorModeButton aria-label="Toggle color mode" />
         {!user ? (
-          <NextLink href="/sign-in" passHref>
+          <NextLink href="/login" passHref>
             <Button variant="secondary">Sign in</Button>
           </NextLink>
         ) : null}

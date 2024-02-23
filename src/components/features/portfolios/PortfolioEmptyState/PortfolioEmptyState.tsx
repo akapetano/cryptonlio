@@ -14,8 +14,6 @@ export const PortfolioEmptyState = ({
   portfolioList,
   onOpen,
 }: IPortfolioEmptyStateProps) => {
-  console.log({ portfolioList });
-
   return (
     <Flex
       flexDir="column"

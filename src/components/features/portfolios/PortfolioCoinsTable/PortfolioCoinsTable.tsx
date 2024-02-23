@@ -6,7 +6,6 @@ import {
   Th,
   Td,
   Tbody,
-  Skeleton,
   useColorModeValue,
   TableProps,
   Text,
@@ -19,7 +18,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import { useCrypto } from "../../../../../hooks/useCrypto";
+import { useCoins } from "../../../../../hooks/useCoins";
 import { PortfolioCoin, Coin } from "../../../../../types/crypto";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { TransactionsModal } from "./TransactionsModal/TransactionsModal";
@@ -36,7 +35,7 @@ export const PortfolioCoinsTable = ({
   const textColor = useColorModeValue("brand.300", "brand.200");
   const coinSymbolColor = useColorModeValue("gray.400", "gray.500");
   const coinSymbolHoverColor = useColorModeValue("gray.500", "gray.400");
-  const { data } = useCrypto();
+  const { data } = useCoins();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const userCoins =

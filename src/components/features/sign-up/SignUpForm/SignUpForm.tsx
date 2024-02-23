@@ -88,8 +88,6 @@ export const SignUpForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<ISignUpFormValues>({ resolver: zodResolver(zodSchema) });
 
-  console.log(user);
-
   return (
     <SignUpFormContainer>
       <VStack
@@ -109,7 +107,7 @@ export const SignUpForm = () => {
           <Heading size="xl">Sign Up</Heading>
           <Text>
             If you already have an account, click{" "}
-            <NextLink href="/sign-in" passHref>
+            <NextLink href="/login" passHref>
               <ChakraLink
                 _hover={{ color: "brand.500", textDecoration: "underline" }}
               >

@@ -1,9 +1,9 @@
-import { SignInForm } from "../src/components/features/sign-in/SignInForm/SignInForm";
+import { LoginForm } from "../src/components/features/login/LoginForm/LoginForm";
 import { LayoutMain } from "../src/components/shared/LayoutMain/LayoutMain";
 import { Layout } from "../src/components/shared/Layout/Layout";
 import { useAuth } from "../hooks/useAuth";
 
-const SignIn = () => {
+const Login = () => {
   const { session, user } = useAuth();
 
   return (
@@ -15,10 +15,10 @@ const SignIn = () => {
       hasFooter={false}
     >
       <LayoutMain>
-        <SignInForm />
+        <LoginForm />
       </LayoutMain>
     </Layout>
   );
 };
 
-export default SignIn;
+export default Login;

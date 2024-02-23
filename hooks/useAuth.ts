@@ -70,13 +70,13 @@ export function useAuth() {
       setSession(supabaseSession);
 
       if (user) {
-        router.push("/sign-in");
+        router.push("/login");
       }
       return { user, session };
     }
   };
 
-  const onSignIn = async ({ email, password }: ILoginFormValues) => {
+  const onLogin = async ({ email, password }: ILoginFormValues) => {
     const { user: supabaseUser, error } = await supabaseClient?.auth?.signIn({
       email,
       password,
@@ -108,7 +108,7 @@ export function useAuth() {
         isClosable: true,
       });
     } else {
-      router.push("/sign-in");
+      router.push("/login");
     }
   };
 
@@ -145,7 +145,7 @@ export function useAuth() {
     userAvatar,
     session,
     setSession,
-    onSignIn,
+    onLogin,
     onSignUp,
     onForgotPassword,
     handleSignOut,

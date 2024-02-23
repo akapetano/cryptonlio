@@ -1,6 +1,6 @@
 import { Flex, FlexProps } from "@chakra-ui/react";
 
-export const SignInFormContainer = ({ ...restProps }: FlexProps) => {
+export const LoginFormContainer = ({ ...restProps }: FlexProps) => {
   return (
     <Flex
       h="screen"

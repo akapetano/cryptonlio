@@ -3,6 +3,7 @@ import { Layout } from "../src/components/shared/Layout/Layout";
 import { useAuth } from "../hooks/useAuth";
 import { useUser } from "@supabase/auth-helpers-react";
 import { PortfolioContent } from "../src/components/features/portfolios/PortfolioContent/PortfolioContent";
+import { Heading } from "@chakra-ui/react";
 
 const Portfolios = () => {
   const { session } = useAuth();

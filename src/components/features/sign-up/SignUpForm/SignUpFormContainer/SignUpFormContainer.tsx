@@ -3,7 +3,7 @@ import { Flex, FlexProps, useColorModeValue } from "@chakra-ui/react";
 export const SignUpFormContainer = ({ ...restProps }: FlexProps) => {
   return (
     <Flex
-      h={{ base: "auto", md: "100vh" }}
+      h={{ base: "auto" }}
       my={100}
       justifyContent="center"
       alignItems="center"

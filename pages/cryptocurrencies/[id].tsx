@@ -3,17 +3,17 @@ import { LayoutMain } from "../../src/components/shared/LayoutMain/LayoutMain";
 import { CoinDetails } from "../../src/components/features/cryptocurrencies/[coin]/CoinDetails/CoinDetails";
 import { GetStaticProps, GetStaticPaths } from "next";
 import {
-  COINS_COINGECKO_API_URL,
   COIN_COINGECKO_API_URL,
+  COINS_COINGECKO_API_URL_TOP10,
 } from "../../constants/globals";
 import { Coin, CoinById } from "../../types/crypto";
 import { useAuth } from "../../hooks/useAuth";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await fetch(COINS_COINGECKO_API_URL);
+  const response = await fetch(COINS_COINGECKO_API_URL_TOP10);
   const coins: Coin[] = await response.json();
 
-  const paths = coins.slice(0, 11).map(({ id }) => {
+  const paths = coins.map(({ id }) => {
     return {
       params: { id: id },
     };
@@ -21,7 +21,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 

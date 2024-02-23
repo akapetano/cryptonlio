@@ -62,7 +62,6 @@ export function usePortfolio({ onClose }: IUsePortfolioProps) {
         ) as Portfolio[];
         setPortfolioList(convertedData);
       }
-      console.log({ data, error });
     } catch (error) {
       if (error instanceof Error) {
         toast({

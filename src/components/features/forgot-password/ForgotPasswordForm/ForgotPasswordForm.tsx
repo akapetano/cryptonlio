@@ -103,7 +103,7 @@ export const ForgotPasswordForm = () => {
             </Button>
           </GridItem>
           <GridItem colSpan={2}>
-            <NextLink href="/sign-in" passHref>
+            <NextLink href="/login" passHref>
               <Button
                 variant="secondary"
                 size="lg"

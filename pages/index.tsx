@@ -19,7 +19,7 @@ const HomePage = () => {
       <LayoutMain>
         <Welcome />
         <IllustrationCta />
-        <TopTenCoinsTable session={session} />
+        <TopTenCoinsTable />
       </LayoutMain>
     </Layout>
   );

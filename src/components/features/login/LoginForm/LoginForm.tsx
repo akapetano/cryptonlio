@@ -14,7 +14,7 @@ import {
   useColorModeValue,
   Flex,
 } from "@chakra-ui/react";
-import { SignInFormContainer } from "./SignInFormContainer/SignInFormContainer";
+import { LoginFormContainer } from "./LoginFormContainer/LoginFormContainer";
 import { Logo } from "../../../core/Logo/Logo";
 import { useAuth } from "../../../../../hooks/useAuth";
 import NextLink from "next/link";
@@ -23,14 +23,14 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ISignUpFormValues } from "../../../../../types/auth";
 
-export const SignInForm = () => {
+export const LoginForm = () => {
   const formBgColor = useColorModeValue("white", "gray.800");
   const spinnerColor = useColorModeValue("brand.400", "brand.800");
   const formBoxShadow = useColorModeValue(
     "0 1px 16px -1px rgba(0, 0, 0, .2)",
     "0 1px 16px 1px rgba(255, 255, 255, .05)"
   );
-  const { onSignIn, user } = useAuth();
+  const { onLogin, user } = useAuth();
   const zodSchema = z.object({
     email: z
       .string({
@@ -50,10 +50,8 @@ export const SignInForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<ISignUpFormValues>({ resolver: zodResolver(zodSchema) });
 
-  console.log(user);
-
   return (
-    <SignInFormContainer>
+    <LoginFormContainer>
       <VStack
         w="30rem"
         h="fit-content"
@@ -83,7 +81,7 @@ export const SignInForm = () => {
         </VStack>
         <SimpleGrid
           as="form"
-          onSubmit={handleSubmit(onSignIn)}
+          onSubmit={handleSubmit(onLogin)}
           columns={2}
           columnGap={3}
           rowGap={6}
@@ -144,6 +142,6 @@ export const SignInForm = () => {
           </GridItem>
         </SimpleGrid>
       </VStack>
-    </SignInFormContainer>
+    </LoginFormContainer>
   );
 };

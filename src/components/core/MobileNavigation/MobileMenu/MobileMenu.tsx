@@ -49,7 +49,7 @@ export const MobileMenu = ({
       <VStack spacing={12} flexDir={!!user ? "column" : "column-reverse"}>
         {!user ? (
           <VStack spacing={6} mt={16}>
-            <NextLink href="/sign-in" passHref>
+            <NextLink href="/login" passHref>
               <Button variant="secondary" width="14rem">
                 Sign in
               </Button>

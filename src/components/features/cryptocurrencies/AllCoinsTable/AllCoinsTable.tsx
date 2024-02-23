@@ -9,12 +9,11 @@ import {
   Skeleton,
   Flex,
 } from "@chakra-ui/react";
-import { useCrypto } from "../../../../../hooks/useCrypto";
+import { useCoins } from "../../../../../hooks/useCoins";
 import Image from "next/image";
 import { Coin } from "../../../../../types/crypto";
 import { Card } from "../../../core/Card/Card";
 import NextLink from "next/link";
-import { BsStarFill, BsStar } from "react-icons/bs";
 import { AllCoinsSection } from "../AllCoinsSection/AllCoinsSection";
 import { TablePaginationActions } from "../TablePaginationActions/TablePaginationActions";
 import { Search } from "../../../core/Search/Search";
@@ -22,12 +21,12 @@ import { useState } from "react";
 
 export const AllCoinsTable = () => {
   const {
-    data: cryptocurrencies,
+    data: coins,
     filteredCoins,
     isLoading,
     isError,
     onChange,
-  } = useCrypto();
+  } = useCoins();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const tableRowHoverBgColor = useColorModeValue("gray.100", "gray.700");
@@ -194,7 +193,7 @@ export const AllCoinsTable = () => {
           </Tbody>
         </Table>
         <TablePaginationActions
-          count={cryptocurrencies?.length}
+          count={coins?.length ?? 0}
           page={page}
           onPageChange={onPageChange}
           rowsPerPage={rowsPerPage}
