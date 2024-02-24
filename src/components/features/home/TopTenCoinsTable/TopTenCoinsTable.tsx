@@ -21,8 +21,6 @@ export const TopTenCoinsTable = () => {
   const { topTenCoins, isLoading } = useTopTenCoins();
   const tableRowHoverBgColor = useColorModeValue("gray.100", "gray.700");
 
-  console.log(topTenCoins);
-
   return (
     <TopTenCoinsSection>
       <Heading

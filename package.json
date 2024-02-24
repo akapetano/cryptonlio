@@ -20,6 +20,7 @@
     "@supabase/supabase-js": "^1.35.4",
     "@types/coingecko-api": "^1.0.10",
     "chart.js": "^3.7.1",
+    "cheerio": "^1.0.0-rc.12",
     "framer-motion": "^6.2.8",
     "html-react-parser": "^1.4.12",
     "next": "^12.2.3",

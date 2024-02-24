@@ -6,14 +6,14 @@ import {
   COIN_COINGECKO_API_URL,
   COINS_COINGECKO_API_URL_TOP10,
 } from "../../constants/globals";
-import { Coin, CoinById } from "../../types/crypto";
+import { Coin as CoinType, CoinById } from "../../types/crypto";
 import { useAuth } from "../../hooks/useAuth";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response = await fetch(COINS_COINGECKO_API_URL_TOP10);
-  const coins: Coin[] = await response.json();
+  const coins: CoinType[] = await response.json();
 
-  const paths = coins.map(({ id }) => {
+  const paths = coins?.slice(0, 1)?.map(({ id }) => {
     return {
       params: { id: id },
     };
@@ -53,7 +53,7 @@ interface ICoinProps {
   coin: CoinById;
 }
 
-const Coin = ({ coin }: ICoinProps) => {
+const CrypyoCoin = ({ coin }: ICoinProps) => {
   const { session, user } = useAuth();
 
   return (
@@ -74,4 +74,4 @@ const Coin = ({ coin }: ICoinProps) => {
   );
 };
 
-export default Coin;
+export default CrypyoCoin;
