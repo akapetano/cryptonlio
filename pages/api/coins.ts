@@ -6,7 +6,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const coingecko = "https://www.coingecko.com/";
     const coinmarketcap = "https://coinmarketcap.com/";
 
     const response = await fetch(coinmarketcap, { method: "GET" });
@@ -18,23 +17,23 @@ export default async function handler(
       "#__next > div.sc-65dd1213-1.ipsZBU.global-layout-v2 > div.main-content > div.cmc-body-wrapper > div > div:nth-child(1) > div.sc-14cb040a-2.hptPYH > table > tbody > tr";
 
     const keys = [
-      "rank",
+      "marketCapRank",
       "name",
-      "price",
-      "1h",
-      "24h",
-      "7d",
+      "currentPrice",
+      "priceChangePercentage1h",
+      "priceChangePercentage24h",
+      "priceChangePercentage7d",
       "marketCap",
-      "volume",
+      "totalVolume",
       "circulatingSupply",
     ];
 
-    const coinArr = [];
+    const coinArr: Record<string, string>[] = [];
 
     const cryptoData = $(cmElementSelector).each(
       (parentIndex, parentElement) => {
         let keyIndex = 0;
-        const coinObject = {};
+        const coinObject: Record<string, string> = {};
 
         if (parentIndex <= 9) {
           $(parentElement)
@@ -42,9 +41,31 @@ export default async function handler(
             .each((childIndex, childElement) => {
               let tdValue = $(childElement).text();
 
-              if (keyIndex === 1 || keyIndex === 6) {
+              if (keyIndex === 1) {
                 tdValue = $(
                   "div:first-child > p:first-child",
+                  $(childElement).html()
+                ).text();
+                const imgSrc = $("img.coin-logo", childElement).attr("src");
+                const symbol = $("p.coin-item-symbol", childElement)
+                  .text()
+                  .trim();
+
+                if (imgSrc) {
+                  coinObject["image"] = imgSrc;
+                } else {
+                  coinObject["image"] = "";
+                }
+                coinObject["symbol"] = symbol;
+              } else if (keyIndex === 6) {
+                tdValue = $(
+                  "p > span:nth-child(2)",
+                  $(childElement).html()
+                ).text();
+              } else if (keyIndex === 7) {
+                console.log($(childElement).html());
+                tdValue = $(
+                  "a:first-child > p:first-child",
                   $(childElement).html()
                 ).text();
               }

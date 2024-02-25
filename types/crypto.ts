@@ -1,3 +1,17 @@
+export type NewCoin = {
+  marketCapRank: string;
+  name: string;
+  symbol: string;
+  image: string;
+  currentPrice: string;
+  priceChangePercentage1h: string;
+  priceChangePercentage24h: string;
+  priceChangePercentage7d: string;
+  marketCap: string;
+  totalVolume: string;
+  circulatingSupply: string;
+};
+
 export type Coin = {
   ath: number;
   ath_change_percentage: number;

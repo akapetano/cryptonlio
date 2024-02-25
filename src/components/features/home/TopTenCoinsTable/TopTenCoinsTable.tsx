@@ -11,10 +11,9 @@ import {
 } from "@chakra-ui/react";
 import { Card } from "../../../core/Card/Card";
 import Image from "next/image";
-import { Coin } from "../../../../../types/crypto";
+import { Coin, NewCoin } from "../../../../../types/crypto";
 import NextLink from "next/link";
 import { TopTenCoinsSection } from "../TopTenCoinsSection/TopTenCoinsSection";
-import { Session } from "@supabase/supabase-js";
 import { useTopTenCoins } from "../../../../../hooks/useTopTenCoins";
 
 export const TopTenCoinsTable = () => {
@@ -56,10 +55,10 @@ export const TopTenCoinsTable = () => {
             {isLoading ? (
               <Skeleton noOfLines={10} as="tr" />
             ) : topTenCoins ? (
-              topTenCoins.map((coin: Coin) => {
+              topTenCoins.map((coin: NewCoin) => {
                 return (
-                  <Tr key={coin.id} _hover={{ bg: tableRowHoverBgColor }}>
-                    <Td>{coin.market_cap_rank}</Td>
+                  <Tr key={coin.symbol} _hover={{ bg: tableRowHoverBgColor }}>
+                    <Td>{coin.marketCapRank}</Td>
                     <Td>
                       <Image
                         loader={() => coin.image}
@@ -71,34 +70,36 @@ export const TopTenCoinsTable = () => {
                       />
                     </Td>
 
-                    <NextLink href={`/cryptocurrencies/${coin.id}`} passHref>
+                    <NextLink
+                      href={`/cryptocurrencies/${coin.name.toLowerCase()}`}
+                      passHref
+                    >
                       <Td _hover={{ cursor: "pointer" }}>{coin.name}</Td>
                     </NextLink>
 
                     <Td>{coin.symbol.toUpperCase()}</Td>
                     <Td>
-                      $
-                      {coin.current_price > 1
-                        ? coin.current_price.toLocaleString(undefined, {
+                      {Number(coin.currentPrice) > 1
+                        ? Number(coin.currentPrice).toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })
-                        : coin.current_price.toLocaleString(undefined, {
+                        : Number(coin.currentPrice).toLocaleString(undefined, {
                             minimumFractionDigits: 6,
                             maximumFractionDigits: 6,
                           })}
                     </Td>
                     <Td
                       color={
-                        coin.price_change_percentage_24h > 0
+                        Number(coin.priceChangePercentage24h) > 0
                           ? "#60AD65"
                           : "#E53E3E"
                       }
                     >
-                      {coin.price_change_percentage_24h.toFixed(2)}%
+                      {coin.priceChangePercentage24h}
                     </Td>
-                    <Td>${coin.total_volume.toLocaleString()}</Td>
-                    <Td>${coin.market_cap.toLocaleString()}</Td>
+                    <Td>{coin.totalVolume.toLocaleString()}</Td>
+                    <Td>{coin.marketCap.toLocaleString()}</Td>
                   </Tr>
                 );
               })
