@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import { Badge, VStack, HStack, Heading, Box } from '@chakra-ui/react';
-import { CoinById } from '../../../../../../../types/crypto';
+import Image from "next/image";
+import { Badge, VStack, HStack, Heading, Box } from "@chakra-ui/react";
+import { CoinBySlug } from "../../../../../../../types/coins";
 
 interface ICoinHeaderProps {
-  coin: CoinById;
+  coin: CoinBySlug;
 }
 
 export const CoinHeader = ({ coin }: ICoinHeaderProps) => {
@@ -14,7 +14,7 @@ export const CoinHeader = ({ coin }: ICoinHeaderProps) => {
       spacing="1rem"
       mb="2rem"
     >
-      <Badge variant="primary">Rank #{coin.market_cap_rank}</Badge>
+      <Badge variant="primary">Rank #{"unknown"}</Badge>
       <HStack
         justifyContent="center"
         alignItems="center"
@@ -24,8 +24,8 @@ export const CoinHeader = ({ coin }: ICoinHeaderProps) => {
         <Heading as="h2">{coin.name}</Heading>
         <Box rounded="full">
           <Image
-            loader={() => coin.image.large}
-            src={coin.image.large}
+            loader={() => coin.logo}
+            src={coin.logo}
             alt={coin.name}
             height="50px"
             width="50px"

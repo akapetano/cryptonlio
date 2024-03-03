@@ -1,6 +1,6 @@
 import { Flex, Icon, Box, Text, useColorModeValue } from "@chakra-ui/react";
 import { BsInfoCircle } from "react-icons/bs";
-import { SiEthereum } from "react-icons/si";
+import { SiEthereum, SiBitcoin } from "react-icons/si";
 
 export const CryptoCard = () => {
   const cryptoCardBoxShadow = useColorModeValue(
@@ -32,15 +32,14 @@ export const CryptoCard = () => {
       <Flex justifyContent="space-between" flexDir="column" w="full" h="full">
         <Flex justifyContent="space-between" alignItems="start">
           <Flex
-            w={10}
-            h={10}
+            p="0.4rem"
             rounded="full"
-            border="2px solid"
+            border="1px solid"
             borderColor={cryptoCardTextColor}
             justifyContent="center"
             alignItems="center"
           >
-            <Icon as={SiEthereum} fontSize={21} color={cryptoCardTextColor} />
+            <Icon as={SiBitcoin} fontSize={21} color={cryptoCardTextColor} />
           </Flex>
           <Icon as={BsInfoCircle} fontSize={17} color={cryptoCardTextColor} />
         </Flex>

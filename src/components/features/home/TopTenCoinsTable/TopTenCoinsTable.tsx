@@ -16,6 +16,17 @@ import NextLink from "next/link";
 import { TopTenCoinsSection } from "../TopTenCoinsSection/TopTenCoinsSection";
 import { useTopTenCoins } from "../../../../../hooks/useTopTenCoins";
 
+function getSlug(name: string) {
+  switch (name) {
+    case "USDC":
+      return "usd-coin";
+    case "Tether USDt":
+      return "tether";
+    default:
+      return name;
+  }
+}
+
 export const TopTenCoinsTable = () => {
   const { topTenCoins, isLoading } = useTopTenCoins();
   const tableRowHoverBgColor = useColorModeValue("gray.100", "gray.700");
@@ -56,6 +67,12 @@ export const TopTenCoinsTable = () => {
               <Skeleton noOfLines={10} as="tr" />
             ) : topTenCoins ? (
               topTenCoins.map((coin: NewCoin) => {
+                const priceChangePercentage24h = parseFloat(
+                  coin?.priceChangePercentage24h?.slice(0, -1)
+                );
+
+                const slug = getSlug(coin?.name)?.toLowerCase();
+
                 return (
                   <Tr key={coin.symbol} _hover={{ bg: tableRowHoverBgColor }}>
                     <Td>{coin.marketCapRank}</Td>
@@ -70,30 +87,15 @@ export const TopTenCoinsTable = () => {
                       />
                     </Td>
 
-                    <NextLink
-                      href={`/cryptocurrencies/${coin.name.toLowerCase()}`}
-                      passHref
-                    >
+                    <NextLink href={`/cryptocurrencies/${slug}`} passHref>
                       <Td _hover={{ cursor: "pointer" }}>{coin.name}</Td>
                     </NextLink>
 
                     <Td>{coin.symbol.toUpperCase()}</Td>
-                    <Td>
-                      {Number(coin.currentPrice) > 1
-                        ? Number(coin.currentPrice).toLocaleString(undefined, {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })
-                        : Number(coin.currentPrice).toLocaleString(undefined, {
-                            minimumFractionDigits: 6,
-                            maximumFractionDigits: 6,
-                          })}
-                    </Td>
+                    <Td>{coin.currentPrice}</Td>
                     <Td
                       color={
-                        Number(coin.priceChangePercentage24h) > 0
-                          ? "#60AD65"
-                          : "#E53E3E"
+                        priceChangePercentage24h > 0 ? "#60AD65" : "#E53E3E"
                       }
                     >
                       {coin.priceChangePercentage24h}

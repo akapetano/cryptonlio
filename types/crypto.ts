@@ -155,3 +155,41 @@ export type CoinMarketHistory = {
   prices: Array<Array<number>>;
   total_volumes: Array<Array<number>>;
 };
+
+export type CoinmarketcapCoinInSnakeCase = {
+  id: number;
+  name: string;
+  symbol: string;
+  slug: string;
+  num_market_pairs: number;
+  date_added: string;
+  tags: string[];
+  max_supply: number | null;
+  circulating_supply: number;
+  total_supply: number;
+  infinite_supply: boolean;
+  platform: string | null;
+  cmc_rank: number;
+  self_reported_circulating_supply: null | unknown;
+  self_reported_market_cap: null | unknown;
+  tvl_ratio: null | unknown;
+  last_updated: string;
+  quote: {
+    EUR: {
+      price: number;
+      volume_24h: number;
+      volume_change_24h: number;
+      percent_change_1h: number;
+      percent_change_24h: number;
+      percent_change_7d: number;
+      percent_change_30d: number;
+      percent_change_60d: number;
+      percent_change_90d: number;
+      market_cap: number;
+      market_cap_dominance: number;
+      fully_diluted_market_cap: number;
+      tvl: null | unknown;
+      last_updated: string;
+    };
+  };
+};

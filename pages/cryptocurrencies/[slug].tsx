@@ -2,20 +2,17 @@ import { Layout } from "../../src/components/shared/Layout/Layout";
 import { LayoutMain } from "../../src/components/shared/LayoutMain/LayoutMain";
 import { CoinDetails } from "../../src/components/features/cryptocurrencies/[coin]/CoinDetails/CoinDetails";
 import { GetStaticProps, GetStaticPaths } from "next";
-import {
-  COIN_COINGECKO_API_URL,
-  COINS_COINGECKO_API_URL_TOP10,
-} from "../../constants/globals";
-import { Coin as CoinType, CoinById } from "../../types/crypto";
+import { Coin, CoinBySlug } from "../../types/coins";
 import { useAuth } from "../../hooks/useAuth";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await fetch(COINS_COINGECKO_API_URL_TOP10);
-  const coins: CoinType[] = await response.json();
+  const response = await fetch("http://localhost:3000/api/top-ten");
 
-  const paths = coins?.slice(0, 1)?.map(({ id }) => {
+  const coins: Coin[] = await response.json();
+
+  const paths = coins?.map(({ slug }) => {
     return {
-      params: { id: id },
+      params: { slug: slug },
     };
   });
 
@@ -26,22 +23,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const id = context?.params?.id;
-  if (id && typeof id === "string") {
-    const url = COIN_COINGECKO_API_URL(id);
+  const slug = context?.params?.slug;
+  if (slug && typeof slug === "string") {
+    const queryParams = new URLSearchParams({ slug }).toString();
+    const response = await fetch(
+      `http://localhost:3000/api/coin?${queryParams}`
+    );
+    const data = await response.json();
 
-    if (url) {
-      const response = await fetch(url);
-      const data = await response.json();
-
-      return {
-        props: { coin: data },
-      };
-    } else {
-      return {
-        props: { coin: null },
-      };
-    }
+    return {
+      props: { coin: data },
+    };
   } else {
     return {
       props: { coin: null },
@@ -50,10 +42,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 interface ICoinProps {
-  coin: CoinById;
+  coin: CoinBySlug;
 }
 
-const CrypyoCoin = ({ coin }: ICoinProps) => {
+const CoinPage = ({ coin }: ICoinProps) => {
   const { session, user } = useAuth();
 
   return (
@@ -74,4 +66,4 @@ const CrypyoCoin = ({ coin }: ICoinProps) => {
   );
 };
 
-export default CrypyoCoin;
+export default CoinPage;

@@ -14,7 +14,7 @@ export default async function handler(
       "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY || "",
     };
 
-    const response = await fetch(`${url}${path}?convert=EUR`, {
+    const response = await fetch(`${url}${path}?convert=EUR&limit=10`, {
       method: "GET",
       headers: headers,
     });
